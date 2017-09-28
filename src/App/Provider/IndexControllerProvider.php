@@ -3,6 +3,7 @@
 namespace App\Provider;
 
 use Silex\Api\ControllerProviderInterface;
+use Silex\Application;
 
 class IndexControllerProvider implements ControllerProviderInterface {
     
@@ -10,7 +11,7 @@ class IndexControllerProvider implements ControllerProviderInterface {
      * {@inheritDoc}
      * @see \Silex\Api\ControllerProviderInterface::connect()
      */
-    public function connect(\Silex\Application $app)
+    public function connect(Application $app)
     {
         
         # : Créer une instance de Silex\ControllerCollection
@@ -24,9 +25,15 @@ class IndexControllerProvider implements ControllerProviderInterface {
                 # En option je peux donner un nom à la route, qui servira plus tard
                 # pour la créations de lien : "controller_action"
                 ->bind('index_index');
+
+            # Page de connexion
+            $controllers
+                ->get("/connexion","App\Controller\IndexController::connexionAction")
+                ->bind('index_connexion');
             
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;
-        
+
     }
+
 }
