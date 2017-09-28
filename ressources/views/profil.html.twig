@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Espace Membre {% endblock %}
+
+{# Block de Contenu défini dans base.html.twig #}
+{% block contenu %}
+        
+        <div class="container">
+            <div class="starter-template">
+            	<h1>Bienvenue {{ membre.prenom }} {{ membre.nom }}</h1>
+            	<table align="center" class=".table-striped">
+            	<tr>
+            		<td>Nom public : </td><td>{{ membre.pseudo }}</td>
+            	</tr>
+            	<tr>
+            		<td>Email : </td><td>{{ membre.email }}</td>
+            	</tr>
+            	</table>
+            	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <h1>Profil</h1>
+                <p class="lead">{{ message }}</p>
+                {% else %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Vous devez être inscrit-e et/ou connecté-e pour accéder à cet espace <br />
+                <b>Connexion</b> - <b>Inscription</b></div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- /.container -->
+    
+{% endblock %}

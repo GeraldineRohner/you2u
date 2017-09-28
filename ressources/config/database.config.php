@@ -4,8 +4,8 @@ use Idiorm\Silex\Provider\IdiormServiceProvider;
 
 #1 : Connexion BDD
 define('DBHOST',     'localhost');
-define('DBNAME',     '');
-define('DBUSERNAME', '');
+define('DBNAME',     'you2u');
+define('DBUSERNAME', 'root');
 define('DBPASSWORD', '');
 
 #2 : Doctrine DBAL
@@ -25,6 +25,8 @@ $app->register(new IdiormServiceProvider(), array(
         'connection_string' => 'mysql:host='.DBHOST.';dbname='.DBNAME,
         'username' => DBUSERNAME,
         'password' => DBPASSWORD,
-        'id_column_overrides' => array()
+        'id_column_overrides' => array(
+            'users' =>  'idUser'
+        )
     )
 ));
