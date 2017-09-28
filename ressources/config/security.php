@@ -2,7 +2,7 @@
 
 use Silex\Provider\SecurityServiceProvider;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use TechNews\Provider\AuteurProvider;
+# use App\Provider\MembreProvider;
 use Silex\Provider\SessionServiceProvider;
 
 # use Silex\Provider\SessionServiceProvider;
@@ -10,14 +10,18 @@ $app->register(new SessionServiceProvider());
 
 #use Silex\Provider\SecurityServiceProvider;
 $app->register(new SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-        'main' => array(
-            'pattern'   => '^/',
-            'http'      => true,
-            'anonymous' => true
+    'security.firewalls'                => array(
+        'main'                          => array(
+            'pattern'                   => '^/',
+            'http'                      => true,
+            'anonymous'                 => true,
+            'form'                      => array(
+                'login_path'            => '/connexion',
+                'check_path'            => '/membre/login_check'
             )
         ),
-        'security.access_rules' => array(),
+        'security.access_rules' => array()
+        ),
         'security.role_hierarchy' => array()
     )
 );
