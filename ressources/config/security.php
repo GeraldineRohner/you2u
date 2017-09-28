@@ -2,7 +2,6 @@
 
 use Silex\Provider\SecurityServiceProvider;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-use TechNews\Provider\AuteurProvider;
 use Silex\Provider\SessionServiceProvider;
 
 # use Silex\Provider\SessionServiceProvider;
