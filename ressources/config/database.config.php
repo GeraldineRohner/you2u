@@ -1,11 +1,12 @@
 <?php
 
 use Idiorm\Silex\Provider\IdiormServiceProvider;
+use Silex\Provider\HttpFragmentServiceProvider;
 
 #1 : Connexion BDD
 define('DBHOST',     'localhost');
 define('DBNAME',     'you2u');
-define('DBUSERNAME', 'Root');
+define('DBUSERNAME', 'root');
 define('DBPASSWORD', '');
 
 #2 : Doctrine DBAL
@@ -25,6 +26,8 @@ $app->register(new IdiormServiceProvider(), array(
         'connection_string' => 'mysql:host='.DBHOST.';dbname='.DBNAME,
         'username' => DBUSERNAME,
         'password' => DBPASSWORD,
-        'id_column_overrides' => array()
+        'id_column_overrides' => array('users' => 'idUser')
     )
 ));
+
+$app->register(new HttpFragmentServiceProvider());
