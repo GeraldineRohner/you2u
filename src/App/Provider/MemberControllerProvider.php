@@ -23,7 +23,20 @@ class MemberControllerProvider implements ControllerProviderInterface
         #En option, je peux donner un nom à la route, qui servira plus tard pour la création de liens.
         ->bind('membre_index');
         
+        
+        #page d'Accueil
+        $controllers
+        #on associe une route à un controller et une action
+        ->match('/modif','App\Controller\MemberController::modifAction')
+        #En option, je peux donner un nom à la route, qui servira plus tard pour la création de liens.
+        ->bind('membre_modif');
       
+        #page d'Accueil
+        $controllers
+        #on associe une route à un controller et une action
+        ->match('/modifMdp','App\Controller\MemberController::modifMdp')
+        #En option, je peux donner un nom à la route, qui servira plus tard pour la création de liens.
+        ->bind('membre_motdepasse');
         
         
         

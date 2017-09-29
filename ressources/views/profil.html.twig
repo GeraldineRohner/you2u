@@ -9,6 +9,13 @@
         <div class="container">
             <div class="starter-template">
             	<h1>Bienvenue {{ membre.prenom }} {{ membre.nom }}</h1>
+            	 <div class="form-group">
+                        <div class="col-md-5 col-md-push-3">
+                            <a href="{{ url('membre_modif') }}" style="font-size:12px;"><u> Modifier le profil </u></a>
+                            -
+                            <a href="{{ url('membre_motdepasse')}}" style="font-size:12px;"><u> Changer le mot de passe </u></a>
+                        </div>
+                    </div>
             	<table align="center" class="table table-condensed">
             	<tr>
             		<td>Nom public : </td><td>{{ membre.pseudo }}</td>
@@ -32,7 +39,7 @@
             		<td>Téléphone (fixe) : </td><td>{{ membre.telFixe }}</td>
             	</tr>
             	<tr>
-            		<td>Photo: </td><td>{{ membre.photo }}</td>
+            		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~membre.photo) }}"></td>
             	</tr>
             	</table>
             	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
