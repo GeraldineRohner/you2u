@@ -1,0 +1,76 @@
+{% extends 'layout.html.twig' %}
+{% block title %}
+    {{ global.request.get('nomCategorieService') | capitalize }}
+{% endblock %}
+
+{#{% set active = nomCategorieService | capitalize %}#}
+
+{% block contenu %}
+    <div class="row">
+        <!--colleft-->
+        <div class="col-md-8 col-sm-12">
+            {# https://twig.symfony.com/doc/2.x/tests/empty.html #}
+            {% if services is not empty %}
+                <div class="box-caption">
+                    {# 3 façons de procéder : #}
+                    {# https://silex.symfony.com/doc/2.0/providers/twig.html#global-variable #}
+                    {# <span>{{ nomCategorieService }}</span> #}
+                    {# <span>{{ services[0].nomCategorieService }}</span> #}
+                    <span>{{ global.request.get('nomCategorieService') }}</span>
+                </div>
+                <!--list-news-cate-->
+                <div class="list-news-cate">
+                    {% for service in services %}
+                        <service class="news-cate-item">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5 col-xs-12">
+                                    <a href="{{ url('index_categorie', {
+                                        nomCategorieService : service.nomCategorieService | lower,
+                                        slugService		 : service.titreService | slug,
+                                        idService		 : service.idService } ) }}">
+                                       {# <img alt="{{ service.titreService }}"
+                                             src="{{ asset('img'~service.FEATUREDIMAGEservice) }}">#}
+                                    </a>
+                                </div>
+                                <div class="col-md-7 col-sm-7 col-xs-12">
+                                    <h3><a href="{{ url('index_annonce', {
+                                            nomCategorieService : service.nomCategorieService | lower,
+                                            slugService		 : service.titreService | slug,
+                                            idService		 : service.idService } ) }}">{{ service.titreService }}</a></h3>
+                                    <div class="meta-post">
+                                        <a href="#">
+                                            {{ service.pseudo }}
+                                        </a>
+                                        <em></em>
+                                        <span>
+                                            {{ service.datePublicationService }}
+                                    </span>
+                                    </div>
+                                    {{ service.descriptionService | accroche }}
+                                </div>
+                            </div>
+                        </service>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                    <strong>Aucun service demandé pour le moment</strong>
+                </div>
+            {% endif %}
+
+            {# <div class="paging">
+                <a href="#">Prev</a>
+                <a href="#" class="current">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">Next</a>
+            </div> #}
+
+        </div>
+
+       {# {{ render(controller('App\\Controller\\IndexController::sidebar')) }}#}
+
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@ use Idiorm\Silex\Provider\IdiormServiceProvider;
 #1 : Connexion BDD
 define('DBHOST',     'localhost');
 define('DBNAME',     'you2u');
-define('DBUSERNAME', 'Root');
+define('DBUSERNAME', 'root');
 define('DBPASSWORD', '');
 
 #2 : Doctrine DBAL

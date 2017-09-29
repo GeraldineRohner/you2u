@@ -8,6 +8,7 @@ use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\CsrfServiceProvider;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Silex\Provider\HttpFragmentServiceProvider;
+use App\Extension\AppTwigExtension;
 
 #1 : Activation du Debuggage
 $app['debug'] = true;
@@ -28,6 +29,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
         PATH_RESSOURCES .'/layout'
     ],
 ));
+
+
+$app->extend('twig', function($twig, $app) {
+    $twig->addExtension(new AppTwigExtension());
+    return $twig;
+});
 
 #5 : Activation de Asset
 $app->register(new AssetServiceProvider());

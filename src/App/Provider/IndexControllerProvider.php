@@ -26,10 +26,36 @@ class IndexControllerProvider implements ControllerProviderInterface {
                 # pour la créations de lien : "controller_action"
                 ->bind('index_index');
 
-            # Page de connexion
+        # Affichage d'une catégorie (services qui y sont liés)
+        $controllers
+            ->get('/categorie/{nomCategorieService}',
+                'App\Controller\IndexController::categorie_serviceAction')
+            # Je spécifie le type de paramètre attendu avec une Regex
+            ->assert('nomCategorieService', '[^/]+')
+            # Je peux attribuer une valeur par défaut.
+            ->value('nomCategorieService', 'Garde d\'enfants')
+            # Nom de ma Route
+            ->bind('index_categorie');
+
+
+        # Page Annonce
+        $controllers
+            ->get('/{nomCategorieService}/{slugService}_{idService}.html',
+                'App\Controller\IndexController::serviceAction')
+            ->assert('idService', '\d+')
+            ->bind('index_annonce');
+
+
+
+
+        # Page de connexion
             $controllers
                 ->get("/connexion","App\Controller\IndexController::connexionAction")
                 ->bind('index_connexion');
+
+
+
+
             
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;
