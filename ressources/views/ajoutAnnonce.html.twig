@@ -1,0 +1,84 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Ajouter une annonce {% endblock %}
+
+{# Block de Contenu défini dans base.html.twig #}
+{% block contenu %}
+
+    <div class="container">
+        <div class="starter-template">
+
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <h1> Ajouter une annonce </h1>
+
+                    {% if global.request.get('ajoutAnnonce') == 'success' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Votre annonce est soumise à validation. </p>
+                            <p class="text-center"> Celle-ci sera publiée dans les 24 à 48 prochaines heures</p>
+                        </div>
+
+                    {% else %}
+
+                    <form class="form-horizontal" method="POST">
+
+                        <!-- Titre -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Titre </label>
+                            <div class="col-md-7"> {{ form_row(form.titreService) }} </div>
+                        </div>
+
+                        <!-- Catégorie -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Catégorie </label>
+                            <div class="col-md-7"> {{ form_row(form.idCategorieService) }} </div>
+                        </div>
+
+                        <!-- Tarif -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Tarif horaire </label>
+                            <div class="col-md-7"> {{ form_row(form.tarifService) }} </div>
+                        </div>
+
+
+                        <!-- Localisation -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Lieu </label>
+                            <div class="col-md-7"> {{ form_row(form.lieuService) }} </div>
+                        </div>
+
+                        <!-- Périmètre d'action -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Périmètre (en km) </label>
+                            <div class="col-md-7"> {{ form_row(form.perimetreAction) }} </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> Description </label>
+                            <div class="col-md-7"> {{ form_row(form.descriptionService) }}</div>
+                        </div>
+
+                        <!-- Validation du Token -->
+                        {{ form_row(form._token) }}
+
+                        <!-- Bouton -->
+                        <div class="form-group">
+                            <div class="col-xs-10 col-xs-offset-1"> {{ form_row(form.submit) }} </div>
+                        </div>
+
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+{% endblock %}
