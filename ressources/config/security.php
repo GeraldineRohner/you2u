@@ -2,8 +2,8 @@
 
 use Silex\Provider\SecurityServiceProvider;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-# use App\Provider\MembreProvider;
 use Silex\Provider\SessionServiceProvider;
+use App\Provider\MemberProvider;
 
 # use Silex\Provider\SessionServiceProvider;
 $app->register(new SessionServiceProvider());
@@ -18,13 +18,20 @@ $app->register(new SecurityServiceProvider(), array(
             'form'                      => array(
                 'login_path'            => '/connexion',
                 'check_path'            => '/membre/login_check'
-            )
+            ),
+            'logout'                    => array(
+                'logout_path'           => '/deconnexion',
+                'invalidate_session'    => true
+            ),
+            'users'                     => function() use($app)
+            {
+                return new MemberProvider($app['idiorm.db']);
+            }
         ),
-        'security.access_rules' => array()
-        ),
+        'security.access_rules' => array(),
         'security.role_hierarchy' => array()
     )
-);
+));
 
 # use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 $app['security.encoder.digest'] = function() use($app) {

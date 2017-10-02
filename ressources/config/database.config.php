@@ -1,6 +1,7 @@
 <?php
 
 use Idiorm\Silex\Provider\IdiormServiceProvider;
+use Silex\Provider\HttpFragmentServiceProvider;
 
 #1 : Connexion BDD
 define('DBHOST',     'localhost');
@@ -25,8 +26,14 @@ $app->register(new IdiormServiceProvider(), array(
         'connection_string' => 'mysql:host='.DBHOST.';dbname='.DBNAME,
         'username' => DBUSERNAME,
         'password' => DBPASSWORD,
+<<<<<<< HEAD
         'id_column_overrides' => array(
             'users' =>  'idUser'
         )
+=======
+        'id_column_overrides' => array('users' => 'idUser')
+>>>>>>> espaceConnexion
     )
 ));
+
+$app->register(new HttpFragmentServiceProvider());
