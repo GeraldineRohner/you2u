@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 namespace App\Controller;
 
 use Silex\Application;
@@ -13,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 
 class MemberController
@@ -24,27 +26,45 @@ class MemberController
         
         
         #Simulation d'un profil 
-        $membre = $app['idiorm.db']
-        ->for_table('users')
-        ->find_one(1);
+        $noteMoyenne = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$app['user']->getIdUser())->avg('note');
+        $nombreStars = round($noteMoyenne, 0, PHP_ROUND_HALF_DOWN);
         
-        # Affichage dans la Vue
-        return $app['twig']->render('profil.html.twig',[
-            'membre'  => $membre
-        ]);
+        if(($noteMoyenne-$nombreStars) > 0.25)
+        {
+            $halfstar = 'Halfstar';
+        }
+            else
+            {
+                $halfstar = '';
+            }
+        $totalNote = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$app['user']->getIdUser())->count('note');
+    
+        if($totalNote != 0)
+        {
+            # Affichage dans la Vue
+            return $app['twig']->render('profil.html.twig',[
+                'message' => 'Bienvenue',
+                'noteMoyenne' => $noteMoyenne,
+                'nombreStars' => $nombreStars,
+                'halfstar'    => $halfstar,
+                'totalNote' => $totalNote
+            ]);
+        }
+            else
+            {
+                # Affichage dans la Vue
+                return $app['twig']->render('profil.html.twig',[
+                    'message' => 'Bienvenue',
+                    'totalNote' => $totalNote
+                ]);
+            }
     }
     
-    public function modifAction(Application $app, $idUser=NULL, Request $request) {
+    public function modifAction(Application $app, Request $request) {
         
         # Déclaration d'un Message
         $message = 'Espace Membre You2u';
-        
-        
-        #Simulation d'un profil
-        $membre = $app['idiorm.db']
-        ->for_table('users')
-        ->find_one(1);
-        
+       
         $codePostaux = function() use ($app) {
             #recuperation des auteurs de la BDD
             $codePostaux = $app['idiorm.db']->for_table('villes_rhone')->order_by_asc('codePostal')->find_result_set();
@@ -68,7 +88,7 @@ class MemberController
            ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['pseudo']
+                'value'   =>  $app['user']->getPseudo()
             ]   
         ])
         ->add('prenom', TextType::class , [
@@ -80,7 +100,7 @@ class MemberController
             ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['prenom']
+                'value'   =>  $app['user']->getPrenom()
             ]
         ])
         ->add('nom', TextType::class , [
@@ -92,7 +112,7 @@ class MemberController
             ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['nom']
+                'value'   =>  $app['user']->getNom()
             ]
         ])
         ->add('email', EmailType::class , [
@@ -104,7 +124,7 @@ class MemberController
             ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['email']
+                'value'   => $app['user']->getEmail()
             ]
         ])
         ->add('adresse', TextType::class , [
@@ -116,7 +136,7 @@ class MemberController
             ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['adresse']
+                'value'   => $app['user']->getAdresse()
             ]
         ])
         ->add('codePostal',  ChoiceType::class, [
@@ -124,7 +144,7 @@ class MemberController
             'expanded' =>  false,
             'multiple'  => false,
             'label'     => false,
-            'data' => $membre['codeINSEE'],
+            'data' => $app['user']->getCodeInsee(),
             'attr'      => [
                 'class' => 'form-control',
             ]
@@ -138,7 +158,7 @@ class MemberController
             ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['telFixe']
+                'value'   =>  $app['user']->getTelFixe()
             ]
         ])
         ->add('telMobile', TextType::class , [
@@ -150,7 +170,7 @@ class MemberController
             ),
             'attr' => [
                 'class'         => 'form-control',
-                'value'   =>  $membre['telMobile']
+                'value'   =>  $app['user']->getTelMobile()
             ]
         ])
         ->add('photo', FileType::class , [
@@ -189,7 +209,7 @@ class MemberController
             }
                 else
                 {
-                    $urlFichier = $membre['photo'];
+                    $urlFichier = $app['user']->getPhoto();
                 }
             
                 
@@ -197,7 +217,7 @@ class MemberController
                $villeCP = $app['idiorm.db']->for_table('villes_rhone')->where('codeINSEE', $modifProfil['codePostal'])->find_one();
             
             #On modifie l'enregistrement #1 a modifié par l'id USER qu'on retrouvera par la variable ID USER
-            $modifUser = $app['idiorm.db']->for_table('users')->find_one(1);
+               $modifUser = $app['idiorm.db']->for_table('users')->find_one($app['user']->getIdUser());
             $modifUser->set(array(
                 'pseudo'                    => $modifProfil['pseudo'],
                 'prenom'                    => $modifProfil['prenom'],
@@ -220,22 +240,16 @@ class MemberController
         return $app['twig']->render('modificationprofil.html.twig', [
             
             'form' => $form->createView(),
-            'membre' => $membre
+            'message' => 'message'
         ]);
         
        
     }
     
-    public function modifMdp( Application $app , $idUser=NULL, Request $req) {
+    public function modifMdpAction( Application $app, Request $request) {
         
-        # Déclaration d'un Message
-        $message = 'Espace Membre You2u';
-        
-        
-        #Simulation d'un profil
-        $membre = $app['idiorm.db']
-        ->for_table('users')
-        ->find_one(1);
+     
+     
         $form = $app['form.factory']->createBuilder(FormType::class)
         ->add('motDePasse', PasswordType::class, [
             'required'  => true,
@@ -263,36 +277,42 @@ class MemberController
         ])
         ->getForm();
         
+        #Traitement du formulaire.
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+           
+            #On verifie que les deux champs PASSWORD et CONFIRMATION PASSWORD correspondent
+            $modificationMotDePasse = $form->getData();
+            if($modificationMotDePasse['motDePasse'] === $modificationMotDePasse['confirm_motDePasse'])
+            {
+                
+                #On encode les password
+                $motDePasseModifie = $app['security.encoder.digest']
+                ->encodePassword($modificationMotDePasse['motDePasse'],'');
+                
+                #On modifie dans la base de données
+                $modifMDP = $app['idiorm.db']->for_table('users')->find_one($app['user']->getIdUser());
+                $modifMDP->set(array(
+                    'motDePasse'                    => $motDePasseModifie
+                    )
+                  );
+                $modifMDP->save();
+                return $app->redirect($app['url_generator']->generate('deconnexion'));    
+            }
+            
+        }
+        
+        
         return $app['twig']->render('modificationmdp.html.twig' , [
-            'membre' => $membre,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'message' => 'message'
         ]);
         
         
     }
     
-}
 
-=======
-
-
-namespace App\Controller;
-
-
-use Silex\Application;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\NotBlank;
-
-class MemberController
-{
     public function ajoutAnnonceAction(Application $app, Request $request)
     {
         # Récupération des catégories de services
@@ -437,12 +457,13 @@ class MemberController
             $annonceDb->lieuService             = $annonce['lieuService'];
             $annonceDb->perimetreAction         = $annonce['perimetreAction'];
             $annonceDb->descriptionService      = $annonce['descriptionService'];
+            $annonceDb->datePublicationService  = time();
             $annonceDb->idUserProposantService  = $app['user']->getIdUser();
 
             # Insertion en BDD
             $annonceDb->save();
 
-            return $app->redirect('ajouter?ajoutAnnonce=success');
+            return $app->redirect($app['url_generator']->generate('membre_index').'?ajoutAnnonce=success');
 
         endif;
 
@@ -452,4 +473,4 @@ class MemberController
         ));
     }
 }
->>>>>>> espaceConnexion
+

@@ -8,6 +8,8 @@
         
         <div class="container">
             <div class="starter-template">
+            {% if global.request.get('inscription') == 'success' %}
+            {% endif %}
                 <h1>{{ message }}</h1>
                 <p class="lead">Use this document as a way to quickly start any new project.</p>
             </div>

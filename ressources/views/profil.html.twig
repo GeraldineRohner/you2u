@@ -6,49 +6,84 @@
 {# Block de Contenu défini dans base.html.twig #}
 {% block contenu %}
         
-        <div class="container">
-            <div class="starter-template">
-            	<h1>Bienvenue {{ membre.prenom }} {{ membre.nom }}</h1>
-            	 <div class="form-group">
-                        <div class="col-md-5 col-md-push-3">
-                            <a href="{{ url('membre_modif') }}" style="font-size:12px;"><u> Modifier le profil </u></a>
-                            -
-                            <a href="{{ url('membre_motdepasse')}}" style="font-size:12px;"><u> Changer le mot de passe </u></a>
-                        </div>
-                    </div>
-            	<table align="center" class="table table-condensed">
-            	<tr>
-            		<td>Nom public : </td><td>{{ membre.pseudo }}</td>
-            	</tr>
-            	<tr>
-            		<td>Email : </td><td>{{ membre.email }}</td>
-            	</tr>
-            	<tr>
-            		<td>Adresse : </td><td>{{ membre.adresse }}</td>
-            	</tr>
-            	<tr>
-            		<td>Code Postal : </td><td>{{ membre.codePostal }}</td>
-            	</tr>
-            	<tr>
-            		<td>Ville : </td><td>{{ membre.ville }}</td>
-            	</tr>
-            	<tr>
-            		<td>Téléphone (mobile) : </td><td>{{ membre.telMobile }}</td>
-            	</tr>
-            	<tr>
-            		<td>Téléphone (fixe) : </td><td>{{ membre.telFixe }}</td>
-            	</tr>
-            	<tr>
-            		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~membre.photo) }}"></td>
-            	</tr>
-            	</table>
+        
             	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <h1>Profil</h1>
-                <p class="lead">{{ message }}</p>
+            	
+            	{% if global.request.get('ajoutAnnonce') == 'success' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Votre annonce est soumise à validation. </p>
+                            <p class="text-center"> Celle-ci sera publiée dans les 24 à 48 prochaines heures</p>
+                        </div>
+
+             	{% endif %}
+             	
+             	
+                   <div class="container">
+                    <div class="starter-template">
+                    	
+                    	
+                    	<h2> Ma note moyenne</h2>
+                   
+                    	
+                    	{% if nombreStars is not defined %}
+                    	Vous n'avez pas de note.
+                    	{% else %}
+                    	
+                    	{% for nombreStars in 1.. nombreStars %}
+                        <i class="fa fa-star" aria-hidden="true" style="color:tan"></i> 
+                        {% endfor %}
+                        
+                    	{% if halfstar is not empty %} 
+                    		<i class="fa fa-star-half" aria-hidden="true" style="color:tan"></i>
+                    	{% endif %}
+                    	
+                    	/ 5 sur une base de {{ totalNote }} note(s)</big>
+                    	{% endif %}
+                    	 
+                    	
+                    	<h2>Mes informations</h2>  
+                    	 <div class="form-group">
+                                <div class="col-md-5 col-md-push-3">
+                                	<a href="{{ url('member_ajout_annonce') }}" style="font-size:12px;"><u> Ajouter une annonce </u></a>
+                                    -
+                                    <a href="{{ url('membre_modif') }}" style="font-size:12px;"><u> Modifier le profil </u></a>
+                                    -
+                                    <a href="{{ url('membre_motdepasse')}}" style="font-size:12px;"><u> Changer le mot de passe </u></a>
+                                </div>
+                            </div>
+                            
+                          
+                    	<table align="center" class="table table-condensed">
+                    	<tr>
+                    		<td>Nom public : </td><td>{{ app.user.pseudo }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Email : </td><td>{{ app.user.email }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Adresse : </td><td>{{ app.user.adresse }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Code Postal : </td><td>{{ app.user.codePostal }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Ville : </td><td>{{ app.user.ville}} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Téléphone (mobile) : </td><td>{{ app.user.telMobile }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Téléphone (fixe) : </td><td>{{ app.user.telFixe }}</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~app.user.photo) }}"></td>
+                    	</tr>
+                    	</table>
                 {% else %}
-                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                Vous devez être inscrit-e et/ou connecté-e pour accéder à cet espace <br />
-                <b>Connexion</b> - <b>Inscription</b></div>
+                        <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        Vous devez être inscrit-e et/ou connecté-e pour accéder à cet espace <br />
+                        <b>Connexion</b> - <b>Inscription</b></div>
                 {% endif %}
             </div>
         </div>

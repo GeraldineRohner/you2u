@@ -19,6 +19,7 @@
                         <div class="alert alert-success">
                             <p class="text-center"><i class="fa fa-thumbs-up"></i> Votre annonce est soumise à validation. </p>
                             <p class="text-center"> Celle-ci sera publiée dans les 24 à 48 prochaines heures</p>
+                            <p> <a href="{{ url('membre_index') }}">Revenir au profil </a></p>
                         </div>
 
                     {% else %}
@@ -81,4 +82,12 @@
         </div>
     </div>
 
+{% endblock %}
+{% block javascripts %}
+{# Pour afficher le contenu intial du block javascripts sinon remplace par les nouveaux élements. Pour eviter ça il faut utiliser la fonction parent() #}
+{{ parent() }}
+<script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('form_descriptionService');
+</script>
 {% endblock %}

@@ -61,7 +61,8 @@ class MemberProvider implements UserProviderInterface
             $users->telFixe,
             $users->photo,
             $users->cleValidation,
-            $users->roleUser
+            $users->roleUser,
+            $users->codeINSEE
         );
     }
 }
