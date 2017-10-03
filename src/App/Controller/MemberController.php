@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class MemberController
 {
-    public function indexAction(Application $app, $idUser=NULL) {
+    public function indexAction(Application $app) {
         
         # Déclaration d'un Message
         $message = 'Espace Membre You2u';
