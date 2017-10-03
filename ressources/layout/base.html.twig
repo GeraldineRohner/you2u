@@ -27,7 +27,7 @@
                 <li class="active"><a href="{{ url('index_index') }}">Accueil</a></li>
                 <li><a href="#about">A Propos</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li {% if is_granted('IS_AUTHENTICATED_FULLY') %} >
+                <li> {% if is_granted('IS_AUTHENTICATED_FULLY') %} >
                     <a href="{{ path('deconnexion') }}">Déconnexion</a>
                 </li>
                 {% else %}
@@ -45,6 +45,5 @@
 
 <!-- Javascripts -->
 {% block javascripts %}{% endblock %}
-
 </body>
 </html>

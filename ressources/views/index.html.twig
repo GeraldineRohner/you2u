@@ -1,16 +1,98 @@
-{% extends 'layout.html.twig' %}
+{% extends "layout.html.twig" %}
 
-{# Block de title défini dans base.html.twig #}
-{% block title %} Accueil {% endblock %}
+{# Titre de la Page #}
+{% block title %} Accueil | TechNews {% endblock %}
 
-{# Block de Contenu défini dans base.html.twig #}
+{# Fil d'Ariane #}
+{% set active = 'accueil' %}
+
+{# Contenu de la Page #}
 {% block contenu %}
-        
-        <div class="container">
-            <div class="starter-template">
-                <h1></h1>
-                <p class="lead">Use this document as a way to quickly start any new project.</p>
+
+    <div class="row">
+        <!--colleft-->
+        <div class="col-md-8 col-sm-12">
+            <div class="box-caption">
+                <span>spotlight</span>
             </div>
-        </div><!-- /.container -->
-    
+            <!--spotlight-->
+            <section class="owl-carousel owl-spotlight">
+                {% for service in spotlight %}
+                    <div>
+                        <service class="spotlight-item">
+                            <div class="spotlight-img">
+                                <img alt="" src="{{ asset('img/'~service.photo) }}" class="img-responsive"/>
+                                <a href="{{ url('index_categorie', {
+                                        nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">{{ service.nomCategorieService }}</a>
+                            </div>
+                            <div class="spotlight-item-caption">
+                                <h2 class="font-heading">
+                                    <a href="{{ url('index_annonce', {
+                                        nomCategorieService : service.nomCategorieService | lower,
+                                        slugService         : service.titreService | slug,
+                                        idService         : service.idService }) }}">
+                                        {{ service.titreService }}
+                                    </a>
+                                </h2>
+                                <div class="meta-post">
+                                    <a href="#">
+                                        {{ service.pseudo }}
+                                    </a>
+                                    <em></em>
+                                    <span>
+                                    {{ service.datePublicationService }}
+                                </span>
+                                </div>
+
+                                {# {# service.CONTENUservice | striptags | slice(0, 170)~'...' #}{#
+                                {{ service.descriptionService | accroche }}#}
+
+                            </div>
+                        </service>
+                    </div>
+                {% endfor %}
+            </section>
+
+            <!--spotlight-thumbs-->
+            <section class="spotlight-thumbs">
+                <div class="row">
+                    {% for service in services %}
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="spotlight-item-thumb">
+                                <div class="spotlight-item-thumb-img">
+                                    <a href="{{ url('index_annonce', {
+                                        nomCategorieService : service.nomCategorieService | lower,
+                                        slugService         : service.titreService | slug,
+                                        idService         : service.idService }) }}">
+                                        <img alt="{{ service.titreService }}" src="{{ asset('img'~service.photo) }}"
+                                             class="img-responsive"/>
+                                    </a>
+                                    <a href="{{ url('index_categorie', {
+                                        nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">{{ service.nomCategorieService }}</a>
+                                </div>
+                                <h3><a href="{{ url('index_annonce', {
+                                        nomCategorieService : service.nomCategorieService | lower,
+                                        slugService         : service.titreService | slug,
+                                        idService         : service.idService }) }}">{{ service.titreService }}</a></h3>
+                                <div class="meta-post">
+                                    <a href="#">
+                                        {{ service.pseudo }}
+                                    </a>
+                                    <em></em>
+                                    <span>
+                                    {{ service.datePublicationService }}
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    {# include 'inc/sidebar.html' #}
+    {#    {{ render(controller('TechNews\\Controller\\NewsController::sidebar')) }}#}
+
 {% endblock %}

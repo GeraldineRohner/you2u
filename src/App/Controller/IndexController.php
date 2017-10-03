@@ -7,8 +7,10 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use PDO;
 
 class IndexController
 {
@@ -17,20 +19,35 @@ class IndexController
     {
 
         # Connexion à la BDD & Récupération des annonces
-        $services = $app['idiorm.db']->for_table('services')->find_result_set();
+        $services = $app['idiorm.db']->for_table('vue_services')->find_result_set();
+
 
         # Récupération des 3 annonces en spotlight (utilisateurs les mieux notés)
-        /*$spotlight = $app[idiorm.db]->
-            "SELECT services . idService, services . titreService, users . pseudo, AVG(note_users . note) as moyenne
-	         FROM services
-             INNER JOIN users ON services . idUserProposantService = users . idUser
-             INNER JOIN note_users ON users . idUser = note_users . idUserNoted
-             GROUP BY users . idUser
-             ORDER BY moyenne DESC";*/
+
+
+
+
+
+
+
+
+
+        $notesUsers = $app['idiorm.db']->for_table('users')->order_by_desc('noteMoyenne')->find_many();
+
+        foreach ($notesUsers as $noteUsers)
+        {
+            $derniereAnnonce[] = $app['idiorm.db']->for_table('vue_services')->where('idUserProposantService', $noteUsers->idUser)->order_by_desc('idService')->find_one();
+        }
+
+
+
+        /*$spotlight = $app['idiorm.db']->for_table('vue_services')->find_result_set();*/
+
 
         # Affichage dans le Vue
         return $app['twig']->render('index.html.twig', [
-            'services' => $services
+            'services' => $services,
+            'spotlight' => $derniereAnnonce
         ]);
     }
 
@@ -61,6 +78,7 @@ class IndexController
 
         # Récupération de l'annonce
         $service = $app['idiorm.db']->for_table('vue_services')
+            /*->where('idService',$idService)*/
             ->find_one($idService);
 
         # Récupérer des Articles de la Catégories (suggestions)
@@ -72,7 +90,7 @@ class IndexController
             # 3 annonces maximum
             ->limit(3)
             # Par ordre décroissant
-            ->order_by_desc('IDARTICLE')
+            ->order_by_desc('idService')
             # Je récupère les résultats
             ->find_result_set();
 
@@ -81,6 +99,142 @@ class IndexController
             'service' => $service,
             'suggestions' => $suggestions
         ]);
+    }
+
+
+    public function inscriptionAction(Application $app) {
+
+        # Création du formulaire d'inscription
+        $form = $app['form.factory']->createBuilder(FormType::class)
+            # -- Identifiant -- #
+            ->add('nom', TextType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez entrer votre nom')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre nom'
+                )
+            ))
+            ->add('prenom', TextType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez entrer votre prénom')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre prénom'
+                )
+            ))
+            ->add('email', EmailType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez renseigner votre adresse email')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'votre.email@exemple.fr'
+                )
+            ))
+            ->add('pseudo', TextType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez choisir un nom d\'utilisateur')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre pseudonyme'
+                )
+            ))
+            # -- Mot de passe -- #
+            ->add('motDePasse', PasswordType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez renseigner votre mot de passe')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => '******'
+                )
+            ))
+            ->add('motDePasseConfirmation', PasswordType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez renseigner une seconde fois votre mot de passe')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Veuillez retaper votre mot de passe'
+                )
+            ))
+            ->add('adresse', TextType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez entrer un nom et n° de voie')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'voie'
+                )
+            ))
+            ->add('codePostal', TextType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez entrer un code postal valide')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre code postal'
+                )
+            ))
+            ->add('codePostal', TextType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez entrer une ville')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'Votre ville de résidence'
+                )
+            ))
+
+
+            # -- Connexion -- #
+            ->add('submit', SubmitType::class, array(
+                'label' => 'Connexion',
+                'attr' => array(
+                    'class' => 'btn btn-primary'
+                )
+            ))
+            # --> La sécurisation du formulaire de connexion est géré par Silex directement <-- #
+
+            ->getForm();
+
+        $form->handleRequest($request);
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return $app['twig']->render('inscription.html.twig');
     }
 
 

@@ -2,8 +2,8 @@
 
 {# Block de title défini dans base.html.twig #}
 
-    {% block title %} {{service.TitreService | capitalize}} {% endblock %}
-{% set active = service.nomCategorieService | capitalize %}
+    {% block title %} {{service.titreService | capitalize}} {% endblock %}
+{#{% set active = service.nomCategorieService | capitalize %}#}
 
 {# Block de Contenu défini dans base.html.twig #}
 
@@ -13,7 +13,7 @@
             <div class="col-md-8 col-sm-12">
                 <!--post-detail-->
                 <service class="post-detail">
-                    <h1>{{ service.TITREservice }}</h1>
+                    <h1>{{ service.titreService }}</h1>
                     <div class="meta-post">
                         <a href="#">
                             {{ service.pseudo }}
@@ -81,18 +81,19 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="spotlight-item-thumb">
                                     <div class="spotlight-item-thumb-img">
-                                        <a href="{{ url('news_service', {
+                                        <a href="{{ url('index_annonce', {
                                             nomCategorieService: service.nomCategorieService | lower,
-                                            slugService : service.TitreService | slug,
+                                            slugService : service.titreService | slug,
                                             idService : service.idService }) }}">
-                                           {# <img alt="{{ service.TITREservice }}" src="{{ asset('images/product/'~service.FEATUREDIMAGEservice) }}">#}
+                                            <img alt="{{ service.titreService }}" src="{{ asset('img'~service.photo) }}">
                                         </a>
-                                        <a href="#" class="cate-tag">{{ service.nomCategorieservice }}</a>
+                                        <a href="{{ url('index_categorie', {
+                                            nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">{{ service.nomCategorieService }}</a>
                                     </div>
-                                    <h3><a href="{{ url('news_service', {
+                                    <h3><a href="{{ url('index_annonce', {
                                             nomCategorieService : service.nomCategorieService | lower,
-                                            slugService : service.TitreService | slug,
-                                            idService : service.idService }) }}">{{ service.TitreService }}</a></h3>
+                                            slugService : service.titreService | slug,
+                                            idService : service.idService }) }}">{{ service.titreService }}</a></h3>
                                     <div class="meta-post">
                                         <a href="#">
                                             {{ service.pseudo }}
