@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Modification mot de passe {% endblock %}
+
+{# Block de Contenu défini dans base.html.twig #}
+{% block contenu %}
+        
+       
+            	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                 <div class="container">
+                    <div class="starter-template">
+                    	<h1>Modification du mot de passe de {{app.user.prenom }} {{ app.user.nom }}</h1>
+                    		<form class="form-horizontal" method="POST" enctype="multipart/form-data" >
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Saissisez votre nouveau mot de passe : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.motDePasse) }}
+                            	</div>
+                    	</div>
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Confirmer votre nouveau mot de passe : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.confirm_motDePasse) }}
+                            	</div>
+                    	</div>
+                    	{{ form_row(form._token) }}
+            			<div class="form-group">
+            				<label for="" class="col-md-3 control-label">
+            					
+            				</label>
+            				<div class="col-md-7">
+            					<input type="submit" class="btn btn-primary" value="Mettre à jour" />
+            				</div>
+            			</div>
+                {% else %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Vous devez être inscrit-e et/ou connecté-e pour accéder à cet espace <br />
+                <b>Connexion</b> - <b>Inscription</b></div>
+                {% endif %}
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

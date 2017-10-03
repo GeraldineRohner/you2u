@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Silex\Application;
+<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -11,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use PDO;
+=======
+use Symfony\Component\HttpFoundation\Request;
+>>>>>>> beta
 
 class IndexController
 {
@@ -241,6 +245,7 @@ class IndexController
     # Affichage de la page de connexion
     public function connexionAction(Application $app, Request $request)
     {
+<<<<<<< HEAD
         # Création du formulaire de connexion
         $form = $app['form.factory']->createBuilder(FormType::class)
             # -- Identifiant -- #
@@ -285,6 +290,12 @@ class IndexController
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
             'form' => $form->createView()
+=======
+        # Affichage dans la Vue
+        return $app['twig'] -> render('connexion.html.twig', [
+            'error'         => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username')
+>>>>>>> beta
         ]);
     }
 }

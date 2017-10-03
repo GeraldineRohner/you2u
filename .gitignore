@@ -1,2 +1,8 @@
 vendor/
+<<<<<<< HEAD
 src/App/Controller/gitignore
+=======
+.buildpath
+.project
+public/img/img_user/
+>>>>>>> beta

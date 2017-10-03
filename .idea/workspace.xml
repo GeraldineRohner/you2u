@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ChangeListManager">
     <list default="true" id="27608911-7cc4-44c9-9eb0-3ee250890072" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
@@ -14,6 +15,58 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/Controller/IndexController.php" afterPath="$PROJECT_DIR$/src/App/Controller/IndexController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+<<<<<<< HEAD
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="85a96f52-cd1a-479a-ad76-7877d33b2f0a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ressources/views/test" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/App/Controller/Member.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/App/Provider/MemberProvider.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/desktop.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/main.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/main.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/owl.carousel.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/owl.carousel.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/scss/_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/scss/_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/scss/desktop.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fonts/desktop.ini" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ressources/layout/header.html.twig" afterPath="$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/bootstrap.css" afterPath="$PROJECT_DIR$/public/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/font-awesome.css" afterPath="$PROJECT_DIR$/public/css/font-awesome.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/font-awesome.css.map" afterPath="$PROJECT_DIR$/public/css/font-awesome.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/public/css/font-awesome.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/main.css" afterPath="$PROJECT_DIR$/public/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/normalize.css" afterPath="$PROJECT_DIR$/public/css/normalize.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/normalize.min.css" afterPath="$PROJECT_DIR$/public/css/normalize.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/public/fonts/fontawesome-webfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/public/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/bootstrap.js" afterPath="$PROJECT_DIR$/public/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/jquery.matchHeight.js" afterPath="$PROJECT_DIR$/public/js/jquery.matchHeight.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/jquery.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/main.js" afterPath="$PROJECT_DIR$/public/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/owl.carousel.min.js" afterPath="$PROJECT_DIR$/public/js/owl.carousel.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/config/database.config.php" afterPath="$PROJECT_DIR$/ressources/config/database.config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/config/security.php" afterPath="$PROJECT_DIR$/ressources/config/security.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/layout/base.html.twig" afterPath="$PROJECT_DIR$/ressources/layout/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/layout/layout.html.twig" afterPath="$PROJECT_DIR$/ressources/layout/layout.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/views/connexion.html.twig" afterPath="$PROJECT_DIR$/ressources/views/connexion.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/views/index.html.twig" afterPath="$PROJECT_DIR$/ressources/views/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/Controller/IndexController.php" afterPath="$PROJECT_DIR$/src/App/Controller/IndexController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/Controller/MemberController.php" afterPath="$PROJECT_DIR$/src/App/Controller/MemberController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php" afterPath="$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routes.php" afterPath="$PROJECT_DIR$/src/routes.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+  <component name="ChangeListManager">
+    <list default="true" id="77eded83-d1f9-417a-a530-c106146038f6" name="Default" comment="" />
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +74,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App/Controller/IndexController.php">
@@ -143,6 +197,146 @@
     <dirStrings>
       <dir>C:\xampp\htdocs\Soutenance\you2u</dir>
     </dirStrings>
+=======
+    <splitter split-orientation="horizontal" split-proportion="0.50987893">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ressources/views/index.html.twig">
+              <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="207">
+                  <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                  <folding />
+=======
+                <state relative-caret-position="161">
+                  <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+                  <folding>
+                    <marker date="1506697174321" expanded="true" signature="174:487" ph="{% block contenu ...%}" />
+                    <marker date="1506697174321" expanded="true" signature="233:446" ph="..." />
+                  </folding>
+>>>>>>> ajoutAnnonce
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MemberController.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/App/Controller/MemberController.php">
+              <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="1265">
+                  <caret line="169" column="66" lean-forward="true" selection-start-line="169" selection-start-column="66" selection-end-line="169" selection-end-column="66" />
+                  <folding>
+                    <element signature="e#36#58#0#PHP" expanded="true" />
+                    <element signature="e#818#1329#1#PHP" expanded="true" />
+                    <element signature="e#1398#1705#1#PHP" expanded="true" />
+                  </folding>
+=======
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+>>>>>>> ajoutAnnonce
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="connexion.html.twig" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ressources/views/connexion.html.twig">
+              <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="1311">
+                  <caret line="57" column="51" lean-forward="true" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+                  <folding>
+                    <element signature="e#2539#2562#0#HTML" expanded="true" />
+                    <element signature="e#2741#2764#0#HTML" expanded="true" />
+                  </folding>
+=======
+                <state relative-caret-position="1242">
+                  <caret line="54" column="30" lean-forward="false" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+                  <folding />
+>>>>>>> ajoutAnnonce
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/App/Controller/IndexController.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="69">
+                  <caret line="4" column="45" lean-forward="false" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
+                  <folding>
+<<<<<<< HEAD
+                    <element signature="e#103#796#0#PHP" expanded="true" />
+                    <element signature="e#132#413#0#PHP" expanded="true" />
+                    <element signature="e#459#794#0#PHP" expanded="true" />
+=======
+                    <element signature="e#748#2636#0#PHP" expanded="true" />
+                    <element signature="e#392#2638#0#PHP" expanded="true" />
+>>>>>>> ajoutAnnonce
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ressources/layout/base.html.twig">
+              <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="757">
+                  <caret line="45" column="20" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+=======
+                <state relative-caret-position="-161">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> ajoutAnnonce
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MemberControllerProvider.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php">
+              <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+                <state relative-caret-position="460">
+                  <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="29" />
+                  <folding>
+                    <element signature="e#33#75#0#PHP" expanded="true" />
+                  </folding>
+=======
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+>>>>>>> ajoutAnnonce
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
+          <file leaf-file-name="ajoutAnnonce.html.twig" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="230">
+                  <caret line="42" column="48" lean-forward="false" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+=======
+          <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ressources/views/index.html.twig">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="161">
+                  <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+>>>>>>> ajoutAnnonce
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+>>>>>>> beta
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -150,6 +344,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/app.php" />
         <option value="$PROJECT_DIR$/src/App/Extension/AppTwigExtension.php" />
         <option value="$PROJECT_DIR$/ressources/views/service.html.twig" />
@@ -163,6 +358,29 @@
         <option value="$PROJECT_DIR$/src/App/Controller/HelpController.php" />
         <option value="$PROJECT_DIR$/ressources/views/inscription.html.twig" />
         <option value="$PROJECT_DIR$/src/App/Controller/IndexController.php" />
+=======
+        <option value="$PROJECT_DIR$/src/routes.php" />
+        <option value="$PROJECT_DIR$/ressources/layout/header.html.twig" />
+        <option value="$PROJECT_DIR$/ressources/layout/layout.html.twig" />
+        <option value="$PROJECT_DIR$/ressources/views/test" />
+        <option value="$PROJECT_DIR$/ressources/config/database.config.php" />
+        <option value="$PROJECT_DIR$/ressources/views/connexion.html.twig" />
+        <option value="$PROJECT_DIR$/src/App/Provider/MemberProvider.php" />
+        <option value="$PROJECT_DIR$/ressources/config/security.php" />
+        <option value="$PROJECT_DIR$/src/App/Controller/Member.php" />
+        <option value="$PROJECT_DIR$/ressources/layout/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/App/Controller/IndexController.php" />
+        <option value="$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/ressources/views/index.html.twig" />
+        <option value="$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig" />
+        <option value="$PROJECT_DIR$/src/App/Controller/MemberController.php" />
+=======
+        <option value="$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig" />
+        <option value="$PROJECT_DIR$/src/App/Controller/MemberController.php" />
+        <option value="$PROJECT_DIR$/ressources/views/index.html.twig" />
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
       </list>
     </option>
   </component>
@@ -173,12 +391,24 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
+=======
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="y" value="1" />
+    <option name="width" value="1036" />
+    <option name="height" value="733" />
+  </component>
+=======
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -194,6 +424,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+      <pane id="Scratches" />
+>>>>>>> beta
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -252,12 +487,17 @@
               <item name="you2u" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="App" type="2a2b976b:PhpTreeStructureProvider$1" />
+<<<<<<< HEAD
               <item name="Extension" type="2a2b976b:PhpTreeStructureProvider$1" />
+=======
+              <item name="Provider" type="2a2b976b:PhpTreeStructureProvider$1" />
+>>>>>>> beta
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
@@ -266,6 +506,19 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
+=======
+    </panes>
+  </component>
+<<<<<<< HEAD
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.spelling" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/fr" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+=======
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -281,6 +534,7 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+<<<<<<< HEAD
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="27608911-7cc4-44c9-9eb0-3ee250890072" name="Default" comment="" />
@@ -292,10 +546,28 @@
       <workItem from="1506668708688" duration="19652000" />
       <workItem from="1506928945417" duration="20740000" />
       <workItem from="1507012503485" duration="2098000" />
+=======
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="1" Folder0="$USER_HOME$/Downloads/fr" Dictionaries="0" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85a96f52-cd1a-479a-ad76-7877d33b2f0a" name="Default" comment="" />
+      <created>1506608897812</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1506608897812</updated>
+      <workItem from="1506608900612" duration="2191000" />
+      <workItem from="1506667755927" duration="23446000" />
+<<<<<<< HEAD
+      <workItem from="1506692720674" duration="4251000" />
+=======
+      <workItem from="1506692720674" duration="4381000" />
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="43162000" />
   </component>
   <component name="ToolWindowManager">
@@ -303,6 +575,22 @@
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13272922" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="29888000" />
+=======
+    <option name="totallyTimeSpent" value="30018000" />
+>>>>>>> ajoutAnnonce
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+<<<<<<< HEAD
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16364606" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16364606" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -317,6 +605,10 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
+=======
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> beta
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -331,15 +623,25 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
+<<<<<<< HEAD
           <url>file://$PROJECT_DIR$/src/App/Provider/IndexControllerProvider.php</url>
           <line>4</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
+=======
+          <url>file://$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/SecurityServiceProvider.php</url>
+          <line>145</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
+>>>>>>> beta
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/App/Controller/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -373,10 +675,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+=======
+    <entry file="file://$PROJECT_DIR$/ressources/views/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -407,26 +716,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
           <caret line="90" column="107" lean-forward="false" selection-start-line="90" selection-start-column="107" selection-end-line="90" selection-end-column="107" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="29" />
+<<<<<<< HEAD
+          <folding>
+            <element signature="e#33#75#0#PHP" expanded="true" />
+          </folding>
+=======
+          <folding />
+>>>>>>> ajoutAnnonce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/Controller/MemberController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2898">
+          <caret line="157" column="23" lean-forward="false" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
+<<<<<<< HEAD
+          <folding>
+            <element signature="e#36#58#0#PHP" expanded="true" />
+            <element signature="e#818#1329#1#PHP" expanded="true" />
+            <element signature="e#1398#1705#1#PHP" expanded="true" />
+          </folding>
+=======
+          <folding />
+>>>>>>> ajoutAnnonce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ressources/layout/layout.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="14" lean-forward="false" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Provider/AdminControllerProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/App/Controller/HelpController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="109" lean-forward="true" selection-start-line="19" selection-start-column="109" selection-end-line="19" selection-end-column="109" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Controller/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/App/Controller/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -508,26 +868,136 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="26" lean-forward="false" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+=======
+    <entry file="file://$PROJECT_DIR$/ressources/layout/erreur.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/layout/sidebar.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/layout/footer.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/layout/header.html.twig" />
+    <entry file="file://$PROJECT_DIR$/public/css/main.scss" />
+    <entry file="file://$PROJECT_DIR$/ressources/views/test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="63" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/layout/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="30" column="14" lean-forward="false" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/silex/silex/src/Silex/Provider/SecurityServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="256" column="80" lean-forward="true" selection-start-line="256" selection-start-column="80" selection-end-line="256" selection-end-column="80" />
+          <folding>
+            <element signature="e#4268#4446#1#PHP" expanded="true" />
+            <element signature="e#4490#4556#1#PHP" expanded="true" />
+            <element signature="e#4596#4864#2#PHP" expanded="true" />
+            <element signature="e#4918#5138#1#PHP" expanded="true" />
+            <element signature="e#5240#5434#1#PHP" expanded="true" />
+            <element signature="e#5536#5615#1#PHP" expanded="true" />
+            <element signature="e#5660#5742#1#PHP" expanded="true" />
+            <element signature="e#5787#5898#1#PHP" expanded="true" />
+            <element signature="e#5943#6018#1#PHP" expanded="true" />
+            <element signature="e#6061#6126#1#PHP" expanded="true" />
+            <element signature="e#6171#6269#1#PHP" expanded="true" />
+            <element signature="e#6306#6539#1#PHP" expanded="true" />
+            <element signature="e#6578#6689#1#PHP" expanded="true" />
+            <element signature="e#6736#7140#1#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/config/database.config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+          <folding>
+            <element signature="e#7#55#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/Provider/IndexControllerProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="711">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="e#32#74#0#PHP" expanded="false" />
+            <element signature="e#99#1232#0#PHP" expanded="true" />
+            <element signature="e#278#1229#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/App/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Provider/MemberProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="61" column="26" lean-forward="true" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/App/Controller/MemberController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/ressources/config/security.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="30" column="41" lean-forward="false" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ressources/views/service.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -553,10 +1023,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="48" lean-forward="false" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Controller/Member.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="58" column="29" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="29" />
+<<<<<<< HEAD
+          <folding>
+            <element signature="e#460#1372#0#PHP" expanded="true" />
+            <element signature="e#1379#1448#0#PHP" expanded="true" />
+            <element signature="e#1455#1524#0#PHP" expanded="true" />
+            <element signature="e#1531#1600#0#PHP" expanded="true" />
+            <element signature="e#1607#1670#0#PHP" expanded="true" />
+            <element signature="e#1677#1744#0#PHP" expanded="true" />
+            <element signature="e#1751#1828#0#PHP" expanded="true" />
+            <element signature="e#1835#1906#0#PHP" expanded="true" />
+            <element signature="e#1913#1990#0#PHP" expanded="true" />
+            <element signature="e#1997#2072#0#PHP" expanded="true" />
+            <element signature="e#2079#2150#0#PHP" expanded="true" />
+            <element signature="e#2157#2224#0#PHP" expanded="true" />
+            <element signature="e#2231#2314#0#PHP" expanded="true" />
+            <element signature="e#2321#2394#0#PHP" expanded="true" />
+            <element signature="e#2533#2603#0#PHP" expanded="true" />
+            <element signature="e#2648#2723#0#PHP" expanded="true" />
+            <element signature="e#2766#2828#0#PHP" expanded="true" />
+            <element signature="e#2873#2931#0#PHP" expanded="true" />
+            <element signature="e#3035#3076#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/views/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+=======
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Http/Tests/Authentication/DefaultAuthenticationSuccessHandlerTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
@@ -568,18 +1076,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="13" lean-forward="false" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-69">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ressources/views/annonce.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
           <caret line="90" column="107" lean-forward="false" selection-start-line="90" selection-start-column="107" selection-end-line="90" selection-end-column="107" />
+=======
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="42" column="48" lean-forward="false" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/App/Provider/IndexControllerProvider.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -610,10 +1133,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="14" lean-forward="false" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="29" />
+          <folding>
+            <element signature="e#33#75#0#PHP" expanded="true" />
+          </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/App/Provider/MemberControllerProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+>>>>>>> ajoutAnnonce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/Controller/IndexController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="4" column="45" lean-forward="false" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
+          <folding>
+<<<<<<< HEAD
+            <element signature="e#103#796#0#PHP" expanded="true" />
+            <element signature="e#132#413#0#PHP" expanded="true" />
+            <element signature="e#459#794#0#PHP" expanded="true" />
+=======
+            <element signature="e#748#2636#0#PHP" expanded="true" />
+            <element signature="e#392#2638#0#PHP" expanded="true" />
+>>>>>>> ajoutAnnonce
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ressources/layout/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="757">
+          <caret line="45" column="20" lean-forward="true" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+=======
+        <state relative-caret-position="-161">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ressources/views/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -626,18 +1195,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+=======
+    <entry file="file://$PROJECT_DIR$/ressources/views/connexion.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="1311">
+          <caret line="57" column="51" lean-forward="true" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+          <folding>
+            <element signature="e#2539#2562#0#HTML" expanded="true" />
+            <element signature="e#2741#2764#0#HTML" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="1242">
+          <caret line="54" column="30" lean-forward="false" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="30" />
+          <folding />
+>>>>>>> ajoutAnnonce
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/Controller/MemberController.php">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="1265">
+          <caret line="169" column="66" lean-forward="true" selection-start-line="169" selection-start-column="66" selection-end-line="169" selection-end-column="66" />
+          <folding>
+            <element signature="e#36#58#0#PHP" expanded="true" />
+            <element signature="e#818#1329#1#PHP" expanded="true" />
+            <element signature="e#1398#1705#1#PHP" expanded="true" />
+          </folding>
+=======
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/app.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="34" column="46" lean-forward="false" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+=======
+    <entry file="file://$PROJECT_DIR$/ressources/views/ajoutAnnonce.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="48" column="32" lean-forward="false" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+>>>>>>> beta
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ressources/views/inscription.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -656,6 +1265,14 @@
             <marker date="1507013941252" expanded="true" signature="1128:1143" ph="/*${$spotlig... " />
             <marker date="1507013941252" expanded="true" signature="1128:1148" ph="/*$spotlight... " />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/ressources/views/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <folding />
+>>>>>>> ajoutAnnonce
+>>>>>>> beta
         </state>
       </provider>
     </entry>
