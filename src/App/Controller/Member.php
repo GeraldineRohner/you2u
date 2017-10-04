@@ -140,7 +140,10 @@ class Member implements UserInterface
     {
         return $this->codeINSEE;
     }
-
+    public function getVille()
+    {
+        return $this->ville;
+    }
 
 
     # ------------------- Méthodes héritées de l'Interface ------------------- #
