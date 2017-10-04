@@ -2,6 +2,10 @@
 
 {# Block de title défini dans base.html.twig #}
 {% block title %} Accueil {% endblock %}
+{% block stylesheets %} 
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+{% endblock %}
 
 {# Block de Contenu défini dans base.html.twig #}
 {% block contenu %}
@@ -15,4 +19,29 @@
             </div>
         </div><!-- /.container -->
     
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#d5a369"
+    },
+    "button": {
+      "background": "#f8d044"
+    }
+  },
+  "position": "top",
+  "static": true,
+  "content": {
+    "message": "En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies ou autres traceurs pour vous proposer des annonces ciblées adaptées à vos centres d’intérêts et réaliser des statistiques de visites.",
+    "dismiss": "J'ai compris",
+    "link": "Plus d'infos",
+    "href": "https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi"
+  }
+})});
+</script>
 {% endblock %}
