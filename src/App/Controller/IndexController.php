@@ -3,18 +3,17 @@
 namespace App\Controller;
 
 use Silex\Application;
-<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use PDO;
-=======
-use Symfony\Component\HttpFoundation\Request;
->>>>>>> beta
+
 
 class IndexController
 {
@@ -106,11 +105,11 @@ class IndexController
     }
 
 
-    public function inscriptionAction(Application $app) {
+    public function inscriptionAction(Application $app, Request $request) {
 
         # Création du formulaire d'inscription
-        $form = $app['form.factory']->createBuilder(FormType::class)
-            # -- Identifiant -- #
+        $formInscription = $app['form.factory']->createBuilder(FormType::class)
+
             ->add('nom', TextType::class, array(
                 'required' => true,
                 'label' => false,
@@ -178,6 +177,15 @@ class IndexController
                     'placeholder' => 'Veuillez retaper votre mot de passe'
                 )
             ))
+
+
+
+          /*  ------------------------------------------------------------------------------
+          ------------------------------------------------------------------------------------
+          CES CHAMPS SERONT A REMPLIR DANS LE PROFIL AFIN D'ALLEGER LA PROCÉDURE D'INSCRIPTION
+          ------------------------------------------------------------------------------------
+          ------------------------------------------------------------------------------------
+
             ->add('adresse', TextType::class, array(
                 'required' => true,
                 'label' => false,
@@ -192,6 +200,7 @@ class IndexController
             ->add('codePostal', TextType::class, array(
                 'required' => true,
                 'label' => false,
+                'disabled' => true,
                 'constraints' => array(new NotBlank(array(
                         'message' => 'Veuillez entrer un code postal valide')
                 )),
@@ -200,52 +209,205 @@ class IndexController
                     'placeholder' => 'Votre code postal'
                 )
             ))
-            ->add('codePostal', TextType::class, array(
+            ->add('ville', TextType::class, array(
                 'required' => true,
                 'label' => false,
                 'constraints' => array(new NotBlank(array(
                         'message' => 'Veuillez entrer une ville')
                 )),
                 'attr' => array(
-                    'class' => 'form-control',
+                    'class' => 'form-control typeahead',
                     'placeholder' => 'Votre ville de résidence'
                 )
             ))
 
+            ->add('telFixe', TextType::class, array(
+                    'required' => false,
+                    'label'    => false,
+                    'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'N° de téléphone fixe'
+                    )
+            ))
 
-            # -- Connexion -- #
-            ->add('submit', SubmitType::class, array(
-                'label' => 'Connexion',
+
+            ->add('telMobile', TextType::class, array(
+                'required' => false,
+                'label'    => false,
                 'attr' => array(
-                    'class' => 'btn btn-primary'
+                    'class' => 'form-control',
+                    'placeholder' => 'N° de téléphone mobile'
                 )
             ))
-            # --> La sécurisation du formulaire de connexion est géré par Silex directement <-- #
+
+            ->add('photo', FileType::class, [
+
+                'required'      => false,
+                'label'         => false,
+                'attr'          =>
+                    ['class' => 'dropify'],
+                'constraints'   => [new File([
+                    'maxSize' => '4096k',
+                    'mimeTypes' => [
+                        'image/png',
+                        'image/jpeg',
+                        'image/gif'
+                    ]
+                ])]
+            ])
+            ->add('profilVisible', CheckboxType::class, array(
+                'label'    => '',
+                'required' => false,
+            ))
+
+
+          ------------------------------------------------------------------------------------
+          ------------------------------------------------------------------------------------*/
+
+            ->add('accepterConditions', CheckboxType::class, array(
+                    'label'    => '',
+                    'required' => true,
+                 'constraints' => array(new NotBlank(array(
+                        'message' => 'Vous devez accepter les conditions générales de vente')
+                                      )
+                 )
+            ))
+
+
+            ->add('submit', SubmitType::class, ['label' => 'S\'inscrire',
+                                                'attr' => array(
+                                                    'class' => 'btn btn-primary'
+                                                )])
 
             ->getForm();
 
-        $form->handleRequest($request);
+
+
+        # Traitement des données POST
+        $formInscription->handleRequest($request);
+
+
+
+
+        # Vérifier si le Formulaire est valide
 
 
 
 
 
 
+        if($formInscription->isValid())
+
+
+        {
+
+
+
+            $creationMembre = $formInscription->getData();
+
+            if ($creationMembre['motDePasse'] === $creationMembre['motDePasseConfirmation'])
+
+            {
+
+            # Récupération des données du Formulaire
+
+
+            # Récupération de l'image
+
+        /*
+
+
+        ------------------------------------------------------------------------------------
+        ----------INSERTION DE LA PHOTO ET DU CODE INSEE (A METTRE DANS PROFIL)-------------
+        ------------------------------------------------------------------------------------
+
+        $photo  = $creationMembre['photo'];
+            $chemin = PATH_PUBLIC.'/img';
+
+
+
+
+            $insertionMembre = $app['idiorm.db']->for_table('users')->create();
+            $villeCI = $app['idiorm.db']->for_table('villes_rhone')->select('codeINSEE')->where('codePostal', $creationMembre['codePostal'])->where('commune',strtoupper($creationMembre['ville']))->find_one();
+           */
+
+
+            #On récupère la ville et le CP avec le code Insee
+
+
+            #On associe les colonnes de notre BDD avec les valeurs du Formulaire
+            #Colonne mySQL                         #Valeurs du Formulaire
+            $insertionMembre->nom                  = $creationMembre['nom'];
+            $insertionMembre->prenom               = $creationMembre['prenom'];
+            $insertionMembre->pseudo               = $creationMembre['pseudo'];
+
+            #On encode le password
+            $insertionMembre->motDePasse           = $app['security.encoder.digest']->encodePassword($creationMembre['motDePasse'],'');
+
+            /*
+            ------------------------------------------------------------------------------------
+            -----------------------DONNÉES A INSERER DANS LA BDD VIA LE PROFIL------------------
+            ------------------------------------------------------------------------------------
+
+            $insertionMembre->adresse              = $creationMembre['adresse'];
+            $insertionMembre->codePostal           = $creationMembre['codePostal'];
+            $insertionMembre->codeINSEE            = $villeCI;
+            $insertionMembre->ville                = $creationMembre['ville'];
+            $insertionMembre->telFixe              = $creationMembre['telFixe'];
+            $insertionMembre->telMobile            = $creationMembre['telMobile'];
+            $insertionMembre->profilVisible        = $creationMembre['profilVisible'];
+
+
+
+            if (isset($creationMembre['photo']))
+            {
+                $extension = $photo->guessExtension();
+                $photo->move($chemin, $this->generateSlug($photo) . '.' . $extension);
+
+                $insertionMembre->photo = $this->generateSlug($creationMembre['photo'] . '.' . $extension);
+            }
+
+            ------------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------------*/
 
 
 
 
 
+            # Insertion en BDD
+            $insertionMembre->save();
 
 
-        return $app['twig']->render('inscription.html.twig');
+            # --> La sécurisation du formulaire de connexion est gérée par Silex directement <-- #
+                echo "INSCRIPTION OK";
+                return $app->redirect($app['url_generator']->generate('index_inscription?inscription=ok'));
+
+            }
+
+            else
+
+            {
+                $erreurMdp = "<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mot de passe identiques.</div>";
+                return $app['twig']->render('inscription.html.twig', [
+                    'formInscription' => $formInscription->createView(),
+                    'message' => $erreurMdp]);
+            }
+
+        }
+        else
+        {
+            return $app['twig']->render('inscription.html.twig', ['formInscription' => $formInscription->createView()]);
+        }
+
     }
+
 
 
     # Affichage de la page de connexion
     public function connexionAction(Application $app, Request $request)
     {
-<<<<<<< HEAD
+
         # Création du formulaire de connexion
         $form = $app['form.factory']->createBuilder(FormType::class)
             # -- Identifiant -- #
@@ -290,12 +452,8 @@ class IndexController
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
             'form' => $form->createView()
-=======
-        # Affichage dans la Vue
-        return $app['twig'] -> render('connexion.html.twig', [
-            'error'         => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username')
->>>>>>> beta
+
         ]);
     }
+
 }

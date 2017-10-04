@@ -213,7 +213,7 @@ class MemberController
                 }
             
                 
-            #On récupérer la ville et le CP avec le code Insee
+            #On récupère la ville et le CP avec le code Insee
                $villeCP = $app['idiorm.db']->for_table('villes_rhone')->where('codeINSEE', $modifProfil['codePostal'])->find_one();
             
             #On modifie l'enregistrement #1 a modifié par l'id USER qu'on retrouvera par la variable ID USER

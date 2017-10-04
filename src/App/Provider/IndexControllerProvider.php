@@ -46,6 +46,13 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->bind('index_annonce');
 
 
+        # Page d'inscription
+        $controllers
+            ->match("/inscription","App\Controller\IndexController::inscriptionAction")
+            ->method('GET|POST')
+            ->bind('index_inscription');
+
+
 
 
         # Page de connexion

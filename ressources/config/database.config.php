@@ -23,22 +23,15 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 #3 : Idiorm ORM
 $app->register(new IdiormServiceProvider(), array(
     'idiorm.db.options' => array(
-<<<<<<< HEAD
+
         'connection_string'   => 'mysql:host='.DBHOST.';dbname='.DBNAME,
         'username'            => DBUSERNAME,
         'password'            => DBPASSWORD,
         'id_column_overrides' => array('users'             => 'idUser',
                                        'categorie_service' => 'idCategorieService',
                                        'services'          => 'idService',
-                                       'vue_services'      => 'idService')
-=======
-        'connection_string' => 'mysql:host='.DBHOST.';dbname='.DBNAME,
-        'username' => DBUSERNAME,
-        'password' => DBPASSWORD,
-        'id_column_overrides' => array(
-            'users' =>  'idUser'
-        )
->>>>>>> beta
+                                       'vue_services'      => 'idService',
+                                       'villes_rhone'      =>  'codeINSEE')
     )
 ));
 

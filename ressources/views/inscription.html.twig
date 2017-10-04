@@ -1,20 +1,226 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}Inscription{% endblock %}
-{% set active = 'inscription' %}
 
 {% block contenu %}
 
     <div class="row">
         <div class="col-xs-6 col-xs-push-3">
+            {% if message is defined %}
+                {{ message | raw }}
+            {% endif %}
 
             <h2 class="text-center">Inscription d'un Membre</h2>
+
+
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <form enctype="multipart/form-data" class="form-horizontal" method="POST">
+
+
+
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre nom*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.nom) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre prénom*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.prenom) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre nom d'utilisateur*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.pseudo) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre email*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.email) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre mot de passe*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.motDePasse) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Confirmez votre mot de passe*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.motDePasseConfirmation) }}
+                            </div>
+                        </div>
+                        <div class="form-group" id="the-basics">
+                            <label for="" class="col-md-3 control-label">
+                                Votre ville*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.ville) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre n° et nom de voie*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.adresse) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre code postal*
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.codePostal) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre n° de télephone fixe
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.telFixe) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Votre n° de télephone mobile
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.telMobile) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Une petite photo ?
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.photo) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Cochez cette case si vous souhaitez que vous informations personnelles n'apparaissent pas
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.profilVisible) }}
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="" class="col-md-3 control-label">
+                                Accepter les conditions générales de vente
+                            </label>
+                            <div class="col-md-7">
+                                {{ form_row(formInscription.accepterConditions) }}
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        {# Important pour la validation du Token #}
+                        {{ form_row(formInscription._token) }}
+
+                        <!-- Submit -->
+                        <div class="form-group">
+                            <div class="col-xs-7 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary" value="S'inscrire">
+                                    S'inscrire</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
 
 
         </div>
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <!--Script pour l'auto-complétion -->
+    <script src="{{ asset('js/typeahead.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            var ListeDeVilles = [];
+
+            // Requête Ajax pour traiter les données JSON (liste des villes du Rhone)
+            $.ajax({
+                // API data open sources :
+                url: 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=correspondance-code-insee-code-postal&facet=insee_com&facet=nom_dept&facet=nom_region&facet=statut&refine.nom_dept=RHONE&rows=-1',
+                global: false,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+
+                    // console.log permettant de voir toutes les données récupérées dans le tableau JSON :
+                    console.log(data);
+
+                    // Création d'une variable comprenant le nombre total d'entrées dans le tableau JSON :
+                    nhits = data.records.length;
+
+                    /*console.log(value.fields['nom_comm']);
+                     ListeDeVilles.push(value.fields['nom_comm']);*/
+
+                    // Boucle pour afficher toutes les données du tableau :
+                    for(let i = 0 ; i < nhits ; i++) {
+
+                        //console.log(data.records[i].fields.nom_comm);
+
+                        // Instertion des données dans la variable ListeDeVille :
+                        ListeDeVilles.push(data.records[i].fields.nom_comm);
+
+                    }
+
+                    // Insertion des données de la variable ListeDeVille dans l'input de recherche :
+                    $('input.typeahead').typeahead({
+                        local : ListeDeVilles
+                    });
+                }
+            });
+
+        });
+
+    </script>
+
+{% endblock %}
+
+
 
 
 

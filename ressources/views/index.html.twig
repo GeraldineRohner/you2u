@@ -1,29 +1,26 @@
 {% extends "layout.html.twig" %}
 
 {# Titre de la Page #}
-{% block title %} Accueil | TechNews {% endblock %}
+{% block title %} Accueil | You2u {% endblock %}
 
 {# Fil d'Ariane #}
 {% set active = 'accueil' %}
 
 {# Contenu de la Page #}
 {% block contenu %}
-<<<<<<< HEAD
 
     <div class="row">
         <!--colleft-->
         <div class="col-md-8 col-sm-12">
             <div class="box-caption">
                 <span>spotlight</span>
-=======
-        
+
         <div class="container">
             <div class="starter-template">
             {% if global.request.get('inscription') == 'success' %}
             {% endif %}
                 <h1>{{ message }}</h1>
-                <p class="lead">Use this document as a way to quickly start any new project.</p>
->>>>>>> beta
+
             </div>
             <!--spotlight-->
             <section class="owl-carousel owl-spotlight">
