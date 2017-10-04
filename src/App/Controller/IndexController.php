@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Silex\Application;
-<<<<<<< HEAD
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -11,10 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use PDO;
-=======
-use Symfony\Component\HttpFoundation\Request;
->>>>>>> beta
+
 
 class IndexController
 {
@@ -36,12 +32,12 @@ class IndexController
 
 
 
-        $notesUsers = $app['idiorm.db']->for_table('users')->order_by_desc('noteMoyenne')->find_many();
+//         $notesUsers = $app['idiorm.db']->for_table('users')->order_by_desc('noteMoyenne')->find_many();
 
-        foreach ($notesUsers as $noteUsers)
-        {
-            $derniereAnnonce[] = $app['idiorm.db']->for_table('vue_services')->where('idUserProposantService', $noteUsers->idUser)->order_by_desc('idService')->find_one();
-        }
+//         foreach ($notesUsers as $noteUsers)
+//         {
+//             $derniereAnnonce[] = $app['idiorm.db']->for_table('vue_services')->where('idUserProposantService', $noteUsers->idUser)->order_by_desc('idService')->find_one();
+//         }
 
 
 
@@ -50,8 +46,7 @@ class IndexController
 
         # Affichage dans le Vue
         return $app['twig']->render('index.html.twig', [
-            'services' => $services,
-            'spotlight' => $derniereAnnonce
+            'services' => $services
         ]);
     }
 
@@ -98,10 +93,19 @@ class IndexController
             # Je récupère les résultats
             ->find_result_set();
 
+            
+            #On génére le géocode 
+            
+            #Je recupére geo_point_2D 
+            $latitude = substr($service['geo_point_2d'], 0, strpos($service['geo_point_2d'], ','));
+            $longitude = substr($service['geo_point_2d'], strpos($service['geo_point_2d'],',')+strlen(','));
+
         # Transmission à la Vue
         return $app['twig']->render('annonce.html.twig', [
             'service' => $service,
-            'suggestions' => $suggestions
+            'suggestions' => $suggestions,
+            'latitude' => $latitude,
+            'longitude' => $longitude
         ]);
     }
 
@@ -245,7 +249,7 @@ class IndexController
     # Affichage de la page de connexion
     public function connexionAction(Application $app, Request $request)
     {
-<<<<<<< HEAD
+
         # Création du formulaire de connexion
         $form = $app['form.factory']->createBuilder(FormType::class)
             # -- Identifiant -- #
@@ -290,12 +294,6 @@ class IndexController
             'error' => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
             'form' => $form->createView()
-=======
-        # Affichage dans la Vue
-        return $app['twig'] -> render('connexion.html.twig', [
-            'error'         => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username')
->>>>>>> beta
         ]);
     }
 }
