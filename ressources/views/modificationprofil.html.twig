@@ -3,6 +3,13 @@
 {# Block de title défini dans base.html.twig #}
 {% block title %} Espace Membre {% endblock %}
 
+{% block stylesheets %}
+
+   {{ parent() }}
+
+   <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet" />
+
+{% endblock %}
 {# Block de Contenu défini dans base.html.twig #}
 {% block contenu %}
         
@@ -55,12 +62,12 @@
                             	{{ form_row(form.adresse) }}
                             	</div>
                     	</div>
-                    	<div class="form-group">
+                    	<div class="form-group" id="the-basics" align="left">
                         	<label for="" class="col-md-3 control-label">
-            					Code Postal (Ville) : 
+            					Ville  : 
             				</label>
                 				<div class="col-md-7">
-                            	{{ form_row(form.codePostal) }}
+                            	{{ form_row(form.ville) }}
                             	</div>
                     	</div>
                     	<div class="form-group">
@@ -85,6 +92,11 @@
         				</label>
         				<div class="col-md-7">
         					{{ form_row(form.photo) }}
+        				</div>
+        			</div>
+        			<div class="form-group">
+        				<div class="col-md-7">
+        					{{ form_row(form.profilVisible) }}
         				</div>
         			</div>
         			{{ form_row(form._token) }}
@@ -127,4 +139,75 @@ $('.dropify').dropify({
 }
 });
 </script>
+   <!--Script pour l'auto-complétion -->
+   
+ {{ parent() }}
+<script src="{{ asset('js/typeahead.js') }}"></script>
+   <script>
+
+       $(document).ready(function() {
+
+           var ListeDeVilles = [];
+
+           
+
+           // Requête Ajax pour traiter les données JSON (liste des villes du Rhone)
+           $.ajax({
+               // API data open sources :
+               url: 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=correspondance-code-insee-code-postal&facet=insee_com&facet=nom_dept&facet=nom_region&facet=statut&refine.nom_dept=RHONE&rows=-1',
+               global: false,
+               type: "GET",
+               dataType: "json",
+               success: function(data) {
+
+               // console.log permettant de voir toutes les données récupérées dans le tableau JSON :
+               console.log(data);
+
+               // Création d'une variable comprenant le nombre total d'entrées dans le tableau JSON :
+               nhits = data.records.length;
+
+               /*console.log(value.fields['nom_comm']);
+               ListeDeVilles.push(value.fields['nom_comm']);*/
+
+               // Boucle pour afficher toutes les données du tableau :
+               for(let i = 0 ; i < nhits ; i++) {
+
+                   //console.log(data.records[i].fields.nom_comm);
+
+                   // Instertion des données dans la variable ListeDeVille :
+                   ListeDeVilles.push(data.records[i].fields.nom_comm);
+                   //ListeDeVilles.push(data.records[i].fields.postal_code);
+
+               }
+
+                   // Insertion des données de la variable ListeDeVille dans l'input de recherche :
+                   $('input.typeahead').typeahead({
+                       local : ListeDeVilles
+                   }).blur(validateSelection);
+               }
+           });
+
+            function validateSelection() {
+        	    if ($.inArray($(this).val(), ListeDeVilles) === -1)
+            	{
+        	    	$( "#the-basics" ).addClass('has-error');
+        	    	$("input[type=submit]").prop('disabled', true);
+            	}	
+        	    else
+            	{
+        	    	$( "#the-basics" ).removeClass('has-error');
+        	    	$("input[type=submit]").prop('disabled', false); 
+            	}		
+        	}  
+           
+
+        
+
+       });
+
+       
+
+     
+
+   </script>
 {% endblock %}
