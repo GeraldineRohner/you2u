@@ -36,7 +36,7 @@
                     </div>
             </form>
 
-            <div class="affinerRecherche"></div>
+            {#<div class="affinerRecherche"></div>#}
 
 
         </div>
@@ -170,6 +170,9 @@
 
     <!-- Script pour le chargement des résultats -->
     <script src="{{ asset ('js/recherche.js') }}"></script>
+
+    <!-- Script pour affiner recherche via holmes.js (https://haroen.me/holmes/) -->
+    {#
     <script src="{{ asset('js/holmes.js') }}"></script>
 
     <script>
@@ -178,6 +181,6 @@
             find: '.results .annonces'
         });
 
-    </script>
+    </script>#}
 
 {% endblock %}
