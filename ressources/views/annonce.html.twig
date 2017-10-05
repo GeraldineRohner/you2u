@@ -6,21 +6,49 @@
 {#{% set active = service.nomCategorieService | capitalize %}#}
 
 {# Block de Contenu défini dans base.html.twig #}
-
     {% block contenu %}
+    {% if global.request.get('note') == 'success' %}
+                         <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i>Félications !. </p>
+                            <p class="text-center"> Votre avis concernant le service de l'utilisateur a bien été pris en compte !</p>
+                        </div>
+    {% endif %}
+    {% if global.request.get('note') == 'error' %}
+                         <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+Erreur lors de la publication de votre commentaire </p>
+                            <p class="text-center"> Vous devez être inscrit et connecté, Avoir rempli au moins l'un des deux champs et avoir attendu 24 heures pour valider un deuxieme commentaire!</p>
+                        </div>
+    {% endif %}
         <div class="row">
             <!--colleft-->
             <div class="col-md-8 col-sm-12">
                 <!--post-detail-->
                 <service class="post-detail">
-                    <h1>{{ service.titreService }}</h1>
+                    <h1>{{ service.titreService }}  </h1>
+                    
+                        {% if totalNote < 1 %}
+                    	Vous n'avez pas de note.
+                    	{% else %}
+                    	{% for nombreStars in 1.. nombreStars %}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i> 
+                        {% endfor %}
+                        
+                    	{% if halfstar is not empty %} 
+                    		<i class="fa fa-star-half" aria-hidden="true" style="color:#ffd700"></i>
+                    	{% endif %}
+                    	
+                    	/ 5 sur une base de {{ totalNote }} note(s)</big>
+                    	{% endif %}
+                    
+                   
                     <div class="meta-post">
                         <a href="#">
                             {{ service.pseudo }}
                         </a>
                         <em></em>
                         <span>
-                                {{ service.datePublicationService }}
+                                {{ service.datePublicationService |date("d/m/Y") }}
                             </span>
                     </div>
 
@@ -29,8 +57,58 @@
                     {{ service.descriptionService | raw }}
 
                     <h5 class="text-right font-heading"><strong>{{ service.pseudo }}</strong> </h5>
-
+                    
+                    
+                    
+            
+             
                 </service>
+                <h3>Localisation  : {{ service.commune }} </h3>
+                
+               <div id="map"></div>
+       			 <h3>Commentaires</h3>
+                    {% for commentaire in commentairesService %}
+                    
+                    <br />
+                    Commentaire de {{commentaire.pseudo}} note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
+                    
+                    {% endfor %} 
+               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                     <div class="container">
+                        <div class="starter-template">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" >
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Note : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.note) }}
+                            	</div>
+                    	</div>
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Commentaires : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.commentaires) }}
+                            	</div>
+                    	</div>
+                    	{{ form_row(form._token) }}
+        				<div class="form-group">
+            				<label for="" class="col-md-3 control-label">
+            					
+            				</label>
+            					<div class="col-md-7">
+            					<input type="submit" class="btn btn-primary" value="Noter" />
+            					</div>
+            				</div>
+        				</form>	
+                  
+                    </div>
+                  </div> 	
+               {% endif %} 
+                       
+               
                 <!--social-detail-->
                 <div class="social-detail">
                     <span>Partager notre service</span>
@@ -69,7 +147,7 @@
 
                     </ul>
                 </div>
-
+				
                 <!--related post-->
                 <div class="detail-caption">
                     <span>  DANS LA MEME CATEGORIE</span>
@@ -100,7 +178,7 @@
                                         </a>
                                         <em></em>
                                         <span>
-                                            {{ service.datePublicationService }}
+                                            {{ service.datePublicationService|date("d/m/Y") }}
                                         </span>
                                     </div>
                                 </div>
@@ -114,5 +192,26 @@
           {#  {{ render(controller('App\\Controller\\IndexController::sidebar')) }}#}
 
         </div>
+{% endblock %}        
+{% block javascripts %}
+{# Pour afficher le contenu intial du block javascripts sinon remplace par les nouveaux élements. Pour eviter ça il faut utiliser la fonction parent() #}
+{{ parent() }}
+	<script>
+	      function initMap() {
+	        var lieuAnnonce = {lat: {{ latitude }}, lng: {{ longitude }}};
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 10,
+	          center: lieuAnnonce
+	        });
+	        var marker = new google.maps.Marker({
+	          position: lieuAnnonce,
+	          map: map
+	        });
+	      }
+	    </script>
+			
 
-    {% endblock %}
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOkS2l5PbE8xo6Vhq24PlimyUg36gLoRE&callback=initMap">
+		</script>
+{% endblock %}
+ 		

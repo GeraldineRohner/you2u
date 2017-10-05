@@ -15,6 +15,10 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use App\Validator\Constraints\constraintVille;
+
+
 
 
 class MemberController
@@ -139,14 +143,16 @@ class MemberController
                 'value'   => $app['user']->getAdresse()
             ]
         ])
-        ->add('codePostal',  ChoiceType::class, [
-            'choices'   => $codePostaux(),
-            'expanded' =>  false,
-            'multiple'  => false,
-            'label'     => false,
-            'data' => $app['user']->getCodeInsee(),
+        ->add('ville', TextType::class , [
+            'required' => true,
+            'label'    => false,
+            'constraints' => array(new constraintVille(
+                array('message' => 'Vous devez saisir une ville correcte ')
+                )
+            ),
             'attr'      => [
-                'class' => 'form-control',
+                'class' => 'form-control typeahead',
+                'value' => $app['user']->getVille(),
             ]
         ])
         ->add('telFixe', TextType::class , [
@@ -172,6 +178,10 @@ class MemberController
                 'class'         => 'form-control',
                 'value'   =>  $app['user']->getTelMobile()
             ]
+        ])
+        ->add('profilVisible', CheckboxType::class, [
+            'label'    => '',
+            'required' => false,
         ])
         ->add('photo', FileType::class , [
             'required'      =>  false,
@@ -214,7 +224,8 @@ class MemberController
             
                 
             #On récupérer la ville et le CP avec le code Insee
-               $villeCP = $app['idiorm.db']->for_table('villes_rhone')->where('codeINSEE', $modifProfil['codePostal'])->find_one();
+               $villeCP = $app['idiorm.db']->for_table('villes_rhone')->where('commune', $modifProfil['ville'])->find_one();
+  
             
             #On modifie l'enregistrement #1 a modifié par l'id USER qu'on retrouvera par la variable ID USER
                $modifUser = $app['idiorm.db']->for_table('users')->find_one($app['user']->getIdUser());
@@ -229,6 +240,7 @@ class MemberController
                 'codeINSEE'                 => $villeCP['codeINSEE'],
                 'telMobile'                 => $modifProfil['telMobile'],
                 'telFixe'                   => $modifProfil['telFixe'],
+                'profilVisible'             => $modifProfil['profilVisible'],
                 'photo'                     => $urlFichier
                 )
             );
