@@ -91,13 +91,13 @@ class MemberController
 
 
             # -- Localisation -- #
-            ->add('lieuService', ChoiceType::class, array(
-                'choices'           => $villesRhone(),
+            ->add('localisation', TextType::class, array(
                 'required'          => false,
                 'label'             => false,
                 'attr'              => array(
                     'id'            => 'recherche',
-                    'class'         => 'form-control'
+                    'class'         => 'typeahead form-control',
+                    'placeholder'   => 'Localisation'
                 )
             ))
 

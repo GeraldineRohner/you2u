@@ -1,12 +1,15 @@
 <?php
 namespace App\Controller;
 
+use function json_encode;
 use function print_r;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use function utf8_encode;
+use function var_dump;
 
 class IndexController
 {
@@ -58,6 +61,7 @@ class IndexController
                 'multiple'          => false,
                 'label'             => false,
                 'attr'              => array(
+                    'id'            => 'categorie-search',
                     'class'         => 'form-control'
                 )
             ))
@@ -67,7 +71,7 @@ class IndexController
                 'required'          => false,
                 'label'             => false,
                 'attr'              => array(
-                    'id'            => 'recherche',
+                    'id'            => 'recherche localisation-search',
                     'class'         => 'typeahead form-control',
                     'placeholder'   => 'Localisation'
                 )
@@ -77,35 +81,189 @@ class IndexController
 
         $form->handleRequest($request);
 
-        # Récupération des données du formulaire
-       if (!empty($_GET))
-       {
-           $categorie       =  $request->get('form')['categorie'];
-           $localisation    =  $app['idiorm.db']->for_table('villes_rhone')->where('commune', $request->get('form')['localisation'])->find_one();
-           $codeINSEE       =  $localisation->codeINSEE;
 
-           # Récupération des annonces
-           $annoncesPubliees = $app['idiorm.db']->for_table('services')
-               ->where('validation', 1)
-               ->where('idCategorieService', $categorie)
-               ->where('lieuService', $codeINSEE)
-               ->order_by_desc('idService')
-               ->find_result_set();
+        # Affichage dans la vue
+        return $app['twig']->render('recherche.html.twig', [
+            'form'                   => $form->createView()
+        ]);
 
-           return $app['twig']->render('recherche.html.twig', [
-               'idCategorieService'    => $categorie,
-               'lieuService'           => $localisation,
-               'form'=> $form->createView(),
-               'annoncesPubliees'  => $annoncesPubliees
-           ]);
+    }// Fin public function rechercheAction
 
-       } // END IF NOT EMPTY
+    public function rechercheActionPost(Application $app, Request $request)
+    {
 
-        # Affichage dans la Vue
-        return $app['twig'] -> render('recherche.html.twig', array(
-            'form'=> $form->createView()
-        ));
+        $annoncesPubliees[]  = null;
+        $nbAnnoncesPubliees = null;
+        $pageMax = null;
+        $numeroPage = null;
+        $categorie = null;
+        $localisation = null;
+        $page = $request->get('page');
+        # --> PAGINATION <-- #
 
-    }
+        $debug['categorie'] = $request->get('categorie');
 
-}
+        # Variable pagination : nombre d'annonce par page (limit)
+        $limit = 10;
+        # Vérification de l'existance et la conformité de GET
+        if(null != $page && preg_match('#^[1-9][0-9]{0,9}$#', $page))
+        {
+            # si oui, on récupère l'information de GET
+            $numeroPage = $page;
+        }
+        else
+        {
+            # si non, on prend la page 1 par défaut
+            $numeroPage = 1;
+        }
+        # Création de l'offset
+        $offset = ($numeroPage-1)*$limit;
+
+        # --> FIN PAGINATION <-- #
+
+        # --> CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
+        if (!empty($_POST))
+        {
+            # --> GESTION CHAMPS DE RECHERCHE <-- #
+            # Récupération des données GET pour la catégorie de service et la localisation
+            $categorie       =  $request->get('categorie');
+
+
+            $localisation    =  $app['idiorm.db']   ->for_table('villes_rhone')
+                                                    ->where('commune', $request->get('localisation'))
+                                                    ->find_one();
+
+            # Si juste localisation remplie
+            if($categorie == 1 AND !empty($localisation))
+            {
+                $codeINSEE   =  $localisation->codeINSEE;
+
+                # Récupération des annonces
+                $annoncesPubliees = $app['idiorm.db']   ->for_table('vue_liste_annonces')
+                                                        ->where('validationService', 1)
+                                                        ->where('ouvert', 1)
+                                                        ->where('lieuService', $codeINSEE)
+                                                        ->order_by_desc('idService')
+                                                        ->limit($limit)
+                                                        ->offset($offset)
+                                                        ->find_one();
+
+                # Récupération du nb d'annonces correspondant à la recherche
+                $nbAnnoncesPubliees = $app['idiorm.db'] ->for_table('vue_liste_annonces')
+                                                        ->where('validationService', 1)
+                                                        ->where('ouvert', 1)
+                                                        ->where('lieuService', $codeINSEE)
+                                                        ->order_by_desc('idService')
+                                                        ->count();
+                $totalAnnonces = $nbAnnoncesPubliees;
+                $pageMax = ceil($totalAnnonces/$limit) ;
+
+            }
+
+            # Si juste catégorie remplie
+            if(empty($localisation) AND $categorie !=1)
+            {
+                # Récupération des annonces
+
+                $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                                                     ->where('validationService', 1)
+                                                     ->where('ouvert', 1)
+                                                     ->where('idCategorieService', $categorie)
+                                                     ->order_by_desc('idService')
+                                                     ->limit($limit)
+                                                     ->offset($offset)
+                                                     ->find_array();
+
+                # Récupération du nb d'annonces correspondant à la recherche
+                $nbAnnoncesPubliees = $app['idiorm.db'] ->for_table('vue_liste_annonces')
+                                                        ->where('validationService', 1)
+                                                        ->where('ouvert', 1)
+                                                        ->where('idCategorieService', $categorie)
+                                                        ->order_by_desc('idService')
+                                                        ->count();
+
+                $totalAnnonces = $nbAnnoncesPubliees;
+                $pageMax = ceil($totalAnnonces/$limit) ;
+
+            }
+
+            # Si localisation et catégorie remplies
+            if(!empty($localisation) AND $categorie != 1)
+            {
+                $codeINSEE   =  $localisation->codeINSEE;
+
+                # Récupération des annonces
+                $annoncesPubliees = $app['idiorm.db']   ->for_table('vue_liste_annonces')
+                                                        ->where('validationService', 1)
+                                                        ->where('ouvert', 1)
+                                                        ->where('idCategorieService', $categorie)
+                                                        ->where('lieuService', $codeINSEE)
+                                                        ->order_by_desc('idService')
+                                                        ->limit($limit)
+                                                        ->offset($offset)
+                                                        ->find_many();
+
+                # Récupération du nb d'annonces correspondant à la recherche
+                $nbAnnoncesPubliees = $app['idiorm.db'] ->for_table('vue_liste_annonces')
+                                                        ->where('validationService', 1)
+                                                        ->where('ouvert', 1)
+                                                        ->where('lieuService', $codeINSEE)
+                                                        ->where('idCategorieService', $categorie)
+                                                        ->order_by_desc('idService')
+                                                        ->count();
+
+                $totalAnnonces = $nbAnnoncesPubliees;
+                $pageMax = ceil($totalAnnonces/$limit) ;
+
+            }
+
+
+        }
+        # --> FIN CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
+
+        $annoncesJson = [];
+        foreach ($annoncesPubliees as $key => $data) {
+            $annoncesJson[$key]['titreService']         = utf8_encode($data['titreService']);
+            $annoncesJson[$key]['descriptionService']   = utf8_encode($data['descriptionService']);
+        };
+
+        $array=[
+            'annoncesPubliees'   => $annoncesJson,
+            'nbAnnoncesPubliees' => $nbAnnoncesPubliees,
+            'pageMax'            => $pageMax,
+            'numeroPage'         => $numeroPage,
+            'idCategorieService' => $categorie,
+            'lieuService'        => $localisation
+        ];
+
+/*      $json = json_encode($array);
+        var_dump($json);*/
+        # Affichage dans la vue
+        print_r($array);
+//        print_r($annoncesPublieesMaisEnPlusProprePourJson);
+        return json_encode($array);
+       #return json_encode($debug);
+
+
+    } # --> FIN FONCTION rechercheActionPost() <-- #
+
+   /* public function api(Application $app) {
+        $result = $app['idiorm.db']->for_table('vue_liste_annonces')
+            ->where('validationService', 1)
+            ->where('ouvert', 1)
+            ->where('idCategorieService', 2)
+            ->order_by_desc('idService')
+            ->limit(10)
+            ->find_array();
+        //print_r(utf8_encode($result));
+
+        $array = [];
+        foreach ($result as $key => $data) {
+            $array[$key]['titreService']        = utf8_encode($data['titreService']);
+            $array[$key]['descriptionService']  = utf8_encode($data['descriptionService']);
+        };
+
+        return json_encode($array);
+    }*/
+
+} // Fin class IndexController

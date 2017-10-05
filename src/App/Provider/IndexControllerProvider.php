@@ -36,13 +36,13 @@ class IndexControllerProvider implements ControllerProviderInterface {
                 ->get("/recherche", "App\Controller\IndexController::rechercheAction")
                 ->bind('index_recherche');
 
-           # Page de résultat recherche
-            /*$controllers
-                ->get("/recherche", "App\Controller\IndexController::resultatRechercheAction")
-                ->assert('localisation','[^a-zA-Z\- $]+')
-                ->assert('categorie', '[\d]+')
-                ->bind('index_resultat_recherche');*/
-            
+            # Page de recherche
+            $controllers
+                ->post("/recherche", "App\Controller\IndexController::rechercheActionPost")
+                ->bind('index_recherche_POST');
+
+            $controllers->get('/api/recherche',  "App\Controller\IndexController::api");
+
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;
 
