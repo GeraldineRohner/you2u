@@ -40,8 +40,9 @@ class IndexControllerProvider implements ControllerProviderInterface {
 
         # Page Annonce
         $controllers
-            ->get('/{nomCategorieService}/{slugService}_{idService}.html',
+            ->match('/{nomCategorieService}/{slugService}_{idService}.html',
                 'App\Controller\IndexController::serviceAction')
+            ->method('GET|POST')    
             ->assert('idService', '\d+')
             ->bind('index_annonce');
 
@@ -71,10 +72,15 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->method('GET|POST')
             ->assert('idUser', '\d+')
             ->bind('index_signalement_utilisateur');
+            # Page de recherche
+            $controllers
+                ->get("/recherche", "App\Controller\IndexController::rechercheAction")
+                ->bind('index_recherche');
 
-
-
-
+            # Page de recherche
+            $controllers
+                ->post("/recherche", "App\Controller\IndexController::rechercheActionPost")
+                ->bind('index_recherche_POST');
 
 
         # On retourne la liste des controllers (ControllerCollection)

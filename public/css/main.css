@@ -34,3 +34,32 @@ ul, li {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   line-height: 1.4;
   font-family: "Roboto Slab", serif; }
+
+  
+#map
+{
+	width: 50%;
+	height: 250px;
+}  
+
+.border
+{
+	 border-style: solid;
+   
+}
+
+
+.annonce-item {
+  background-color: #EEE;
+  border:1px solid #CCC;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+/* Barre de recherche localisation */
+.twitter-typeahead{
+  width:100%;
+}
+

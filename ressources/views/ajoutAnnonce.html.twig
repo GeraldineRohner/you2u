@@ -3,6 +3,14 @@
 {# Block de title défini dans base.html.twig #}
 {% block title %} Ajouter une annonce {% endblock %}
 
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet" />
+
+{% endblock %}
+
 {# Block de Contenu défini dans base.html.twig #}
 {% block contenu %}
 
@@ -48,7 +56,7 @@
                         <!-- Localisation -->
                         <div class="form-group">
                             <label class="col-md-3 control-label"> Lieu </label>
-                            <div class="col-md-7"> {{ form_row(form.lieuService) }} </div>
+                            <div id="the-basics" class="col-md-7"> {{ form_row(form.lieuService) }} </div>
                         </div>
 
                         <!-- Périmètre d'action -->
@@ -84,10 +92,63 @@
 
 {% endblock %}
 {% block javascripts %}
+
 {# Pour afficher le contenu intial du block javascripts sinon remplace par les nouveaux élements. Pour eviter ça il faut utiliser la fonction parent() #}
 {{ parent() }}
 <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('form_descriptionService');
 </script>
+
+    {{ parent() }}
+
+    <!--Script pour l'auto-complétion -->
+    <script src="{{ asset('js/typeahead.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            var ListeDeVilles = [];
+
+            // Requête Ajax pour traiter les données JSON (liste des villes du Rhone)
+            $.ajax({
+                // API data open sources :
+                url: 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=correspondance-code-insee-code-postal&facet=insee_com&facet=nom_dept&facet=nom_region&facet=statut&refine.nom_dept=RHONE&rows=-1',
+                global: false,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+
+                    // console.log permettant de voir toutes les données récupérées dans le tableau JSON :
+                    console.log(data);
+
+                    // Création d'une variable comprenant le nombre total d'entrées dans le tableau JSON :
+                    nhits = data.records.length;
+
+                    /*console.log(value.fields['nom_comm']);
+                    ListeDeVilles.push(value.fields['nom_comm']);*/
+
+                    // Boucle pour afficher toutes les données du tableau :
+                    for(let i = 0 ; i < nhits ; i++) {
+
+                        //console.log(data.records[i].fields.nom_comm);
+
+                        // Instertion des données dans la variable ListeDeVille :
+                        ListeDeVilles.push(data.records[i].fields.nom_comm);
+
+                    }
+
+                    // Insertion des données de la variable ListeDeVille dans l'input de recherche :
+                    $('input.typeahead').typeahead({
+                        local : ListeDeVilles
+                    });
+                }
+            });
+
+        });
+
+    </script>
+
+
 {% endblock %}
