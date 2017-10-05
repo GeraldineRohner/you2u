@@ -61,7 +61,6 @@ class IndexController
                 'multiple'          => false,
                 'label'             => false,
                 'attr'              => array(
-                    'id'            => 'categorie-search',
                     'class'         => 'form-control'
                 )
             ))
@@ -71,7 +70,7 @@ class IndexController
                 'required'          => false,
                 'label'             => false,
                 'attr'              => array(
-                    'id'            => 'recherche localisation-search',
+                    'id'            => 'recherche',
                     'class'         => 'typeahead form-control',
                     'placeholder'   => 'Localisation'
                 )
@@ -101,7 +100,7 @@ class IndexController
         $page = $request->get('page');
         # --> PAGINATION <-- #
 
-        $debug['categorie'] = $request->get('categorie');
+        $debug['localisation'] = $request->get('categorie');
 
         # Variable pagination : nombre d'annonce par page (limit)
         $limit = 10;
@@ -144,8 +143,8 @@ class IndexController
                                                         ->where('ouvert', 1)
                                                         ->where('lieuService', $codeINSEE)
                                                         ->order_by_desc('idService')
-                                                        ->limit($limit)
-                                                        ->offset($offset)
+                                                        //->limit($limit)
+                                                        //->offset($offset)
                                                         ->find_one();
 
                 # Récupération du nb d'annonces correspondant à la recherche
@@ -170,8 +169,8 @@ class IndexController
                                                      ->where('ouvert', 1)
                                                      ->where('idCategorieService', $categorie)
                                                      ->order_by_desc('idService')
-                                                     ->limit($limit)
-                                                     ->offset($offset)
+                                                     //->limit($limit)
+                                                     //->offset($offset)
                                                      ->find_array();
 
                 # Récupération du nb d'annonces correspondant à la recherche
@@ -199,8 +198,8 @@ class IndexController
                                                         ->where('idCategorieService', $categorie)
                                                         ->where('lieuService', $codeINSEE)
                                                         ->order_by_desc('idService')
-                                                        ->limit($limit)
-                                                        ->offset($offset)
+                                                        //->limit($limit)
+                                                        //->offset($offset)
                                                         ->find_many();
 
                 # Récupération du nb d'annonces correspondant à la recherche
@@ -223,8 +222,15 @@ class IndexController
 
         $annoncesJson = [];
         foreach ($annoncesPubliees as $key => $data) {
-            $annoncesJson[$key]['titreService']         = utf8_encode($data['titreService']);
-            $annoncesJson[$key]['descriptionService']   = utf8_encode($data['descriptionService']);
+            $annoncesJson[$key]['titreService']             = utf8_encode($data['titreService']);
+            $annoncesJson[$key]['photo']                    = utf8_encode($data['photo']);
+            $annoncesJson[$key]['nomCategorieService']      = utf8_encode($data['nomCategorieService']);
+            $annoncesJson[$key]['prenom']                   = utf8_encode($data['prenom']);
+            $annoncesJson[$key]['nom']                      = utf8_encode($data['nom']);
+            $annoncesJson[$key]['tarifService']             = utf8_encode($data['tarifService']);
+            $annoncesJson[$key]['datePublicationService']   = utf8_encode($data['datePublicationService']);
+            $annoncesJson[$key]['commune']                  = utf8_encode($data['commune']);
+            $annoncesJson[$key]['descriptionService']       = utf8_encode($data['descriptionService']);
         };
 
         $array=[
@@ -236,34 +242,11 @@ class IndexController
             'lieuService'        => $localisation
         ];
 
-/*      $json = json_encode($array);
-        var_dump($json);*/
         # Affichage dans la vue
-        print_r($array);
-//        print_r($annoncesPublieesMaisEnPlusProprePourJson);
         return json_encode($array);
-       #return json_encode($debug);
+        #return json_encode($debug);
 
 
     } # --> FIN FONCTION rechercheActionPost() <-- #
-
-   /* public function api(Application $app) {
-        $result = $app['idiorm.db']->for_table('vue_liste_annonces')
-            ->where('validationService', 1)
-            ->where('ouvert', 1)
-            ->where('idCategorieService', 2)
-            ->order_by_desc('idService')
-            ->limit(10)
-            ->find_array();
-        //print_r(utf8_encode($result));
-
-        $array = [];
-        foreach ($result as $key => $data) {
-            $array[$key]['titreService']        = utf8_encode($data['titreService']);
-            $array[$key]['descriptionService']  = utf8_encode($data['descriptionService']);
-        };
-
-        return json_encode($array);
-    }*/
 
 } // Fin class IndexController
