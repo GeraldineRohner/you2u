@@ -120,6 +120,8 @@ class IndexController
             
             #Verification de la validité du formulaire.
             $noteService = $form->getData();
+            if(!empty($app['user']))
+            {
             $dernierComment = $app['idiorm.db']->for_table('note_services')->where('idService', $idService)->where('idUserNotant', $app['user']->getIdUser())->order_by_desc('dateCommentaire')->limit(1)->find_one();
             $timeStampActuel = time();
             $delai = 60*60*24;
@@ -168,7 +170,8 @@ class IndexController
     //                     'form' => $form->createView()
     //                 ]);
                 
-            }
+                }
+            }      
             
 
         # Transmission à la Vue
