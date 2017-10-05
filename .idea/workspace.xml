@@ -4,9 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85a96f52-cd1a-479a-ad76-7877d33b2f0a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ressources/views/recherche.html.twig" afterPath="$PROJECT_DIR$/ressources/views/recherche.html.twig" />
-    </list>
+    <list default="true" id="85a96f52-cd1a-479a-ad76-7877d33b2f0a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="recherche.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="recherche.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/recherche.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="23" column="71" lean-forward="false" selection-start-line="23" selection-start-column="71" selection-end-line="23" selection-end-column="71" />
+            <state relative-caret-position="357">
+              <caret line="33" column="37" lean-forward="true" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
               <folding>
                 <marker date="1507206333620" expanded="true" signature="1625:2259" ph="..." />
               </folding>
@@ -44,7 +42,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recherche.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="recherche.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ressources/views/recherche.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2850">
@@ -117,7 +115,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="407" />
     <option name="width" value="1505" />
     <option name="height" value="1047" />
@@ -255,15 +253,15 @@
       <workItem from="1507015135680" duration="681000" />
       <workItem from="1507016063667" duration="21853000" />
       <workItem from="1507100125794" duration="28559000" />
-      <workItem from="1507183581731" duration="20108000" />
+      <workItem from="1507183581731" duration="20150000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124998000" />
+    <option name="totallyTimeSpent" value="125040000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="407" y="0" width="1505" height="1047" extended-state="0" />
+    <frame x="407" y="0" width="1505" height="1047" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17178245" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -649,21 +647,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/recherche.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="23" column="71" lean-forward="false" selection-start-line="23" selection-start-column="71" selection-end-line="23" selection-end-column="71" />
-          <folding>
-            <marker date="1507206333620" expanded="true" signature="1625:2259" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ressources/views/recherche.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2850">
           <caret line="174" column="6" lean-forward="true" selection-start-line="174" selection-start-column="6" selection-end-line="174" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/recherche.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="33" column="37" lean-forward="true" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+          <folding>
+            <marker date="1507206333620" expanded="true" signature="1625:2259" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
