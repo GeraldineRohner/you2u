@@ -7,8 +7,6 @@ use App\Provider\MemberProvider;
 
 # use Silex\Provider\SessionServiceProvider;
 $app->register(new SessionServiceProvider());
-
-#use Silex\Provider\SecurityServiceProvider;
 $app->register(new SecurityServiceProvider(), array(
     'security.firewalls'                => array(
         'main'                              => array(
@@ -17,21 +15,28 @@ $app->register(new SecurityServiceProvider(), array(
             'anonymous'                         => true,
             'form'                              => array(
                 'login_path'                        => '/connexion',
-                'check_path'                        => '/membre/login_check'
+                'check_path'                        => '/admin/login_check'
             ),
             'logout'                            => array(
-                            'logout_path'           => '/deconnexion',
-                            'invalidate_session'    => true
+                'logout_path'           => '/deconnexion',
+                'invalidate_session'    => true
             ),
-                    'users'                     =>
-                    function() use($app)
-                    {
-                        return new MemberProvider($app['idiorm.db']);
-                    }
-        ),
-        'security.access_rules'   => array(),
-        'security.role_hierarchy' => array()
-    )
+            'users'                     =>
+                function() use($app)
+                {
+                    return new MemberProvider($app['idiorm.db']);
+                }
+        )
+
+    ),'security.access_rules' => array(
+    # Seul les utilisateurs ayant un ROLE ADMIN, pourront
+    # accéder aux routes commençant par /admin
+    array('^/admin', 'ROLE_ADMIN', 'http'),
+    array('^/membre', 'ROLE_USER', 'http')
+),
+    'security.role_hierarchy' => array(
+    'ROLE_ADMIN' => array('ROLE_USER')
+) # Fin de 'security.role_hierarchy'
 ));
 
 
@@ -44,3 +49,6 @@ $app['security.encoder.digest'] = function() use($app) {
 $app['security.default_encoder'] = function() use($app) {
     return $app['security.encoder.digest'];
 };
+
+
+
