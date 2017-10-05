@@ -1,0 +1,186 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Recherche {% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet" />
+    <style>
+
+        #pagination li{
+            list-style: none;
+            display: inline;
+            margin-right: 5px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block contenu  %}
+
+    <!--Barre de recherche -->
+    <div class="row">
+        <div class="col-md-6 col-md-push-3">
+            <h2 class="text-center"> Recherche </h2>
+
+            <form action="{{ path('index_recherche') }}" class="form-horizontal" method="GET">
+                    <div class="form-group">
+                        <div id="the-basics" class="col-md-5">{{ form_row(form.localisation) }}</div>
+                        <div class="col-md-5">{{ form_row(form.categorie) }}</div>
+                        <div class="col-md-2">
+                            <button class="go-recherche btn btn-warning">Rechercher</button>
+                        </div>
+                    </div>
+            </form>
+
+            {#<div class="affinerRecherche"></div>#}
+
+
+        </div>
+    </div>
+
+    {# Zone de filtre #}
+
+    {# Zone de résultat de recherche #}
+
+        <div class="row">
+            <div class="col-md-6 col-md-push-3">
+
+                {#<h3> <b> {{ nbAnnoncesPubliees | striptags }} </b> annonces correspondent à votre recherche </h3>#}
+                <h3 class="text-center phrase-count-result"></h3>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-push-3">
+                <div class="row results">
+                    <div class="col-md-9 col-md-offset-1 annonces"></div>
+                </div>
+            </div>
+        </div>
+
+
+        {# Pagination #}{#
+        <div class="row pagination">
+            <ul id="pagination" class="col-md-6 col-md-push-5">
+
+                #}{# Pagination 'début' #}{#
+                <li><button><a href=""> <i class="fa fa-angle-double-left"></i></a></button></li>
+
+                #}{# Pagination page précédente #}{#
+                {% if (numeroPage-1)>0 %}
+                <li><button><a href=""> <i class="fa fa-angle-left"></i> </a></button></li>
+                {% endif %}
+
+                #}{# Pagination -2  #}{#
+                {% if (numeroPage-2)>0 %}
+                    #}{# cachée si valeur 0 ou négative #}{#
+                    <li><button><a href=""></a></button></li>
+                {% endif %}
+
+                #}{# Pagination -1 #}{#
+                {% if (numeroPage-1)>0 %}
+                    #}{# cachée si valeur 0 ou négative #}{#
+                    <li><button><a href=""></a></button></li>
+                {% endif %}
+
+                #}{# Page actuelle #}{#
+                <li><button><a href=""><b></b></a></button></li>
+
+                #}{# Pagination +1 #}{#
+                {% if (numeroPage+1) <= pageMax %}
+                    #}{# cachée si valeur sup au nb total de page #}{#
+                    <li><button><a href=""></a></button></li>
+                {% endif %}
+
+                #}{# Pagination +2 #}{#
+                {% if (numeroPage+2) <= pageMax %}
+                    #}{# cachée si valeur sup au nb total de page #}{#
+                    <li><button><a href=""></a></button></li>
+                {% endif %}
+
+                #}{# Pagination page suivante #}{#
+                {% if (numeroPage+1) <= pageMax %}
+                    #}{# cachée si valeur sup au nb total de page #}{#
+                    <li><button><a href=""> <i class="fa fa-angle-right"></i> </a></button></li>
+                {% endif %}
+
+                #}{# Pagination 'fin' #}{#
+                <li><button><a href=""> <i class="fa fa-angle-double-right"></i> </a></button></li>
+
+            </ul>
+        </div>#}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <!--Script pour l'auto-complétion -->
+    <script src="{{ asset('js/typeahead.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            var ListeDeVilles = [];
+
+            // Requête Ajax pour traiter les données JSON (liste des villes du Rhone)
+            $.ajax({
+                // API data open sources :
+                url: 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=correspondance-code-insee-code-postal&facet=insee_com&facet=nom_dept&facet=nom_region&facet=statut&refine.nom_dept=RHONE&rows=-1',
+                global: false,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+
+                // console.log permettant de voir toutes les données récupérées dans le tableau JSON :
+                console.log(data);
+
+                // Création d'une variable comprenant le nombre total d'entrées dans le tableau JSON :
+                nhits = data.records.length;
+
+                /*console.log(value.fields['nom_comm']);
+                ListeDeVilles.push(value.fields['nom_comm']);*/
+
+                // Boucle pour afficher toutes les données du tableau :
+                for(let i = 0 ; i < nhits ; i++) {
+
+                    //console.log(data.records[i].fields.nom_comm);
+
+                    // Instertion des données dans la variable ListeDeVille :
+                    ListeDeVilles.push(data.records[i].fields.nom_comm);
+
+                }
+
+                    // Insertion des données de la variable ListeDeVille dans l'input de recherche :
+                    $('input.typeahead').typeahead({
+                        local : ListeDeVilles
+                    });
+                }
+            });
+
+        });
+
+    </script>
+
+    <!-- Script pour le chargement des résultats -->
+    <script src="{{ asset ('js/recherche.js') }}"></script>
+
+    <!-- Script pour affiner recherche via holmes.js (https://haroen.me/holmes/) -->
+    {#
+    <script src="{{ asset('js/holmes.js') }}"></script>
+
+    <script>
+
+        holmes({
+            find: '.results .annonces'
+        });
+
+    </script>#}
+
+{% endblock %}

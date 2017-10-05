@@ -47,19 +47,23 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->bind('index_annonce');
 
 
-
-
         # Page de connexion
             $controllers
                 ->get("/connexion","App\Controller\IndexController::connexionAction")
                 ->bind('index_connexion');
-            
-       
 
 
+            # Page de recherche
+            $controllers
+                ->get("/recherche", "App\Controller\IndexController::rechercheAction")
+                ->bind('index_recherche');
+
+            # Page de recherche
+            $controllers
+                ->post("/recherche", "App\Controller\IndexController::rechercheActionPost")
+                ->bind('index_recherche_POST');
 
 
-            
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;
 
