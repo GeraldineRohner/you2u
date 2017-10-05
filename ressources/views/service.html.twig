@@ -24,13 +24,21 @@
                         <service class="news-cate-item">
                             <div class="row">
                                 <div class="col-md-5 col-sm-5 col-xs-12">
-                                    <a href="{{ url('index_categorie', {
+                                    <a href="{{ url('index_categorie',
+                                    {
                                         nomCategorieService : service.nomCategorieService | lower,
                                         slugService		 : service.titreService | slug,
-                                        idService		 : service.idService } ) }}">
+                                        idService		 : service.idService
+                                        })
+                                    }}">
                                        {# <img alt="{{ service.titreService }}"
                                              src="{{ asset('img'~service.FEATUREDIMAGEservice) }}">#}
                                     </a>
+                                    <a href="{{ url('index_signalement_annonce',
+                                    {
+                                        idService : service.idService
+                                    })
+                                    }}"> Signaler l'annonce </a>
                                 </div>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <h3><a href="{{ url('index_annonce', {
@@ -41,6 +49,11 @@
                                         <a href="#">
                                             {{ service.pseudo }}
                                         </a>
+                                        <a href="{{ url('index_signalement_utilisateur',
+                                        {
+                                            idUser : service.idUser
+                                        })
+                                        }}"> Signaler l'utilisateur </a>
                                         <em></em>
                                         <span>
                                             {{ service.datePublicationService }}

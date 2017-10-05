@@ -18,13 +18,13 @@ class IndexControllerProvider implements ControllerProviderInterface {
         # : https://silex.symfony.com/api/master/Silex/ControllerCollection.html
         $controllers = $app['controllers_factory'];
         
-            # Page d'Accueil
-            $controllers
-                # On associe une Route à un Controller et une Action
-                ->get('/', 'App\Controller\IndexController::indexAction')
-                # En option je peux donner un nom à la route, qui servira plus tard
-                # pour la créations de lien : "controller_action"
-                ->bind('index_index');
+        # Page d'Accueil
+        $controllers
+            # On associe une Route à un Controller et une Action
+            ->get('/', 'App\Controller\IndexController::indexAction')
+            # En option je peux donner un nom à la route, qui servira plus tard
+            # pour la créations de lien : "controller_action"
+            ->bind('index_index');
 
         # Affichage d'une catégorie (services qui y sont liés)
         $controllers
@@ -54,16 +54,29 @@ class IndexControllerProvider implements ControllerProviderInterface {
 
 
 
-
         # Page de connexion
-            $controllers
-                ->get("/connexion","App\Controller\IndexController::connexionAction")
-                ->bind('index_connexion');
+        $controllers
+            ->get("/connexion","App\Controller\IndexController::connexionAction")
+            ->bind('index_connexion');
+
+        # Page de signalement
+        $controllers
+            ->match("/signalement/annonce_{idService}","App\Controller\IndexController::signalementServiceAction")
+            ->method('GET|POST')
+            ->assert('idService', '\d+')
+            ->bind('index_signalement_annonce');
+
+        $controllers
+            ->match("/signalement/utilisateur_{idUser}","App\Controller\IndexController::signalementUserAction")
+            ->method('GET|POST')
+            ->assert('idUser', '\d+')
+            ->bind('index_signalement_utilisateur');
 
 
 
 
-            
+
+
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;
 
