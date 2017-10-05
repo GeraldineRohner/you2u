@@ -132,12 +132,8 @@ class MemberController
             ]
         ])
         ->add('adresse', TextType::class , [
-            'required' => true,
+            'required' => false,
             'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir une adresse')
-                )
-            ),
             'attr' => [
                 'class'         => 'form-control',
                 'value'   => $app['user']->getAdresse()
@@ -156,24 +152,16 @@ class MemberController
             ]
         ])
         ->add('telFixe', TextType::class , [
-            'required' => true,
+            'required' => false,
             'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir une adresse')
-                )
-            ),
             'attr' => [
                 'class'         => 'form-control',
                 'value'   =>  $app['user']->getTelFixe()
             ]
         ])
         ->add('telMobile', TextType::class , [
-            'required' => true,
+            'required' => false,
             'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir une adresse')
-                )
-            ),
             'attr' => [
                 'class'         => 'form-control',
                 'value'   =>  $app['user']->getTelMobile()
