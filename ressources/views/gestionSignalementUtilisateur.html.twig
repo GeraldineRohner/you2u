@@ -1,0 +1,24 @@
+{% extends "layout.html.twig" %}
+
+{# Titre de la Page #}
+{% block title %} Accueil | You2u {% endblock %}
+
+{# Fil d'Ariane #}
+{% set active = 'accueil' %}
+
+{# Contenu de la Page #}
+{% block contenu %}
+
+
+    {% for signalement in signalements %}
+
+        {{ signalement.idUserSignale }}
+        {{ signalement.idUserAlertant }}
+        {{ signalement.dateAlerte }}
+        {{ signalement.message }}
+
+
+    {% endfor %}
+
+
+{% endblock %}
