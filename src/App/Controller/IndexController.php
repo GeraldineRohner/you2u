@@ -886,7 +886,7 @@ function rechercheActionPost(Application $app, Request $request)
                 ->order_by_desc('idService')
                 //->limit($limit)
                 //->offset($offset)
-                ->find_many();
+                ->find_array();
 
             # Récupération du nb d'annonces correspondant à la recherche
             $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
