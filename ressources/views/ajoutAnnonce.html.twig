@@ -111,6 +111,8 @@ CKEDITOR.replace('form_descriptionService');
 
             var ListeDeVilles = [];
 
+
+
             // Requête Ajax pour traiter les données JSON (liste des villes du Rhone)
             $.ajax({
                 // API data open sources :
@@ -136,17 +138,32 @@ CKEDITOR.replace('form_descriptionService');
 
                         // Instertion des données dans la variable ListeDeVille :
                         ListeDeVilles.push(data.records[i].fields.nom_comm);
+                        //ListeDeVilles.push(data.records[i].fields.postal_code);
 
                     }
 
                     // Insertion des données de la variable ListeDeVille dans l'input de recherche :
                     $('input.typeahead').typeahead({
                         local : ListeDeVilles
-                    });
+                    }).blur(validateSelection);
                 }
             });
 
+            function validateSelection() {
+                if ($.inArray($(this).val(), ListeDeVilles) === -1)
+                {
+                    $( "#the-basics" ).addClass('has-error');
+                    $("input[type=submit]").prop('disabled', true);
+                }
+                else
+                {
+                    $( "#the-basics" ).removeClass('has-error');
+                    $("input[type=submit]").prop('disabled', false);
+                }
+            }
         });
+
+
 
     </script>
 

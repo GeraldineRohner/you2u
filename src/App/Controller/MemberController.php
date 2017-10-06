@@ -18,9 +18,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use App\Validator\Constraints\constraintVille;
 
-
-
-
 class MemberController
 {
     public function indexAction(Application $app) {
@@ -406,15 +403,18 @@ class MemberController
                 )
             ))
 
-            /*# -- Localisation -- #
-            ->add('lieuService', TextType::class, array(
-                'required'          => false,
-                'label'             => false,
-                'attr'              => array(
-                    'id'            => 'recherche',
-                    'class'         => 'form-control'
+            # -- Localisation -- #
+            ->add('lieuService', TextType::class , [
+                'required' => true,
+                'label'    => false,
+                'constraints' => array(new constraintVille(
+                    array('message' => 'Vous devez saisir une ville correcte ')
                 )
-            ))*/
+                ),
+                'attr'      => [
+                    'class' => 'form-control typeahead'
+                ]
+            ])
 
             # -- Description -- #
             ->add('descriptionService', TextareaType::class, array(

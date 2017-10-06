@@ -822,6 +822,7 @@ function rechercheActionPost(Application $app, Request $request)
 
         # Si juste localisation remplie
         if ($categorie == 1 AND !empty($localisation)) {
+
             $codeINSEE = $localisation->codeINSEE;
 
             # Récupération des annonces
@@ -832,7 +833,7 @@ function rechercheActionPost(Application $app, Request $request)
                 ->order_by_desc('idService')
                 //->limit($limit)
                 //->offset($offset)
-                ->find_one();
+                ->find_array();
 
             # Récupération du nb d'annonces correspondant à la recherche
             $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
