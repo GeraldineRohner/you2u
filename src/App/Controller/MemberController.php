@@ -44,7 +44,7 @@ class MemberController
         {
             # Affichage dans la Vue
             return $app['twig']->render('profil.html.twig',[
-                'message' => 'Bienvenue',
+                'message' => $message,
                 'noteMoyenne' => $noteMoyenne,
                 'nombreStars' => $nombreStars,
                 'halfstar'    => $halfstar,

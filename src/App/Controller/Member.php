@@ -54,8 +54,8 @@ class Member implements UserInterface
         $this->telFixe          = $telFixe;
         $this->photo            = $photo;
         $this->cleValidation    = $cleValidation;
-        $this->roleUser         = $roleUser;
-        $this->codeINSEE         = $codeINSEE;
+        $this->roleUser[]       = $roleUser;
+        $this->codeINSEE        = $codeINSEE;
     }
 
 
@@ -163,7 +163,7 @@ class Member implements UserInterface
     # Récupération du rôle du membre
     public function getRoles()
     {
-        return array();
+        return $this->roleUser;
     }
 
     # Sécurisation du MDP avec un Salt
