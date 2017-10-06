@@ -26,6 +26,15 @@ class AdminControllerProvider implements ControllerProviderInterface
             ->bind('admin_signalements_utilisateurs');
 
 
+        $controllers
+            ->get('/gestion/utilisateurs', 'App\Controller\AdminController::gestionUtilisateursAction')
+            ->bind('admin_gestion_utilisateurs');
+
+
+        $controllers
+            ->get('/gestion/services', 'App\Controller\AdminController::gestionServicesAction')
+            ->bind('admin_gestion_services');
+
 
 
         return $controllers;

@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{# Titre de la Page #}
+{% block title %} Accueil | You2u {% endblock %}
+
+{# Fil d'Ariane #}
+{% set active = 'accueil' %}
+
+{# Contenu de la Page #}
+{% block contenu %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+
+        {% for user in users %}
+            {{ user.idUser }}
+            {{ user.email }}
+            {{  }}
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

@@ -34,6 +34,24 @@ class AdminController
 
     }
 
+    function gestionUtilisateursAction(Application $app)
+    {
+        $listeUtilisateurs = $app['idiorm.db']->for_table('users')->find_result_set();
+        return $app['twig']->render('gestionUtilisateurs.html.twig',
+            ['users' => $listeUtilisateurs]);
+    }
+
+
+    function gestionServicesAction(Application $app)
+    {
+        $listeServices = $app['idiorm.db']->for_table('services')->find_result_set();
+        return $app['twig']->render('gestionServices.html.twig',
+            ['services' => $listeServices]);
+    }
+
+
+
+
 
 
 
