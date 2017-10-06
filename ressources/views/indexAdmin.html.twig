@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Espace Admin {% endblock %}
+{# Block de Contenu défini dans base.html.twig #}
+{% block contenu %}
+        
+   
+            	{% if is_granted('ROLE_ADMIN') %}
+                     <div class="container">
+                        <div class="starter-template">
+                        	<h1>Bienvenue {{ app.user.pseudo }} sur votre espace Admin</h1>
+                        	<h4>Signalements d'utilisateurs ({{ nombreUserSignaleATraiter }} à traiter)</h4>
+                        	<h4>Signalements de services ({{ serviceSignaleATraiter }} à traiter)</h4>
+                        	<h4>Annonces à valider ({{ serviceAValider }} à traiter)</h4>
+                        	<h4>Message contact</h4>
+                    
+                {% else %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Vous devez être adminaccéder à cet espace <br />
+                </div>
+                {% endif %}
+          </div>
+            	
+            
+        </div>
+        <!-- /.container -->
+    
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

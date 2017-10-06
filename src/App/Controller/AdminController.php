@@ -33,6 +33,18 @@ class AdminController
             ['signalements' => $signalementService]);
 
     }
+    
+    public function indexAdminAction (Application $app)
+    {
+        $userSignaleATraiter = $app['idiorm.db']->for_table('signalements_users')->where('traitementAlerte',0)->count('idSignalementUser');
+        $serviceSignaleATraiter = $app['idiorm.db']->for_table('signalements_services')->where('traitementAlerte',0)->count('idSignalement');
+        $serviceAValider = $app['idiorm.db']->for_table('services')->where('validation',0)->count('idService');
+        return $app['twig']->render('indexAdmin.html.twig' , [
+            'nombreUserSignaleATraiter' => $userSignaleATraiter,
+            'serviceSignaleATraiter' => $serviceSignaleATraiter,
+            'serviceAValider' => $serviceAValider
+        ]);
+    }
 
 
 

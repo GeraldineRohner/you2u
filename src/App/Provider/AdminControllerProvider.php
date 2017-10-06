@@ -20,7 +20,9 @@ class AdminControllerProvider implements ControllerProviderInterface
             ->bind('admin_signalements_services');
         
        
-
+            $controllers
+            ->get('/', 'App\Controller\AdminController::indexAdminAction')
+            ->bind('index_admin');
 
         # Page des signalements de services
         $controllers
