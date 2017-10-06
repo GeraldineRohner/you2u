@@ -446,6 +446,9 @@ class MemberController
             # Récupération des données du formulaire
             $annonce = $form->getData();
 
+            
+            # Recupération du code INSEE 
+            $villeCP = $app['idiorm.db']->for_table('villes_rhone')->where('commune', $annonce['lieuService'])->find_one();
             # Insertion en BDD
             $annonceDb = $app['idiorm.db']->for_table('services')->create();
 
@@ -454,7 +457,7 @@ class MemberController
             $annonceDb->titreService            = $annonce['titreService'];
             $annonceDb->idCategorieService      = $annonce['idCategorieService'];
             $annonceDb->tarifService            = $annonce['tarifService'];
-            $annonceDb->lieuService             = $annonce['lieuService'];
+            $annonceDb->lieuService             = $villeCP['codeINSEE'];
             $annonceDb->perimetreAction         = $annonce['perimetreAction'];
             $annonceDb->descriptionService      = $annonce['descriptionService'];
             $annonceDb->datePublicationService  = time();
