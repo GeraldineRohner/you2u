@@ -73,7 +73,7 @@ Erreur lors de la publication de votre commentaire </p>
                     Commentaire de <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
                     
                     {% endfor %} 
-               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+               {% if is_granted('ROLE_USER') %}
                      <div class="container">
                         <div class="starter-template">
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" >

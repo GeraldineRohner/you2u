@@ -130,7 +130,7 @@ Erreur lors de la publication de votre commentaire </p>
         {% else %}
         Vous n'avez pas encore recu de commentaires.
         {% endif %}
-		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('ROLE_USER') %}
 		<h3>Noter l'utilisateur</h3>
 		<div class="container">
                         <div class="starter-template">
