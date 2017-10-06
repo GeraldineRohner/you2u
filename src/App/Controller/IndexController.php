@@ -534,13 +534,32 @@ class IndexController
         $form->handleRequest($request);
 
         # Affichage dans la Vue
-        return $app['twig']->render('connexion.html.twig', [
-            'error' => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-            'form' => $form->createView()
 
-        ]);
-    }
+       /* $app->finish(function() use($app) {
+
+
+            if ($app['security.authorization_checker']->isGranted('ROLE_BANNED')) {
+                $banned = "<div class=\"alert alert-danger\" style=\"text-align:center;\">Ce compte est temporairement <strong>suspendu</strong> en raison de non respect des conditions générales d'utilisation. Vous serez notifié(e) par mail de toute décision finale de notre part dans les meilleurs délais.</div>";
+                return $app['twig']->render('profil.html.twig',
+                    ['message' => $banned]);
+
+
+            }
+
+
+        });*/
+
+
+            return $app['twig']->render('connexion.html.twig', [
+                'error' => $app['security.last_error']($request),
+                'last_username' => $app['session']->get('_security.last_username'),
+                'form' => $form->createView()]);
+        }
+
+
+
+
+
 
 
     # Page de signalement utilisateur
