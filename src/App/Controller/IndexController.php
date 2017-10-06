@@ -436,7 +436,7 @@ class IndexController
                 $insertionMembre->nom = $creationMembre['nom'];
                 $insertionMembre->prenom = $creationMembre['prenom'];
                 $insertionMembre->pseudo = $creationMembre['pseudo'];
-
+                $insertionMembre->email = $creationMembre['email'];
                 #On encode le password
                 $insertionMembre->motDePasse = $app['security.encoder.digest']->encodePassword($creationMembre['motDePasse'], '');
 
@@ -473,8 +473,7 @@ class IndexController
 
 
                 # --> La sécurisation du formulaire de connexion est gérée par Silex directement <-- #
-                echo "INSCRIPTION OK"; // Test, à supprimer
-                return $app->redirect($app['url_generator']->generate('index_inscription?inscription=ok'));
+                return $app->redirect($app['url_generator']->generate('index_connexion').'?inscription=ok');
 
             } else {
                 $erreurMdp = "<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mot de passe identiques.</div>";
