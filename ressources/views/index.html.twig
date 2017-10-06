@@ -6,15 +6,12 @@
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
 {% endblock %}
 
-{# Titre de la Page #}
-{% block title %} Accueil | You2u {% endblock %}
 
 {# Fil d'Ariane #}
 {% set active = 'accueil' %}
 
 {# Contenu de la Page #}
 {% block contenu %}
-
     <div class="row">
         <!--colleft-->
         <div class="col-md-8 col-sm-12">
@@ -59,7 +56,7 @@
                                         slugService         : service.titreService | slug ,
                                         idService         : service.idService }) }}">{{ service.titreService }}</a></h3>
                                 <div class="meta-post">
-                                    <a href="#">
+                                    <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
                                         {{ service.pseudo }}
                                     </a>
                                     <em></em>

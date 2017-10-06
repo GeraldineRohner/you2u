@@ -933,6 +933,135 @@ function rechercheActionPost(Application $app, Request $request)
     #return json_encode($debug);
 
 
-} # --> FIN FONCTION rechercheActionPost() <-- #
+} 
+    
+    public function affichageProfilAction($idUser ,Application $app, Request $request)
+    {
+        #On fait une requete pour récupérer les informations de l'utilisateur.
+        $infoUser = $app['idiorm.db']
+        ->for_table('users')
+        ->where('idUser', $idUser)
+        ->find_one();
+        
+        #On fait une requete pour récuper les services de l'utilisateur
+        $servicesUser = $app['idiorm.db']
+        ->for_table('vue_services_profil')
+        ->where('idUser', $idUser)
+        ->where('ouvert', 1)
+        ->find_result_set();
+        
+        
+        $commentairesUser = $app['idiorm.db']
+        ->for_table('vue_commentaires_user')
+        ->where('idUserNoted', $idUser)
+        ->find_result_set();
+        
+        #On fait une requete pour récupérer note
+        #Simulation d'un profil
+        $noteMoyenne = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$idUser)->avg('note');
+        $nombreStars = round($noteMoyenne, 0, PHP_ROUND_HALF_DOWN);
+        
+        if(($noteMoyenne-$nombreStars) > 0.25)
+        {
+            $halfstar = 'Halfstar';
+        }
+        else
+        {
+            $halfstar = '';
+        }
+        $totalNote = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$idUser)->count('note');
+        
+       
+        
+        #On crée le formulaire de notation et de commentaires.
+        $form = $app['form.factory']->createBuilder(FormType::class)
+        ->add('commentaires', TextareaType::class , [
+            'required' => false,
+            'label'    => false,
+            'attr' => [
+                'class'         => 'form-control'
+            ]
+        ])
+        ->add('note', ChoiceType::class, [
+            'required' => false,
+            'label'    => false,
+            'attr' => [
+                'class'         => 'form-control'
+            ],
+            'choices'  => array(
+                '*' => 1,
+                '**' => 2,
+                '***' => 3,
+                '****' => 4,
+                '*****' => 5)
+        ])
+        ->getForm();
+        
+        #Traitement des donneés POST stockées dans $request.
+        $form->handleRequest($request);
+        
+        #Verification de la validité du formulaire.
+        $noteService = $form->getData();
+        if(!empty($app['user']))
+        {
+            $dernierComment = $app['idiorm.db']->for_table('note_users')->where('idUserNoted', $idUser)->where('idNotedBy', $app['user']->getIdUser())->order_by_desc('dateCommentaire')->limit(1)->find_one();
+            $timeStampActuel = time();
+            $delai = 60*60*24;
+            if($form->isValid())
+            {
+                if(!empty($noteService) AND (($timeStampActuel - $dernierComment['dateCommentaire']) > $delai) AND ($app['user']->getIdUser() != $idUser))
+                {
+                    $nouvelleNote = $app['idiorm.db']->for_table('note_users')->create();
+                    #On associe les colonnes de notre BDD avec les valeurs du formulaire
+                    #Colonne MYSQL                                              #Valeurs du Fomulaire
+                    $nouvelleNote->idUserNoted           =                          $idUser;
+                    $nouvelleNote->idNotedBy         =                              $app['user']->getIdUser();
+                    $nouvelleNote->note                  =                          $noteService['note'];
+                    $nouvelleNote->commentaires          =                          $noteService['commentaires'];
+                    $nouvelleNote->dateCommentaire       =                          time();
+                    
+                    
+                    $nouvelleNote->save();
+                    
+                    
+                    return $app->redirect($app['url_generator']->generate('index_profil',
+                        [
+                            'idUser'                 =>                   $idUser
+                        ]
+                        ).'?note=success');
+                    
+                }
+                
+                else
+                {
+                    return $app->redirect($app['url_generator']->generate('index_profil',
+                        [
+                            'idUser'                 =>                   $idUser
+                        ]
+                        ).'?note=error');
+                }
+                //                 return $app['twig']->render('annonce.html.twig', [
+                //                     'service' => $service,
+                //                     'suggestions' => $suggestions,
+                //                     'latitude' => $latitude,
+                //                     'longitude' => $longitude,
+                //                     'form' => $form->createView()
+                //                 ]);
+                
+            }
+        }      
+        
+      
+        return $app['twig']->render('affichageProfil.html.twig', [
+            'infoUser'                   => $infoUser,
+            'servicesUser'               => $servicesUser,
+            'totalNote'                  => $totalNote,
+            'halfstar'                   => $halfstar,
+            'noteMoyenne'                => $noteMoyenne,
+            'nombreStars'                => $nombreStars,
+            'form'                       => $form->createView(),
+            'commentairesUser'           => $commentairesUser
+        ]);
+    }
 
 } // Fin class IndexController

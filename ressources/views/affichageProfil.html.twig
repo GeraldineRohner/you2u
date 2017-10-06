@@ -1,0 +1,202 @@
+{% extends "layout.html.twig" %}
+{# Block de title défini dans base.html.twig #}
+{% block title %} Profil {% endblock %}
+
+
+{# Fil d'Ariane #}
+{% set active = 'Profil' %}
+
+{# Contenu de la Page #}
+{% block contenu %}
+{% if global.request.get('note') == 'success' %}
+                         <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i>Félications !. </p>
+                            <p class="text-center"> Votre avis concernant  l'utilisateur a bien été pris en compte !</p>
+                        </div>
+    {% endif %}
+    {% if global.request.get('note') == 'error' %}
+                         <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+Erreur lors de la publication de votre commentaire </p>
+                            <p class="text-center"> Vous devez être inscrit et connecté, Avoir rempli au moins l'un des deux champs et avoir attendu 24 heures pour valider un deuxieme commentaire! <br /> Par ailleurs vous ne pouvez pas voter pour vous même</p>
+                        </div>
+    {% endif %}
+    <div class="row">
+        <!--colleft-->
+        <div class="col-md-8 col-sm-12">
+            <div class="box-caption">
+        {% if infoUser is not empty  %}    
+		<h1>{{ infoUser.pseudo }}</h1>
+		{#Affichage des notes #}
+		Note utilisateur : 
+		 {% if totalNote < 1 %}
+                    	Vous n'avez pas de note.
+                    	{% else %}
+                    	{% for nombreStars in 1.. nombreStars %}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i> 
+                        {% endfor %}
+                        
+                    	{% if halfstar is not empty %} 
+                    		<i class="fa fa-star-half" aria-hidden="true" style="color:#ffd700"></i>
+                    	{% endif %}
+                    	
+                    	/ 5 sur une base de {{ totalNote }} note(s)</big>
+        {% endif %}
+        
+        <h2>Services proposés</h2>
+        {% if servicesUser is not empty  %} 
+        {# Si les services ne sont pas vides on boucle pour afficher la liste des services #}
+        <table align="center" class="table table-condensed">
+        	<tr>
+        		<th>Nom du service</th><th>Categorie</th><th>Commune</th><th>Mobilite</th><th>Infos</th>
+        	</tr>
+        		
+        		 {% for service in servicesUser %}
+        		 <tr><td><a href="{{ url('index_annonce' , {
+                    nomCategorieService : service.nomCategorieService | lower,
+                    slugService         : service.titreService | slug ,
+                    idService         : service.idService 
+                 }
+        		 )}}">{{ service.titreService }}</a></td><td>{{ service.nomCategorieService }}</td><td>{{ service.commune }}</td><td>{{ service.perimetreAction }} KM</td><td><a href="{{ url('index_annonce' , {
+                    nomCategorieService : service.nomCategorieService | lower,
+                    slugService         : service.titreService | slug ,
+                    idService         : service.idService 
+                 }
+        		 )}}">Aller à l'annonce</a></td></tr>
+        		 {% endfor %}
+        	
+        
+        </table>
+        {% else %}
+        L'utilisateur ne propose pas encore de services. 
+        {% endif %}
+        
+        {# Affichage de la liste des services #}
+        
+        <h2>Coordonnées</h2>
+		{% if infoUser.profilVisible == 1 %}
+		
+		
+		
+		<table align="center" class="table table-condensed">
+                    	<tr>
+                    		<td>Nom public : </td><td>{{ infoUser.pseudo }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Email : </td><td>{{ infoUser.email }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Adresse : </td><td>{{ infoUser.adresse }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Code Postal : </td><td>{{infoUser.codePostal }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Ville : </td><td>{{ infoUser.ville}} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Téléphone (mobile) : </td><td>{{ infoUser.telMobile }} </td>
+                    	</tr>
+                    	<tr>
+                    		<td>Téléphone (fixe) : </td><td>{{ infoUser.telFixe }}</td>
+                    	</tr>
+                    	<tr>
+                    		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~infoUser.photo) }}"></td>
+                    	</tr>
+        </table>
+        
+        
+        
+          
+        
+        
+		{% else %}
+		{# L'utilisateur a défini son profil comme étant privé #}
+		
+                            <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							L'utilisateur a défini son profil comme étant un profil privé </p>
+                           
+                       
+		{% endif %}
+		{# Fin de la condition d'affichage public #}
+		<h3> Liste des commentaires</h3>
+		{% if commentairesUser is not empty %}
+        {% for commentaire in commentairesUser %}
+        
+        <br />
+        Commentaire de <a href="{{ url('index_profil', {idUser : commentaire.idNotedBy}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
+        
+        {% endfor %} 
+        {% else %}
+        Vous n'avez pas encore recu de commentaires.
+        {% endif %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<h3>Noter l'utilisateur</h3>
+		<div class="container">
+                        <div class="starter-template">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" >
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Note : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.note) }}
+                            	</div>
+                    	</div>
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Commentaires : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.commentaires) }}
+                            	</div>
+                    	</div>
+                    	{{ form_row(form._token) }}
+        				<div class="form-group">
+            				<label for="" class="col-md-3 control-label">
+            					
+            				</label>
+            					<div class="col-md-7">
+            					<input type="submit" class="btn btn-primary" value="Noter" />
+            					</div>
+            				</div>
+        				</form>	
+                  
+                    </div>
+                  </div> 	
+        {% endif %} 
+        {#Fin de la condition de notation #}
+        
+      
+		{% else %}
+		{# L'id du profil ne corespondant pas #}
+		 <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existance de cette fiche. </p>
+                           
+                        </div>
+		
+		{% endif  %}
+		
+		
+        <div class="container">
+            <div class="starter-template">
+            </div>
+            <!--spotlight-->
+            <!--spotlight-thumbs-->
+            <section class="spotlight-thumbs">
+                <div class="row">
+                    
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    {# include 'inc/sidebar.html' #}
+    {#    {{ render(controller('TechNews\\Controller\\NewsController::sidebar')) }}#}
+
+
+        </div><!-- /.container -->
+    
+{% endblock %}

@@ -81,6 +81,13 @@ class IndexControllerProvider implements ControllerProviderInterface {
             $controllers
                 ->post("/recherche", "App\Controller\IndexController::rechercheActionPost")
                 ->bind('index_recherche_POST');
+            
+            # Page d'affichage du profil public
+            $controllers
+            ->match("/profil/{idUser}", "App\Controller\IndexController::affichageProfilAction")
+            ->assert('idUser', '\d+')
+            ->method('GET|POST')
+            ->bind('index_profil');
 
 
         # On retourne la liste des controllers (ControllerCollection)

@@ -43,7 +43,7 @@ Erreur lors de la publication de votre commentaire </p>
                     
                    
                     <div class="meta-post">
-                        <a href="#">
+                        <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
                             {{ service.pseudo }}
                         </a>
                         <em></em>
@@ -70,7 +70,7 @@ Erreur lors de la publication de votre commentaire </p>
                     {% for commentaire in commentairesService %}
                     
                     <br />
-                    Commentaire de {{commentaire.pseudo}} note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
+                    Commentaire de <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
                     
                     {% endfor %} 
                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -173,7 +173,7 @@ Erreur lors de la publication de votre commentaire </p>
                                             slugService : service.titreService | slug,
                                             idService : service.idService }) }}">{{ service.titreService }}</a></h3>
                                     <div class="meta-post">
-                                        <a href="#">
+                                        <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
                                             {{ service.pseudo }}
                                         </a>
                                         <em></em>
