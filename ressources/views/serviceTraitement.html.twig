@@ -1,0 +1,78 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Traitement des signalements utilisateurs {% endblock %}
+{# Block de Contenu défini dans base.html.twig #}
+{% block contenu %}
+
+				{# GESTION DES ERREURS ET SUCCES #}
+        
+   				{% if global.request.get('cloture') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Félicitations ! L'annonce a été cloturée.</p>
+                        </div>
+
+                    {% endif %}
+                    
+                    {% if global.request.get('traiter') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Félicitations ! Le signalement a bien été traité (sans action).</p>
+                        </div>
+
+                    {% endif %}
+                    
+                     {% if global.request.get('bannir') == 'echec' %}
+
+                        <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Erreur : Vous ne pouvez pas bannir un utilisateur dont le statut est ADMIN .</p>
+                        </div>
+
+                    {% endif %}
+                    
+                    {% if global.request.get('bannir') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> L'utilisateur a été banni , et ses annonces ont été cloturées, ainsi que les demandes le concernant .</p>
+                        </div>
+
+                    {% endif %}
+            	{% if is_granted('ROLE_ADMIN') %}
+                     <div class="container">
+                        <div class="starter-template">
+                        	<h1>Bienvenue {{ app.user.pseudo }} sur votre espace Admin</h1>
+                        	<h4>Gestion du Signalements d'utilisateurs</h4> 
+                        	
+                        	<table class="table table-responsive">
+                        	<th>Service signalé</th><th>Proposé par : </th><th>Message</th><th>Date de soumission de l'alerte</th><th colspan="4" align="center">Actions</th>
+                        	{% for signalementService in traitementServiceSignale %}
+                        	<tr>
+                        		<td>{{ signalementService.titreService }}</td><td>{{ signalementService.pseudo }}</td><td>{{ signalementService.message }}</td><td>{{ signalementService.dateAlerte |date('d/m/Y') }}</td><td><a href="
+                        		{{ url('index_annonce', 
+                        		{idService: signalementService.idServiceSignale,
+                        		 slugService : signalementService.titreService|slug,
+                        		 nomCategorieService : signalementService.nomCategorieService|lower}) 
+                        		}}">Voir l'annonce</a></td><td><a href="{{ url('admin_bannirUser', {idUser : signalementService.idUserSignale}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_fermetureService', {idService : signalementService.idServiceSignale}) }}">Fermer l'annonce</a></td><td><a href="{{ url('admin_traiterService', {idService : signalementService.idServiceSignale}) }}">Ne rien faire</a> </td>
+                        	</tr>
+                        	{% endfor %}
+                        	
+                        	</table>
+                        	
+                        
+                    
+                {% else %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Vous devez être admin pour accéder à cet espace <br />
+                </div>
+                {% endif %}
+          </div>
+            	
+            
+        </div>
+        <!-- /.container -->
+    
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

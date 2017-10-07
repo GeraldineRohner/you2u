@@ -10,9 +10,29 @@
                      <div class="container">
                         <div class="starter-template">
                         	<h1>Bienvenue {{ app.user.pseudo }} sur votre espace Admin</h1>
-                        	<h4>Signalements d'utilisateurs ({{ nombreUserSignaleATraiter }} à traiter)</h4>
-                        	<h4>Signalements de services ({{ serviceSignaleATraiter }} à traiter)</h4>
-                        	<h4>Annonces à valider ({{ serviceAValider }} à traiter)</h4>
+                        	<h4>Signalements d'utilisateurs 
+                        	
+                        	{% if nombreUserSignaleATraiter is not empty %}
+                        	(<a href="{{ url('admin_traitementSignalementUser') }}"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        	{{ nombreUserSignaleATraiter }} à traiter</a>)
+                        	{% endif  %}
+                        	
+                        	</h4>
+                        	
+                        	
+                        	<h4>Signalements de services 
+                        	{% if nombreUserSignaleATraiter is not empty %}
+                        	(<a href="{{ url('admin_traitementSignalementService') }}"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{ serviceSignaleATraiter }} à traiter</a>)
+                        	</h4>
+                        	{% endif  %}
+                        	
+                        	
+                        	<h4>
+                        	Annonces à valider 
+                        	{% if serviceAValider is not empty %}
+                        	<a href="{{ url('admin_serviceavalider') }}">(<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{ serviceAValider }} à traiter</a>)
+                        	{% endif  %}
+                        	</h4>
                         	<h4>Message contact</h4>
                     
                 {% else %}

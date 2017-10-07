@@ -31,6 +31,8 @@ $app->register(new IdiormServiceProvider(), array(
                                        'categorie_service' => 'idCategorieService',
                                        'services'          => 'idService',
                                        'vue_services'      => 'idService',
+                                       'signalements_services' =>'idSignalement',
+                                       'signalements_users' => 'idSignalementUser',
                                        'villes_rhone'      =>  'codeINSEE')
     )
 ));

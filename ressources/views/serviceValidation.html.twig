@@ -1,0 +1,77 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Traitement des signalements utilisateurs {% endblock %}
+{# Block de Contenu défini dans base.html.twig #}
+{% block contenu %}
+
+				{# GESTION DES ERREURS ET SUCCES #}
+        		 {% if global.request.get('bannir') == 'echec' %}
+
+                        <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Erreur : Vous ne pouvez pas bannir un utilisateur dont le statut est ADMIN .</p>
+                        </div>
+
+                    {% endif %}
+                    
+                    {% if global.request.get('bannir') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> L'utilisateur a été banni , et ses annonces ont été cloturées, ainsi que les demandes le concernant .</p>
+                        </div>
+
+                    {% endif %}
+                    {% if global.request.get('cloture') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Félicitations ! L'annonce a été cloturée.</p>
+                        </div>
+
+                    {% endif %}
+                    
+                     {% if global.request.get('validation') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> L'annonce a été publiée .</p>
+                        </div>
+
+                    {% endif %}
+   			
+            	{% if is_granted('ROLE_ADMIN') %}
+                     <div class="container">
+                        <div class="starter-template">
+                        	<h1>Bienvenue {{ app.user.pseudo }} sur votre espace Admin</h1>
+                        	<h4>Gestion de la validation des annonces</h4> 
+                        	
+                        	<table class="table table-responsive">
+                        	<th>Service </th><th>Proposé par : </th><th>Message</th><th>Date de soumission de l'alerte</th><th colspan="4" align="center">Actions</th>
+                        	{% for serviceAValider in servicesAValider %}
+                        	<tr>
+                        		<td>{{ serviceAValider.titreService }}</td><td>{{ serviceAValider.pseudo }}</td><td>{{ serviceAValider.descriptionService }}</td><td>{{ serviceAValider.datePublicationService |date('d/m/Y') }}</td><td><a href="
+                        		{{ url('index_annonce', 
+                        		{idService: serviceAValider.idService,
+                        		 slugService : serviceAValider.titreService|slug,
+                        		 nomCategorieService : serviceAValider.nomCategorieService|lower}) 
+                        		}}">Voir l'annonce</a></td><td><a href="{{ url('admin_bannirUser', {idUser : serviceAValider.idUser}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_fermetureService', {idService : serviceAValider.idService}) }}">Refuser l'annonce</a></td><td><a href="{{ url('admin_validation_service', {idService : serviceAValider.idService}) }}">Accepter l'annonce</a> </td>
+                        	</tr>
+                        	{% endfor %}
+                        	
+                        	</table>
+                        	
+                        
+                    
+                {% else %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Vous devez être admin pour accéder à cet espace <br />
+                </div>
+                {% endif %}
+          </div>
+            	
+            
+        </div>
+        <!-- /.container -->
+    
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
