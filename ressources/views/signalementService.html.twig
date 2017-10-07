@@ -11,8 +11,8 @@
         </div>
 
     {% else %}
-        {% if annonceNonDefinie is defined %}
-            {{ annonceNonDefinie | raw }} {# Si l'utilisateur est passé en force en tapant un id a la main qui ne correpond à rien, on affiche un message d'erreur #}
+        {% if erreur is defined %} {# Si l'utilisateur est passé en force en tapant un id a la main qui ne correpond à rien, ou qu'il a déjà signalé l'annonce, on affiche un message d'erreur #}
+            {{ erreur | raw }}
         {% endif %}
         {% if idService is defined %}
 

@@ -7,3 +7,4 @@ src/App/Controller/gitignore
 
 public/img/img_user/
 
+.idea/you2u.iml

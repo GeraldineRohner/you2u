@@ -593,24 +593,38 @@ class IndexController
             if ($signalement->isValid()) {
 
                 # Insertion BDD
-                $envoiSignalement = $signalement->getData();
-                $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_users')->create();
-
-                # Insertion BDD (infos utilisateur signalé/signalant, et timestamp)
-                $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
-                $enregistrementSignalement->idUserSignale = $idUser;
-                $enregistrementSignalement->dateAlerte = time();
-                $enregistrementSignalement->message = $envoiSignalement['signalement'];
-
-                # Enregistrement
-                $enregistrementSignalement->save();
-
-                # Si le signalement est posté, on redirige l'utilisateur vers un message de confirmation.
-                return $app->redirect($app['url_generator']->generate('index_signalement_utilisateur', [
-                        'idUser' => $idUser]) . '?signalement=succes');
 
 
+
+                # S'il n'existe pas déjà un signalement de l'utilisateur vers l'utilisateur ciblé
+                if ( !($app['idiorm.db']->for_table('signalements_users')->where('idUserAlertant' ,$app['user']->getIdUser())->where('idUserSignale', $idUser)->find_one()) ) {
+
+                    $envoiSignalement = $signalement->getData();
+                    $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_users')->create();
+
+                    # Insertion BDD (infos utilisateur signalé/signalant, et timestamp)
+                    $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
+                    $enregistrementSignalement->idUserSignale = $idUser;
+                    $enregistrementSignalement->dateAlerte = time();
+                    $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
+
+                    # Enregistrement
+                    $enregistrementSignalement->save();
+
+
+                    # Si le signalement est posté, on redirige l'utilisateur vers un message de confirmation.
+                    return $app->redirect($app['url_generator']->generate('index_signalement_utilisateur', [
+                            'idUser' => $idUser]) . '?signalement=succes');
+                }
+                else
+                {
+                    $message = "<div class=\"alert alert-warning\" style=\"text-align: center;\">Vous avez déjà signalé cet utilisateur. Il n'est pas possible d'envoyer un autre signalement pour le moment.</div>";
+                    return $app['twig']->render('signalementUtilisateur.html.twig', ['erreur' => $message]);
+                }
             }
+
+
+
 
             return $app['twig']->render('signalementUtilisateur.html.twig', ['signalement' => $signalement->createView(),
                 'idUser' => $idUser
@@ -618,8 +632,9 @@ class IndexController
 
         } else {
             $message = "<div class=\"alert alert-warning\" style=\"text-align: center;\">Cet utilisateur n'existe pas.</div>";
-            return $app['twig']->render('signalementUtilisateur.html.twig', ['userNonDefini' => $message]);
+            return $app['twig']->render('signalementUtilisateur.html.twig', ['erreur' => $message]);
         }
+
 
     }
 
@@ -691,25 +706,35 @@ class IndexController
             if ($signalement->isValid()) {
 
 
-                $envoiSignalement = $signalement->getData();
-
-                $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_services')->create();
-
-                # Insertion BDD (infos utilisateur signalé/signalant, service signalé, et timestamp)
-                $enregistrementSignalement->idServiceSignale = $idService;
-                $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
-                $enregistrementSignalement->idUserSignale = $userProposantService->idUser;
-                $enregistrementSignalement->dateAlerte = time();
-                $enregistrementSignalement->message = $envoiSignalement['signalement'];
+                if (!($app['idiorm.db']->for_table('signalements_services')->where('idUserAlertant', $app['user']->getIdUser())->where('idServiceSignale', $idService)->find_one())) {
 
 
-                $enregistrementSignalement->save();
+                    $envoiSignalement = $signalement->getData();
+
+                    $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_services')->create();
+
+                    # Insertion BDD (infos utilisateur signalé/signalant, service signalé, et timestamp)
+                    $enregistrementSignalement->idServiceSignale = $idService;
+                    $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
+                    $enregistrementSignalement->idUserSignale = $userProposantService->idUser;
+                    $enregistrementSignalement->dateAlerte = time();
+                    $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
 
 
-                return $app->redirect($app['url_generator']->generate('index_signalement_annonce', [
-                        'idService' => $idService]) . '?signalement=succes');
+                    $enregistrementSignalement->save();
 
 
+                    return $app->redirect($app['url_generator']->generate('index_signalement_annonce', [
+                            'idService' => $idService]) . '?signalement=succes');
+
+
+                }
+
+                else
+                {
+                    $message = "<div class=\"alert alert-warning\" style=\"text-align: center;\">Vous avez déjà signalé cette annonce. Il n'est pas possible d'envoyer un autre signalement pour le moment.</div>";
+                    return $app['twig']->render('signalementService.html.twig', ['erreur' => $message]);
+                }
             }
 
             return $app['twig']->render('signalementService.html.twig', [

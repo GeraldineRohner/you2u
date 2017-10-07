@@ -11,8 +11,8 @@
         </div>
 
     {% else %}
-        {% if userNonDefini is defined %} {# Si l'utilisateur est passé en force en tapant un id a la main qui ne correpond à rien, on affiche un message d'erreur #}
-            {{ userNonDefini | raw }}
+        {% if erreur is defined %} {# Si l'utilisateur est passé en force en tapant un id a la main qui ne correpond à rien, ou qu'il a déjà signalé l'utilisateur, on affiche un message d'erreur #}
+            {{ erreur | raw }}
         {% endif %}
         {% if idUser is defined %}
 
