@@ -192,8 +192,70 @@ class AdminController
         }
     }
     
+    public function debannirUtilisateurAction(Application $app, $idUser, Request $request)
+    {
+        if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
+        {
+            #On recupérer les informations de l'utilisateur.
+            $infoUser = $app['idiorm.db']->for_table('users')->find_one($idUser);
+            if($infoUser['roleUser'] == 'ROLE_ADMIN')
+            {
+                return $app->redirect($request->headers->get('referer').'?debannir=echec');
+            }
+            
+            else
+            {
+                #On banni l'utiliseur
+                $bannisementUser = $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_USER')->save();
+                return $app->redirect($request->headers->get('referer').'?debannir=ok');
+                
+                
+            }
+        }
+        
+        #Sinon on le renvoit vers l'espace de connexion.
+        else
+        {
+            return $app->redirect($app['url_generator']->generate('index_connexion'));
+        }
+    }
     
-
+    public function AdminUtilisateurAction(Application $app, $idUser, Request $request)
+    {
+        if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
+        {
+            #On recupérer les informations de l'utilisateur.
+            $infoUser = $app['idiorm.db']->for_table('users')->find_one($idUser);
+            if($infoUser['roleUser'] == 'ROLE_ADMIN')
+            {
+                return $app->redirect($request->headers->get('referer').'&?admin=echec');
+            }
+            
+            else
+            {
+                #On promeut l'utilisateur au rang d'admin
+                $bannisementUser = $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_ADMIN')->save();
+                return $app->redirect($request->headers->get('referer').'?&admin=ok');
+                
+                
+            }
+        }
+        
+        #Sinon on le renvoit vers l'espace de connexion.
+        else
+        {
+            return $app->redirect($app['url_generator']->generate('index_connexion'));
+        }
+    }
+    
+    
+    public function gestionUtilisateurAction(Application $app)
+    {
+        $infoUsers = $app['idiorm.db']->for_table('users')->where_not_equal('roleUSER','ROLE_ADMIN')->find_result_set();
+        return $app['twig']->render('gestionUtilisateurs.html.twig' , [
+            'infoUsers' => $infoUsers
+        ]);
+    }
 
 
 

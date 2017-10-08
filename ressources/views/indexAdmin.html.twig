@@ -10,6 +10,10 @@
                      <div class="container">
                         <div class="starter-template">
                         	<h1>Bienvenue {{ app.user.pseudo }} sur votre espace Admin</h1>
+                        	
+                        	
+                        	<h4>Gestion des utilisateurs et des roles </h4>
+                        	<a href="{{ url('admin_gestion_utilisateurs') }}"> Accéder à la liste des utilisateurs </a>
                         	<h4>Signalements d'utilisateurs 
                         	
                         	{% if nombreUserSignaleATraiter is not empty %}
