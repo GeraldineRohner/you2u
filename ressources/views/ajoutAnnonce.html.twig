@@ -94,11 +94,8 @@
 {% block javascripts %}
 
 {# Pour afficher le contenu intial du block javascripts sinon remplace par les nouveaux élements. Pour eviter ça il faut utiliser la fonction parent() #}
-{{ parent() }}
-<script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('form_descriptionService');
-</script>
+
+
 
     {{ parent() }}
 

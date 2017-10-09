@@ -240,27 +240,47 @@ class MemberController
                 
             #On récupérer la ville et le CP avec le code Insee
                $villeCP = $app['idiorm.db']->for_table('villes_rhone')->where('commune', $modifProfil['ville'])->find_one();
-  
+              
             
-            #On modifie l'enregistrement #1 a modifié par l'id USER qu'on retrouvera par la variable ID USER
+            #On modifie l'enregistrement qu'on retrouvera par la variable ID USER
                $modifUser = $app['idiorm.db']->for_table('users')->find_one($app['user']->getIdUser());
+               
+              #si le changement d'email est effectué on deconnecte l'utilisateur. 
+              if($modifProfil['email'] != $modifUser['email'])
+              {
+                  $changementEmail = 1;
+              }
+              
+              else
+              {
+                  $changementEmail = 0;
+              }
             $modifUser->set(array(
-                'pseudo'                    => $modifProfil['pseudo'],
-                'prenom'                    => $modifProfil['prenom'],
-                'nom'                       => $modifProfil['nom'],
+                'pseudo'                    => htmlspecialchars($modifProfil['pseudo']),
+                'prenom'                    => htmlspecialchars($modifProfil['prenom']),
+                'nom'                       => htmlspecialchars($modifProfil['nom']),
                 'email'                     => $modifProfil['email'],
-                'adresse'                   => $modifProfil['adresse'],
+                'adresse'                   => htmlspecialchars($modifProfil['adresse']),
                 'ville'                     => $villeCP['commune'],
                 'codePostal'                => $villeCP['codePostal'],
                 'codeINSEE'                 => $villeCP['codeINSEE'],
-                'telMobile'                 => $modifProfil['telMobile'],
-                'telFixe'                   => $modifProfil['telFixe'],
+                'telMobile'                 => htmlspecialchars($modifProfil['telMobile']),
+                'telFixe'                   => htmlspecialchars($modifProfil['telFixe']),
                 'profilVisible'             => $modifProfil['profilVisible'],
                 'photo'                     => $urlFichier
                 )
             );
             $modifUser->save();
-            return $app->redirect($app['url_generator']->generate('membre_index'));
+            
+            if($changementEmail == 0)
+            {
+                return $app->redirect($app['url_generator']->generate('membre_index'));
+            }
+                #si on a change l'email on deconnecte l'utilisateur. 
+                else
+                {
+                    return $app->redirect($app['url_generator']->generate('deconnexion'));    
+                }
             
             
         }
@@ -346,7 +366,7 @@ class MemberController
         $categoriesService = function () use ($app)
         {
             # Récupération des catégories dans la BDD
-            $categoriesService = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
+            $categoriesService = $app['idiorm.db']->for_table('categorie_service')->where_not_equal('idCategorieService',1)->find_result_set();
 
             # Formatage de l'affichage pour le champ select (ChoiceType) du formulaire
             $array = [];
@@ -484,12 +504,12 @@ class MemberController
 
             # Association des colonnes de la BDD avec les champs du formulaire
             # Colonnes BDD                      # Champs du formulaire
-            $annonceDb->titreService            = $annonce['titreService'];
+            $annonceDb->titreService            = htmlspecialchars($annonce['titreService']);
             $annonceDb->idCategorieService      = $annonce['idCategorieService'];
-            $annonceDb->tarifService            = $annonce['tarifService'];
+            $annonceDb->tarifService            = htmlspecialchars($annonce['tarifService']);
             $annonceDb->lieuService             = $villeCP['codeINSEE'];
-            $annonceDb->perimetreAction         = $annonce['perimetreAction'];
-            $annonceDb->descriptionService      = $annonce['descriptionService'];
+            $annonceDb->perimetreAction         = htmlspecialchars($annonce['perimetreAction']);
+            $annonceDb->descriptionService      = htmlspecialchars($annonce['descriptionService']);
             $annonceDb->datePublicationService  = time();
             $annonceDb->idUserProposantService  = $app['user']->getIdUser();
 
