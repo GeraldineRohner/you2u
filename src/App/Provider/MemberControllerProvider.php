@@ -45,6 +45,27 @@ class MemberControllerProvider implements ControllerProviderInterface
         ->match("/ajouter", "App\Controller\MemberController::ajoutAnnonceAction")
         ->method('GET|POST')
         ->bind('member_ajout_annonce');
+
+        #Contact
+        $controllers
+            ->match('/contact','App\Controller\MemberController::contactAction')
+            #En option, je peux donner un nom à la route, qui servira plus tard pour la création de liens.
+                ->method('GET|POST')
+            ->bind('membre_contact');
+
+
+        # Pages de signalement (service et utilisateur)
+        $controllers
+            ->match("/signalement/annonce_{idService}","App\Controller\MemberController::signalementServiceAction")
+            ->method('GET|POST')
+            ->assert('idService', '\d+')
+            ->bind('membre_signalement_annonce');
+
+        $controllers
+            ->match("/signalement/utilisateur_{idUser}","App\Controller\MemberController::signalementUserAction")
+            ->method('GET|POST')
+            ->assert('idUser', '\d+')
+            ->bind('membre_signalement_utilisateur');
         
         
         

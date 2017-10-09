@@ -34,7 +34,7 @@
                                        {# <img alt="{{ service.titreService }}"
                                              src="{{ asset('img'~service.FEATUREDIMAGEservice) }}">#}
                                     </a>
-                                    <a href="{{ url('index_signalement_annonce',
+                                    <a href="{{ url('membre_signalement_annonce',
                                     {
                                         idService : service.idService
                                     })
@@ -49,7 +49,7 @@
                                         <a href="#">
                                             {{ service.pseudo }}
                                         </a>
-                                        <a href="{{ url('index_signalement_utilisateur',
+                                        <a href="{{ url('membre_signalement_utilisateur',
                                         {
                                             idUser : service.idUser
                                         })
