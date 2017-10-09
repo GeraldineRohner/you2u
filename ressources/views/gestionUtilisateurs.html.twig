@@ -1,0 +1,144 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Gestion des utilisateurs {% endblock %}
+{# Block de Contenu défini dans base.html.twig #}
+{% block stylesheets %}
+  {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+{% endblock %}    
+{% block contenu %}
+        
+   				{% if global.request.get('traiter') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Félicitations ! Le signalement a bien été traité (sans action).</p>
+                        </div>
+
+                    {% endif %}
+                    
+                 {% if global.request.get('bannir') == 'echec' %}
+
+                        <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Erreur : Vous ne pouvez pas bannir un utilisateur dont le statut est ADMIN .</p>
+                        </div>
+
+                    {% endif %}
+                    
+                    {% if global.request.get('bannir') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> L'utilisateur a été banni , et ses annonces ont été cloturées, ainsi que les demandes le concernant .</p>
+                        </div>
+
+                    {% endif %}  
+                    {% if global.request.get('debannir') == 'echec' %}
+
+                        <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Erreur : Vous ne pouvez pas débannir cet utilisateur</p>
+                        </div>
+
+                    {% endif %}
+                    
+                    {% if global.request.get('debannir') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Félications : L'utilisateur a été débanni.</p>
+                        </div>
+
+                    {% endif %}  
+                    
+                    {% if global.request.get('admin') == 'echec' %}
+
+                        <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Erreur : Vous ne pouvez donner à cet utilisateur le role d'ADMIN</p>
+                        </div>
+
+                    {% endif %}
+                    
+                    {% if global.request.get('admin') == 'ok' %}
+
+                        <div class="alert alert-success">
+                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Félications : L'utilisateur a été promu ADMIN.</p>
+                        </div>
+
+                    {% endif %}  
+                      
+            	{% if is_granted('ROLE_ADMIN') %}
+                     <div class="container">
+                        <div class="starter-template">
+                        	<h1>Bienvenue {{ app.user.pseudo }} sur votre espace Admin</h1>
+                        	<h4>Gestion des utilisateurs</h4> 
+                        	
+                        	<table class="table table-responsive "id="gestionUser">
+                        	<thead>
+                        		<th>Utilisateurs</th><th>RANG</th><th>Date d'inscription</th><th>Bannir</th><th>Debannir</th><th>Nommer Admin</th>
+                        	</thead>
+                        	<tbody>	
+                        	{% for infoUser in infoUsers %}
+                        	<tr>
+                        		<td>{{infoUser.pseudo}}</td><td>{{ infoUser.roleUser }}</td><td>{{ infoUser.dateInscription|date("d/m/Y") }}</td>
+                        		
+                        		{% if infoUser.roleUser == 'ROLE_ADMIN' %}
+                        		<td></td><td></td><td></td>
+                        		{% endif %}
+                        		{% if infoUser.roleUser == 'ROLE_USER' %}
+                        		<td><a href="{{ url('admin_bannirUser', {idUser : infoUser.idUser}) }}">Bannir</a></td><td></td><td><a href="{{ url('admin_new_admin', {idUser : infoUser.idUser}) }}">Administrateur</a></td>
+                        		{% endif %}
+                        		{% if infoUser.roleUser == 'ROLE_BANNED' %}
+                        		<td><a href="{{ url('admin_debannirUser', {idUser : infoUser.idUser}) }}">Débannir</a></td><td></td><td></td>
+                        		{% endif %}
+                        	</tr>
+                        	{% endfor %}
+                        	</tbody>
+                        	</table>
+                        	
+                        
+                    
+                {% else %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                Vous devez être adminaccéder à cet espace <br />
+                </div>
+                {% endif %}
+          </div>
+            	
+            
+        </div>
+        <!-- /.container -->
+    
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.16/i18n/French.json"></script>
+<script>
+$(document).ready(function() {
+	$('#gestionUser').DataTable( {
+		"language": {
+			"sProcessing":     "Traitement en cours...",
+			"sSearch":         "Rechercher&nbsp;:",
+			"sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+			"sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+			"sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+			"sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+			"sInfoPostFix":    "",
+			"sLoadingRecords": "Chargement en cours...",
+			"sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+			"sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+			"oPaginate": {
+				"sFirst":      "Premier",
+				"sPrevious":   "Pr&eacute;c&eacute;dent",
+				"sNext":       "Suivant",
+				"sLast":       "Dernier"
+			},
+			"oAria": {
+				"sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+				"sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+			}
+		}
+	} );
+} );
+</script>
+
+{% endblock %}

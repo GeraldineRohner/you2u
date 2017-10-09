@@ -63,6 +63,18 @@ class AdminControllerProvider implements ControllerProviderInterface
         ->assert('idUser', '\d+')
         ->bind('admin_bannirUser');
         
+        #Page de débannisement d'un utilisateur.
+        $controllers
+        ->get('/users/gestion/debannir/{idUser}', 'App\Controller\AdminController::debannirUtilisateurAction')
+        ->assert('idUser', '\d+')
+        ->bind('admin_debannirUser');
+        
+        #Page de promotion utilisateur
+        $controllers
+        ->get('/utilisateurs/gestion/promotion/{idUser}', 'App\Controller\AdminController::AdminUtilisateurAction')
+        ->assert('idUser', '\d+')
+        ->bind('admin_new_admin');
+        
         #Page d'affichage des annonces à valider
         $controllers
         ->get('/service/validation', 'App\Controller\AdminController::serviceValidationAction')
@@ -72,6 +84,12 @@ class AdminControllerProvider implements ControllerProviderInterface
         $controllers
         ->get('/service/validation/{idService}', 'App\Controller\AdminController::ValiderAnnonceAction')
         ->bind('admin_validation_service');
+        
+        #Page de validation d'annonce
+        $controllers
+        ->get('/utilisateurs/gestion', 'App\Controller\AdminController::gestionUtilisateurAction')
+        ->bind('admin_gestion_utilisateurs');
+        
 
 
 
