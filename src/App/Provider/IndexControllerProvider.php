@@ -72,18 +72,7 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->get("/connexion","App\Controller\IndexController::connexionAction")
             ->bind('index_connexion');
 
-        # Page de signalement
-        $controllers
-            ->match("/signalement/annonce_{idService}","App\Controller\IndexController::signalementServiceAction")
-            ->method('GET|POST')
-            ->assert('idService', '\d+')
-            ->bind('index_signalement_annonce');
 
-        $controllers
-            ->match("/signalement/utilisateur_{idUser}","App\Controller\IndexController::signalementUserAction")
-            ->method('GET|POST')
-            ->assert('idUser', '\d+')
-            ->bind('index_signalement_utilisateur');
             # Page de recherche
             $controllers
                 ->get("/recherche", "App\Controller\IndexController::rechercheAction")

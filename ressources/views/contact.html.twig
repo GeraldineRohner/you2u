@@ -1,0 +1,95 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}You2u - Contact{% endblock %}
+
+{% block contenu %}
+
+    {% if global.request.get('contact') == 'succes' %}
+
+        <div class='alert alert-success' style='text-align:center;'> Message correctement envoyé. Nous reviendrons vers vous dans les meilleurs délais. Cliquez <strong><a href="{{ url('index_index') }}">ici</a></strong> pour retourner à l'accueil.
+        </div>
+
+    {% else %}
+
+        {% if erreur is defined %} {# Si l'utilisateur a tenté de contacter les admins depuis moins d'heure, on renvoie un message d'erreur #}
+            <div class="alert alert-warning" style="text-align: center;">Vous avez déjà tenté de nous contacter il y a peu. Merci de réessayer ultérieurement. Cliquez <strong><a href="{{ url('index_index') }}">ici</a></strong> pour retourner à l'accueil.</div>
+        {% else %}
+
+            <div class="row">
+                <div class="col-xs-6 col-xs-push-3">
+
+
+                    <h2 class="text-center">Nous contacter</h2>
+
+
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <form enctype="multipart/form-data" class="form-horizontal" method="POST">
+
+
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
+                                        Nom complet
+                                    </label>
+                                    <div class="col-md-7">
+                                        {{ form_row(contact.userContactant) }} {# On affiche dans un champ texte verrouillé le titre du Service, cette donnée est purement visuelle (pas d'incidence si l'utilisateur le change en trifouillant le HTML) #}
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
+                                       Email
+                                    </label>
+                                    <div class="col-md-7">
+                                        {{ form_row(contact.userEmail) }}
+                                        {# On affiche dans un champ texte verrouillé le pseudo de l'utilisateur, cette donnée est purement visuelle (pas d'incidence si l'utilisateur le change en trifouillant le HTML) #}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
+                                        Votre message
+                                    </label>
+                                    <div class="col-md-7">
+                                        {{ form_row(contact.contact) }}
+                                    </div>
+                                </div>
+                                {# Important pour la validation du Token #}
+                                {{ form_row(contact._token) }}
+
+                                <!-- Submit -->
+                                <div class="form-group">
+                                    <div class="col-xs-7 col-xs-offset-3">
+                                        <button type="submit" class="btn btn-primary" value="Cliquez ici">
+                                            Envoyer le message
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+{% endif %}
+{% endif %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
