@@ -22,7 +22,9 @@ $(document).ready(function() {
 
                 $('.phrase-count-result').html('<b class="nbAnnoncesPubliees">'+ data.nbAnnoncesPubliees + '</b> annonces correspondent à votre recherche');
                 $('.affinerRecherche').html('<input class="form-control" type="text" placeholder="Affinez votre recherche" required="">');
-
+                url = $(location).attr('href');
+                //- On lui retire -10 car on sera toujours dans l'URL Recherche. 
+                urlPublic = url.slice(0,-10);
                 // -- Récupération des annonces depuis JSON
                 let annonces    = data.annoncesPubliees;
                 // -- On compte le nombre d'annonce pour les parcourir
@@ -38,7 +40,7 @@ $(document).ready(function() {
 
                         $('.annonces').append(`
                             <div class="col-md-5 annonce-item">
-                                <h4 class="titre_annonce"><a href="#">${annonces[i].titreService}</a></h4>
+                                <h4 class="titre_annonce"><a href="${urlPublic}/${annonces[i].nomCategorieService}/${annonces[i].titreServiceSlug}_${annonces[i].idService}.html">${annonces[i].titreService}</a></h4>
                                 <p class="categorie_annonce">${annonces[i].nomCategorieService}</p>
                                 <p class="annonceur">${annonces[i].prenom} ${annonces[i].nom}</p>
                                 <p class="tarif_annonce">${annonces[i].tarifService} EUR</p>
