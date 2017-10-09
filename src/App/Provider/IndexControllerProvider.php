@@ -6,18 +6,18 @@ use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 
 class IndexControllerProvider implements ControllerProviderInterface {
-    
+
     /**
      * {@inheritDoc}
      * @see \Silex\Api\ControllerProviderInterface::connect()
      */
     public function connect(Application $app)
     {
-        
+
         # : Créer une instance de Silex\ControllerCollection
         # : https://silex.symfony.com/api/master/Silex/ControllerCollection.html
         $controllers = $app['controllers_factory'];
-        
+
         # Page d'Accueil
         $controllers
             # On associe une Route à un Controller et une Action
@@ -42,7 +42,7 @@ class IndexControllerProvider implements ControllerProviderInterface {
         $controllers
             ->match('/{nomCategorieService}/{slugService}_{idService}.html',
                 'App\Controller\IndexController::serviceAction')
-            ->method('GET|POST')    
+            ->method('GET|POST')
             ->assert('idService', '\d+')
             ->bind('index_annonce');
 
@@ -81,7 +81,7 @@ class IndexControllerProvider implements ControllerProviderInterface {
             $controllers
                 ->post("/recherche", "App\Controller\IndexController::rechercheActionPost")
                 ->bind('index_recherche_POST');
-            
+
             # Page d'affichage du profil public
             $controllers
             ->match("/profil/{idUser}", "App\Controller\IndexController::affichageProfilAction")

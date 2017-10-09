@@ -12,12 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+
 use function utf8_encode;
 use function var_dump;
 
@@ -230,15 +231,15 @@ class IndexController
                 'label' => false,
                 'constraints' => array(
                     new Length(array( # Contrainte de longueur
-                    'min' => 2,
-                    'max' => 35,
-                    'minMessage' => 'Votre nom doit contenir au moins deux caractères',
-                    'maxMessage' => 'Votre nom ne peut contenir plus de trente-cinq caractères'
-                )),
+                        'min' => 2,
+                        'max' => 35,
+                        'minMessage' => 'Votre nom doit contenir au moins deux caractères',
+                        'maxMessage' => 'Votre nom ne peut contenir plus de trente-cinq caractères'
+                    )),
                     new Regex(array(  # Contraite de contenu
-                    'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë \'-]*[a-zéèàùûêâôë]$/i',
-                    'message' => 'Votre nom ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces, et doit commencer et se terminer par une lettre'
-                ))),
+                        'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë \'-]*[a-zéèàùûêâôë]$/i',
+                        'message' => 'Votre nom ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces, et doit commencer et se terminer par une lettre'
+                    ))),
 
                 'attr' => array(
                     'class' => 'form-control',
@@ -250,15 +251,15 @@ class IndexController
                 'label' => false,
                 'constraints' => array(
                     new Length(array( # Contrainte de longueur
-                    'min' => 3,
-                    'max' => 35,
-                    'minMessage' => 'Votre prénom doit contenir au moins trois caractères',
-                    'maxMessage' => 'Votre prénom ne peut contenir plus de  trente-cinq caractères'
-                )),
+                        'min' => 3,
+                        'max' => 35,
+                        'minMessage' => 'Votre prénom doit contenir au moins trois caractères',
+                        'maxMessage' => 'Votre prénom ne peut contenir plus de  trente-cinq caractères'
+                    )),
                     new Regex(array( # Contraite de contenu
-                    'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë\'-]*[a-zéèàùûêâôë]$/i',
-                    'message' => 'Votre prénom ne peut contenir que des caractères alphanumériques, tirets ou apostrophes et doit commencer et se terminer par une lettre'
-                ))),
+                        'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë\'-]*[a-zéèàùûêâôë]$/i',
+                        'message' => 'Votre prénom ne peut contenir que des caractères alphanumériques, tirets ou apostrophes et doit commencer et se terminer par une lettre'
+                    ))),
 
                 'attr' => array(
                     'class' => 'form-control',
@@ -271,9 +272,9 @@ class IndexController
                 'constraints' => array(new NotBlank(array(
                         'message' => 'Veuillez renseigner votre adresse email')
                 ),
-                                       new Email(array(
-                        'message' => 'L\'adresse email saisie est invalide',)
-                )),
+                    new Email(array(
+                            'message' => 'L\'adresse email saisie est invalide',)
+                    )),
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'votre.email@exemple.fr'
@@ -284,15 +285,15 @@ class IndexController
                 'label' => false,
                 'constraints' => array(
                     new Length(array( # Contrainte de longueur
-                    'min' => 3,
-                    'max' => 20,
-                    'minMessage' => 'Votre pseudonyme doit contenir au moins trois caractères',
-                    'maxMessage' => 'Votre pseudonyme ne peut contenir plus de  vingt caractères'
-                )),
+                        'min' => 3,
+                        'max' => 20,
+                        'minMessage' => 'Votre pseudonyme doit contenir au moins trois caractères',
+                        'maxMessage' => 'Votre pseudonyme ne peut contenir plus de  vingt caractères'
+                    )),
                     new Regex(array( # Contraite de contenu
-                    'pattern' => '/^[\w-\']+$/',
-                    'message' => 'Votre pseudonyme ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
-                ))),
+                        'pattern' => '/^[\w-\']+$/',
+                        'message' => 'Votre pseudonyme ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
+                    ))),
 
 
                 'attr' => array(
@@ -306,11 +307,11 @@ class IndexController
                 'label' => false,
                 'constraints' => array(
                     new Length(array( # Contrainte de longueur
-                    'min' => 6,
-                    'max' => 20,
-                    'minMessage' => 'Votre mot de passe doit contenir au moins six caractères',
-                    'maxMessage' => 'Votre mot de passe ne peut contenir plus de  vingt caractères'
-                )),
+                        'min' => 6,
+                        'max' => 20,
+                        'minMessage' => 'Votre mot de passe doit contenir au moins six caractères',
+                        'maxMessage' => 'Votre mot de passe ne peut contenir plus de  vingt caractères'
+                    )),
                     new Regex(array( # Contraite de contenu
                         'pattern' => '/^[\w-\']+$/',
                         'message' => 'Votre mot de passe ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
@@ -508,120 +509,163 @@ class IndexController
             }
             else{
                 $erreurs[]="<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mots de passe identiques.</div>";
-                }
-                /*} elseif (mb_strlen($creationMembre['motDePasse']) < 6) {
-                    $erreurs[] = "<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mots de passe identiques.</div>";
-                }*/
-
-                /*
-                ------------------------------------------------------------------------------------
-                -----------------------DONNÉES A INSERER DANS LA BDD VIA LE PROFIL------------------
-                ------------------------------------------------------------------------------------
-
-                $insertionMembre->adresse              = $creationMembre['adresse'];
-                $insertionMembre->codePostal           = $creationMembre['codePostal'];
-                $insertionMembre->codeINSEE            = $villeCI;
-                $insertionMembre->ville                = $creationMembre['ville'];
-                $insertionMembre->telFixe              = $creationMembre['telFixe'];
-                $insertionMembre->telMobile            = $creationMembre['telMobile'];
-                $insertionMembre->profilVisible        = $creationMembre['profilVisible'];
-
-
-
-                if (isset($creationMembre['photo']))
-                {
-                    $extension = $photo->guessExtension();
-                    $photo->move($chemin, $this->generateSlug($photo) . '.' . $extension);
-
-                    $insertionMembre->photo = $this->generateSlug($creationMembre['photo'] . '.' . $extension);
-                }
-
-                ------------------------------------------------------------------------------------
-                ------------------------------------------------------------------------------------
-                ------------------------------------------------------------------------------------*/
-
-
-                if (!isset($erreurs)) { # Si pas d'erreurs dans le formulaire
-                    $insertionMembre->dateInscription = time(); # On log la date d'inscription
-                    $insertionMembre->save(); # Insertion en BDD
-
-                    return $app->redirect($app['url_generator']->generate('index_connexion') . '?inscription=ok');
-                } else {
-
-                    return $app['twig']->render('inscription.html.twig', [
-                        'formInscription' => $formInscription->createView(),
-                        'messages' => $erreurs]);
-
-
-                }
             }
-            else {
-                return $app['twig']->render('inscription.html.twig', ['formInscription' => $formInscription->createView()]);
+            /*} elseif (mb_strlen($creationMembre['motDePasse']) < 6) {
+                $erreurs[] = "<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mots de passe identiques.</div>";
+            }*/
+
+            /*
+            ------------------------------------------------------------------------------------
+            -----------------------DONNÉES A INSERER DANS LA BDD VIA LE PROFIL------------------
+            ------------------------------------------------------------------------------------
+
+            $insertionMembre->adresse              = $creationMembre['adresse'];
+            $insertionMembre->codePostal           = $creationMembre['codePostal'];
+            $insertionMembre->codeINSEE            = $villeCI;
+            $insertionMembre->ville                = $creationMembre['ville'];
+            $insertionMembre->telFixe              = $creationMembre['telFixe'];
+            $insertionMembre->telMobile            = $creationMembre['telMobile'];
+            $insertionMembre->profilVisible        = $creationMembre['profilVisible'];
+
+
+
+            if (isset($creationMembre['photo']))
+            {
+                $extension = $photo->guessExtension();
+                $photo->move($chemin, $this->generateSlug($photo) . '.' . $extension);
+
+                $insertionMembre->photo = $this->generateSlug($creationMembre['photo'] . '.' . $extension);
             }
+
+            ------------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------------
+            ------------------------------------------------------------------------------------*/
+
+
+            if (!isset($erreurs)) { # Si pas d'erreurs dans le formulaire
+                $insertionMembre->dateInscription = time(); # On log la date d'inscription
+                $insertionMembre->save(); # Insertion en BDD
+
+                return $app->redirect($app['url_generator']->generate('index_connexion') . '?inscription=ok');
+            } else {
+
+                return $app['twig']->render('inscription.html.twig', [
+                    'formInscription' => $formInscription->createView(),
+                    'messages' => $erreurs]);
+
+
+            }
+        }
+        else {
+            return $app['twig']->render('inscription.html.twig', ['formInscription' => $formInscription->createView()]);
+        }
 
     }
 
 
-        # Affichage de la page de connexion
-        public
-        function connexionAction(Application $app, Request $request)
-        {
+    # Affichage de la page de connexion
+    public function connexionAction(Application $app, Request $request)
+    {
 
-            # Création du formulaire de connexion
-            $form = $app['form.factory']->createBuilder(FormType::class)
-                # -- Identifiant -- #
-                ->add('email', EmailType::class, array(
-                    'required' => true,
+        # Création du formulaire de connexion
+        $form = $app['form.factory']->createBuilder(FormType::class)
+            # -- Identifiant -- #
+            ->add('email', EmailType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez renseigner votre adresse email')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => 'votre.email@exemple.fr'
+                )
+            ))
+            # -- Mot de passe -- #
+            ->add('motDePasse', PasswordType::class, array(
+                'required' => true,
+                'label' => false,
+                'constraints' => array(new NotBlank(array(
+                        'message' => 'Veuillez renseigner votre mot de passe')
+                )),
+                'attr' => array(
+                    'class' => 'form-control',
+                    'placeholder' => '******'
+                )
+            ))
+            # -- Connexion -- #
+            ->add('submit', SubmitType::class, array(
+                'label' => 'Connexion',
+                'attr' => array(
+                    'class' => 'btn btn-primary'
+                )
+            ))
+            # --> La sécurisation du formulaire de connexion est gérée par Silex directement <-- #
+
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        # Affichage dans la Vue
+        return $app['twig']->render('connexion.html.twig', [
+            'error' => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+            'form' => $form->createView()
+
+        ]);
+    }
+
+
+    # Page de signalement utilisateur
+    public function signalementUserAction(Application $app, Request $request, $idUser)
+
+    {
+
+
+        # Formulaire
+
+
+        $userSignale = $app['idiorm.db']->for_table('users')->find_one($idUser);
+
+        if ($userSignale != false) {
+
+
+            $signalement = $app['form.factory']
+                ->createBuilder(FormType::class)
+                # On affiche le nom de l'utilisateur a signaler dans un champ verrouillé
+                ->add('userProposantService', TextType::class, array(
+                    'required' => false,
                     'label' => false,
-                    'constraints' => array(new NotBlank(array(
-                            'message' => 'Veuillez renseigner votre adresse email')
-                    )),
+                    'disabled' => true,
                     'attr' => array(
                         'class' => 'form-control',
-                        'placeholder' => 'votre.email@exemple.fr'
+                        'value' => utf8_encode($userSignale->pseudo)
                     )
                 ))
-                # -- Mot de passe -- #
-                ->add('motDePasse', PasswordType::class, array(
+                # Champ texte où l'utilisateur signalant pourra décrire son problème
+                ->add('signalement', TextareaType::class, [
                     'required' => true,
                     'label' => false,
-                    'constraints' => array(new NotBlank(array(
-                            'message' => 'Veuillez renseigner votre mot de passe')
-                    )),
-                    'attr' => array(
-                        'class' => 'form-control',
-                        'placeholder' => '******'
+                    'constraints' => array(new NotBlank(
+                        array('message' => 'Merci de décrire le problème rencontré')
                     )
-                ))
-                # -- Connexion -- #
+                    ),
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
                 ->add('submit', SubmitType::class, array(
-                    'label' => 'Connexion',
+                    'label' => 'Effectuer un signalement',
                     'attr' => array(
                         'class' => 'btn btn-primary'
                     )
                 ))
-                # --> La sécurisation du formulaire de connexion est gérée par Silex directement <-- #
-
                 ->getForm();
 
-            $form->handleRequest($request);
+            $signalement->handleRequest($request);
 
-            # Affichage dans la Vue
-            return $app['twig']->render('connexion.html.twig', [
-                'error' => $app['security.last_error']($request),
-                'last_username' => $app['session']->get('_security.last_username'),
-                'form' => $form->createView()
+            if ($signalement->isValid()) {
 
-            ]);
-        }
-                # Insertion BDD
-
-
-        # Page de signalement utilisateur
-        public
-        function signalementUserAction(Application $app, Request $request, $idUser)
-
-        {
                 # S'il n'existe pas déjà un signalement de l'utilisateur vers l'utilisateur ciblé
                 if ( !($app['idiorm.db']->for_table('signalements_users')->where('idUserAlertant' ,$app['user']->getIdUser())->where('idUserSignale', $idUser)->find_one()) ) {
 
@@ -649,9 +693,6 @@ class IndexController
                 }
             }
 
-
-
-
             return $app['twig']->render('signalementUtilisateur.html.twig', ['signalement' => $signalement->createView(),
                 'idUser' => $idUser
             ]);
@@ -661,212 +702,93 @@ class IndexController
             return $app['twig']->render('signalementUtilisateur.html.twig', ['erreur' => $message]);
         }
 
-        # Page de signalement service
-        public
-        function signalementServiceAction(Application $app, Request $request, $idService)
+    }
 
-        {
+    # Page de signalement service
+    public function signalementServiceAction(Application $app, Request $request, $idService)
 
-
-            # Formulaire
-            $serviceSignale = $app['idiorm.db']->for_table('services')->find_one($idService);
-
-            if ($serviceSignale != false) {
-                $userProposantService = $app['idiorm.db']->for_table('users')->where('idUser', $serviceSignale->idUserProposantService)->find_one();
+    {
 
 
-                $signalement = $app['form.factory']
-                    ->createBuilder(FormType::class)
-                    # On affiche le titre du service
-                    ->add('titreService', TextType::class, array(
-                        'required' => false,
-                        'label' => false,
-                        'disabled' => true,
-                        'attr' => array(
-                            'class' => 'form-control',
-                            'value' => utf8_encode($serviceSignale->titreService)
-                        )
-                    ))
-                    ->add('datePublicationService', TextType::class, array(
-                        'required' => false,
-                        'label' => false,
-                        'disabled' => true,
-                        'attr' => array(
-                            'class' => 'form-control',
-                            'value' => 'Annonce publiée le ' . $serviceSignale->datePublicationService
-                        )
-                    ))
-                    # On affiche le nom de l'utilisateur proposant le service a signaler dans un champ verrouillé
-                    ->add('userProposantService', TextType::class, array(
-                        'required' => false,
-                        'label' => false,
-                        'disabled' => true,
-                        'attr' => array(
-                            'class' => 'form-control',
-                            'value' => utf8_encode($userProposantService->pseudo)
-                        )
-                    ))
-                    ->add('signalement', TextareaType::class, [
-                        'required' => true,
-                        'label' => false,
-                        'constraints' => array(new NotBlank(
-                            array('message' => 'Merci de décrire le problème rencontré')
-                        )
-                        ),
-                        'attr' => [
-                            'class' => 'form-control'
-                        ]
-                    ])
-                    ->add('submit', SubmitType::class, array(
-                        'label' => 'Effectuer un signalement',
-                        'attr' => array(
-                            'class' => 'btn btn-primary'
-                        )
-                    ))
-                    ->getForm();
+        # Formulaire
+        $serviceSignale = $app['idiorm.db']->for_table('services')->find_one($idService);
 
-                $signalement->handleRequest($request);
-
-                if ($signalement->isValid()) {
+        if ($serviceSignale != false) {
+            $userProposantService = $app['idiorm.db']->for_table('users')->where('idUser', $serviceSignale->idUserProposantService)->find_one();
 
 
-                    $envoiSignalement = $signalement->getData();
-
-                    $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_services')->create();
-
-                    # Insertion BDD (infos utilisateur signalé/signalant, service signalé, et timestamp)
-                    $enregistrementSignalement->idServiceSignale = $idService;
-                    $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
-                    $enregistrementSignalement->idUserSignale = $userProposantService->idUser;
-                    $enregistrementSignalement->dateAlerte = time();
-                    $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
-
-
-                    $enregistrementSignalement->save();
-
-
-                    return $app->redirect($app['url_generator']->generate('index_signalement_annonce', [
-                            'idService' => $idService]) . '?signalement=succes');
-
-
-                }
-
-                return $app['twig']->render('signalementService.html.twig', [
-                    'signalement' => $signalement->createView(),
-                    'idService' => $idService,
-                    'userProposantService' => $userProposantService->pseudo
-                ]);
-
-            } else {
-                $message = "<div class=\"alert alert-warning\" style=\"text-align: center;\">Cette annonce n'existe pas.</div>";
-                return $app['twig']->render('signalementService.html.twig', ['annonceNonDefinie' => $message]);
-            }
-        }
-
-
-# Affichage de la page de recherche
-        public
-        function rechercheAction(Application $app, Request $request)
-        {
-            # Récupération des catégories de services
-            $categoriesService = function () use ($app) {
-                # Récupération des catégories dans la BDD
-                $categoriesService = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
-
-                # Formatage de l'affichage pour le champ select (ChoiceType) du formulaire
-                $array = [];
-
-                foreach ($categoriesService as $categorie) :
-                    $array[$categorie->nomCategorieService] = $categorie->idCategorieService;
-                endforeach;
-
-                return $array;
-            };
-
-            # Création des champs de recherche
-            $form = $app['form.factory']->createBuilder(FormType::class)
-                # -- Catégorie -- #
-                ->add('categorie', ChoiceType::class, array(
-                    'choices' => $categoriesService(),
-                    'expanded' => false,
-                    'multiple' => false,
-                    'label' => false,
-                    'attr' => array(
-                        'class' => 'form-control'
-                    )
-                ))
-                # -- Localisation -- #
-                ->add('localisation', TextType::class, array(
+            $signalement = $app['form.factory']
+                ->createBuilder(FormType::class)
+                # On affiche le titre du service
+                ->add('titreService', TextType::class, array(
                     'required' => false,
                     'label' => false,
+                    'disabled' => true,
                     'attr' => array(
-                        'id' => 'recherche',
-                        'class' => 'typeahead form-control',
-                        'placeholder' => 'Localisation'
+                        'class' => 'form-control',
+                        'value' => utf8_encode($serviceSignale->titreService)
+                    )
+                ))
+                ->add('datePublicationService', TextType::class, array(
+                    'required' => false,
+                    'label' => false,
+                    'disabled' => true,
+                    'attr' => array(
+                        'class' => 'form-control',
+                        'value' => 'Annonce publiée le ' . $serviceSignale->datePublicationService
+                    )
+                ))
+                # On affiche le nom de l'utilisateur proposant le service a signaler dans un champ verrouillé
+                ->add('userProposantService', TextType::class, array(
+                    'required' => false,
+                    'label' => false,
+                    'disabled' => true,
+                    'attr' => array(
+                        'class' => 'form-control',
+                        'value' => utf8_encode($userProposantService->pseudo)
+                    )
+                ))
+                ->add('signalement', TextareaType::class, [
+                    'required' => true,
+                    'label' => false,
+                    'constraints' => array(new NotBlank(
+                        array('message' => 'Merci de décrire le problème rencontré')
+                    )
+                    ),
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('submit', SubmitType::class, array(
+                    'label' => 'Effectuer un signalement',
+                    'attr' => array(
+                        'class' => 'btn btn-primary'
                     )
                 ))
                 ->getForm();
 
-            $form->handleRequest($request);
+            $signalement->handleRequest($request);
 
-
-            # Affichage dans la vue
-            return $app['twig']->render('recherche.html.twig', [
-                'form' => $form->createView()
-            ]);
+            if ($signalement->isValid()) {
 
                 if (!($app['idiorm.db']->for_table('signalements_services')->where('idUserAlertant', $app['user']->getIdUser())->where('idServiceSignale', $idService)->find_one())) {
-        }// Fin public function rechercheAction
+                $envoiSignalement = $signalement->getData();
 
-        public
-        function rechercheActionPost(Application $app, Request $request)
-        {
+                $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_services')->create();
 
-                    $envoiSignalement = $signalement->getData();
-            $annoncesPubliees[] = null;
-            $nbAnnoncesPubliees = null;
-            $pageMax = null;
-            $numeroPage = null;
-            $categorie = null;
-            $localisation = null;
-            $page = $request->get('page');
-            # --> PAGINATION <-- #
-
-                    $enregistrementSignalement = $app['idiorm.db']->for_table('signalements_services')->create();
-            $debug['localisation'] = $request->get('categorie');
-
-                    # Insertion BDD (infos utilisateur signalé/signalant, service signalé, et timestamp)
-                    $enregistrementSignalement->idServiceSignale = $idService;
-                    $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
-                    $enregistrementSignalement->idUserSignale = $userProposantService->idUser;
-                    $enregistrementSignalement->dateAlerte = time();
-                    $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
-            # Variable pagination : nombre d'annonce par page (limit)
-            $limit = 10;
-            # Vérification de l'existance et la conformité de GET
-            if (null != $page && preg_match('#^[1-9][0-9]{0,9}$#', $page)) {
-                # si oui, on récupère l'information de GET
-                $numeroPage = $page;
-            } else {
-                # si non, on prend la page 1 par défaut
-                $numeroPage = 1;
-            }
-            # Création de l'offset
-            $offset = ($numeroPage - 1) * $limit;
-
-            # --> FIN PAGINATION <-- #
-
-                    $enregistrementSignalement->save();
-            # --> CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
-            if (!empty($_POST)) {
-                # --> GESTION CHAMPS DE RECHERCHE <-- #
-                # Récupération des données GET pour la catégorie de service et la localisation
-                $categorie = $request->get('categorie');
+                # Insertion BDD (infos utilisateur signalé/signalant, service signalé, et timestamp)
+                $enregistrementSignalement->idServiceSignale = $idService;
+                $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
+                $enregistrementSignalement->idUserSignale = $userProposantService->idUser;
+                $enregistrementSignalement->dateAlerte = time();
+                $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
 
 
-                    return $app->redirect($app['url_generator']->generate('index_signalement_annonce', [
-                            'idService' => $idService]) . '?signalement=succes');
+                $enregistrementSignalement->save();
 
+
+                return $app->redirect($app['url_generator']->generate('index_signalement_annonce', [
+                        'idService' => $idService]) . '?signalement=succes');
 
                 }
 
@@ -875,244 +797,359 @@ class IndexController
                     $message = "<div class=\"alert alert-warning\" style=\"text-align: center;\">Vous avez déjà signalé cette annonce. Il n'est pas possible d'envoyer un autre signalement pour le moment.</div>";
                     return $app['twig']->render('signalementService.html.twig', ['erreur' => $message]);
                 }
-            }
-                $localisation = $app['idiorm.db']->for_table('villes_rhone')
-                    ->where('commune', $request->get('localisation'))
-                    ->find_one();
-
-                # Si juste localisation remplie
-                if ($categorie == 1 AND !empty($localisation)) {
-
-                    $codeINSEE = $localisation->codeINSEE;
-
-                    # Récupération des annonces
-                    $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
-                        ->where('validationService', 1)
-                        ->where('ouvert', 1)
-                        ->where('lieuService', $codeINSEE)
-                        ->order_by_desc('idService')
-                        //->limit($limit)
-                        //->offset($offset)
-                        ->find_array();
-
-                    # Récupération du nb d'annonces correspondant à la recherche
-                    $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
-                        ->where('validationService', 1)
-                        ->where('ouvert', 1)
-                        ->where('lieuService', $codeINSEE)
-                        ->order_by_desc('idService')
-                        ->count();
-                    $totalAnnonces = $nbAnnoncesPubliees;
-                    $pageMax = ceil($totalAnnonces / $limit);
-
-                }
-
-                # Si juste catégorie remplie
-                if (empty($localisation) AND $categorie != 1) {
-                    # Récupération des annonces
-
-                    $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
-                        ->where('validationService', 1)
-                        ->where('ouvert', 1)
-                        ->where('idCategorieService', $categorie)
-                        ->order_by_desc('idService')
-                        //->limit($limit)
-                        //->offset($offset)
-                        ->find_array();
-
-                    # Récupération du nb d'annonces correspondant à la recherche
-                    $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
-                        ->where('validationService', 1)
-                        ->where('ouvert', 1)
-                        ->where('idCategorieService', $categorie)
-                        ->order_by_desc('idService')
-                        ->count();
-
-                    $totalAnnonces = $nbAnnoncesPubliees;
-                    $pageMax = ceil($totalAnnonces / $limit);
-
-                }
-
-                # Si localisation et catégorie remplies
-                if (!empty($localisation) AND $categorie != 1) {
-                    $codeINSEE = $localisation->codeINSEE;
-
-                    # Récupération des annonces
-                    $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
-                        ->where('validationService', 1)
-                        ->where('ouvert', 1)
-                        ->where('idCategorieService', $categorie)
-                        ->where('lieuService', $codeINSEE)
-                        ->order_by_desc('idService')
-                        //->limit($limit)
-                        //->offset($offset)
-                        ->find_array();
-
-                    # Récupération du nb d'annonces correspondant à la recherche
-                    $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
-                        ->where('validationService', 1)
-                        ->where('ouvert', 1)
-                        ->where('lieuService', $codeINSEE)
-                        ->where('idCategorieService', $categorie)
-                        ->order_by_desc('idService')
-                        ->count();
-
-                    $totalAnnonces = $nbAnnoncesPubliees;
-                    $pageMax = ceil($totalAnnonces / $limit);
-
-                }
 
 
             }
-            # --> FIN CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
 
-            $annoncesJson = [];
-            foreach ($annoncesPubliees as $key => $data) {
-                $annoncesJson[$key]['titreService'] = utf8_encode($data['titreService']);
-                $annoncesJson[$key]['photo'] = utf8_encode($data['photo']);
-                $annoncesJson[$key]['nomCategorieService'] = utf8_encode($data['nomCategorieService']);
-                $annoncesJson[$key]['prenom'] = utf8_encode($data['prenom']);
-                $annoncesJson[$key]['nom'] = utf8_encode($data['nom']);
-                $annoncesJson[$key]['tarifService'] = utf8_encode($data['tarifService']);
-                $annoncesJson[$key]['datePublicationService'] = utf8_encode($data['datePublicationService']);
-                $annoncesJson[$key]['commune'] = utf8_encode($data['commune']);
-                $annoncesJson[$key]['descriptionService'] = utf8_encode($data['descriptionService']);
-            };
+            return $app['twig']->render('signalementService.html.twig', [
+                'signalement' => $signalement->createView(),
+                'idService' => $idService,
+                'userProposantService' => $userProposantService->pseudo
+            ]);
 
-            $array = [
-                'annoncesPubliees' => $annoncesJson,
-                'nbAnnoncesPubliees' => $nbAnnoncesPubliees,
-                'pageMax' => $pageMax,
-                'numeroPage' => $numeroPage,
-                'idCategorieService' => $categorie,
-                'lieuService' => $localisation
-            ];
-
-            # Affichage dans la vue
-            return json_encode($array);
-            #return json_encode($debug);
-
-
+        } else {
+            $message = "<div class=\"alert alert-warning\" style=\"text-align: center;\">Cette annonce n'existe pas.</div>";
+            return $app['twig']->render('signalementService.html.twig', ['annonceNonDefinie' => $message]);
         }
+    }
 
-        public
-        function affichageProfilAction($idUser, Application $app, Request $request)
-        {
-            #On fait une requete pour récupérer les informations de l'utilisateur.
-            $infoUser = $app['idiorm.db']
-                ->for_table('users')
-                ->where('idUser', $idUser)
+
+# Affichage de la page de recherche
+    public
+    function rechercheAction(Application $app, Request $request)
+    {
+        # Récupération des catégories de services
+        $categoriesService = function () use ($app) {
+            # Récupération des catégories dans la BDD
+            $categoriesService = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
+
+            # Formatage de l'affichage pour le champ select (ChoiceType) du formulaire
+            $array = [];
+
+            foreach ($categoriesService as $categorie) :
+                $array[$categorie->nomCategorieService] = $categorie->idCategorieService;
+            endforeach;
+
+            return $array;
+        };
+
+        # Création des champs de recherche
+        $form = $app['form.factory']->createBuilder(FormType::class)
+            # -- Catégorie -- #
+            ->add('categorie', ChoiceType::class, array(
+                'choices' => $categoriesService(),
+                'expanded' => false,
+                'multiple' => false,
+                'label' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            ))
+            # -- Localisation -- #
+            ->add('localisation', TextType::class, array(
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'id' => 'recherche',
+                    'class' => 'typeahead form-control',
+                    'placeholder' => 'Localisation'
+                )
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+
+        # Affichage dans la vue
+        return $app['twig']->render('recherche.html.twig', [
+            'form' => $form->createView()
+        ]);
+
+    }// Fin public function rechercheAction
+
+    public
+    function rechercheActionPost(Application $app, Request $request)
+    {
+
+        $annoncesPubliees[] = null;
+        $nbAnnoncesPubliees = null;
+        $pageMax = null;
+        $numeroPage = null;
+        $categorie = null;
+        $localisation = null;
+        $page = $request->get('page');
+        # --> PAGINATION <-- #
+
+        $debug['localisation'] = $request->get('categorie');
+
+        # Variable pagination : nombre d'annonce par page (limit)
+        $limit = 10;
+        # Vérification de l'existance et la conformité de GET
+        if (null != $page && preg_match('#^[1-9][0-9]{0,9}$#', $page)) {
+            # si oui, on récupère l'information de GET
+            $numeroPage = $page;
+        } else {
+            # si non, on prend la page 1 par défaut
+            $numeroPage = 1;
+        }
+        # Création de l'offset
+        $offset = ($numeroPage - 1) * $limit;
+
+        # --> FIN PAGINATION <-- #
+
+        # --> CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
+        if (!empty($_POST)) {
+            # --> GESTION CHAMPS DE RECHERCHE <-- #
+            # Récupération des données GET pour la catégorie de service et la localisation
+            $categorie = $request->get('categorie');
+
+
+            $localisation = $app['idiorm.db']->for_table('villes_rhone')
+                ->where('commune', $request->get('localisation'))
                 ->find_one();
 
-            #On fait une requete pour récuper les services de l'utilisateur
-            $servicesUser = $app['idiorm.db']
-                ->for_table('vue_services_profil')
-                ->where('idUser', $idUser)
-                ->where('ouvert', 1)
-                ->find_result_set();
+            # Si juste localisation remplie
+            if ($categorie == 1 AND !empty($localisation)) {
 
+                $codeINSEE = $localisation->codeINSEE;
 
-            $commentairesUser = $app['idiorm.db']
-                ->for_table('vue_commentaires_user')
-                ->where('idUserNoted', $idUser)
-                ->find_result_set();
+                # Récupération des annonces
+                $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                    ->where('validationService', 1)
+                    ->where('ouvert', 1)
+                    ->where('lieuService', $codeINSEE)
+                    ->order_by_desc('idService')
+                    //->limit($limit)
+                    //->offset($offset)
+                    ->find_array();
 
-            #On fait une requete pour récupérer note
-            #Simulation d'un profil
-            $noteMoyenne = $app['idiorm.db']->for_table('note_users')->where('idUserNoted', $idUser)->avg('note');
-            $nombreStars = round($noteMoyenne, 0, PHP_ROUND_HALF_DOWN);
+                # Récupération du nb d'annonces correspondant à la recherche
+                $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                    ->where('validationService', 1)
+                    ->where('ouvert', 1)
+                    ->where('lieuService', $codeINSEE)
+                    ->order_by_desc('idService')
+                    ->count();
+                $totalAnnonces = $nbAnnoncesPubliees;
+                $pageMax = ceil($totalAnnonces / $limit);
 
-            if (($noteMoyenne - $nombreStars) > 0.25) {
-                $halfstar = 'Halfstar';
-            } else {
-                $halfstar = '';
             }
-            $totalNote = $app['idiorm.db']->for_table('note_users')->where('idUserNoted', $idUser)->count('note');
+
+            # Si juste catégorie remplie
+            if (empty($localisation) AND $categorie != 1) {
+                # Récupération des annonces
+
+                $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                    ->where('validationService', 1)
+                    ->where('ouvert', 1)
+                    ->where('idCategorieService', $categorie)
+                    ->order_by_desc('idService')
+                    //->limit($limit)
+                    //->offset($offset)
+                    ->find_array();
+
+                # Récupération du nb d'annonces correspondant à la recherche
+                $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                    ->where('validationService', 1)
+                    ->where('ouvert', 1)
+                    ->where('idCategorieService', $categorie)
+                    ->order_by_desc('idService')
+                    ->count();
+
+                $totalAnnonces = $nbAnnoncesPubliees;
+                $pageMax = ceil($totalAnnonces / $limit);
+
+            }
+
+            # Si localisation et catégorie remplies
+            if (!empty($localisation) AND $categorie != 1) {
+                $codeINSEE = $localisation->codeINSEE;
+
+                # Récupération des annonces
+                $annoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                    ->where('validationService', 1)
+                    ->where('ouvert', 1)
+                    ->where('idCategorieService', $categorie)
+                    ->where('lieuService', $codeINSEE)
+                    ->order_by_desc('idService')
+                    //->limit($limit)
+                    //->offset($offset)
+                    ->find_array();
+
+                # Récupération du nb d'annonces correspondant à la recherche
+                $nbAnnoncesPubliees = $app['idiorm.db']->for_table('vue_liste_annonces')
+                    ->where('validationService', 1)
+                    ->where('ouvert', 1)
+                    ->where('lieuService', $codeINSEE)
+                    ->where('idCategorieService', $categorie)
+                    ->order_by_desc('idService')
+                    ->count();
+
+                $totalAnnonces = $nbAnnoncesPubliees;
+                $pageMax = ceil($totalAnnonces / $limit);
+
+            }
 
 
-            #On crée le formulaire de notation et de commentaires.
-            $form = $app['form.factory']->createBuilder(FormType::class)
-                ->add('commentaires', TextareaType::class, [
-                    'required' => false,
-                    'label' => false,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ]
-                ])
-                ->add('note', ChoiceType::class, [
-                    'required' => false,
-                    'label' => false,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ],
-                    'choices' => array(
-                        '*' => 1,
-                        '**' => 2,
-                        '***' => 3,
-                        '****' => 4,
-                        '*****' => 5)
-                ])
-                ->getForm();
+        }
+        # --> FIN CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
 
-            #Traitement des donneés POST stockées dans $request.
-            $form->handleRequest($request);
+        $annoncesJson = [];
+        foreach ($annoncesPubliees as $key => $data) {
+            $annoncesJson[$key]['titreService'] = utf8_encode($data['titreService']);
+            $annoncesJson[$key]['photo'] = utf8_encode($data['photo']);
+            $annoncesJson[$key]['nomCategorieService'] = utf8_encode($data['nomCategorieService']);
+            $annoncesJson[$key]['prenom'] = utf8_encode($data['prenom']);
+            $annoncesJson[$key]['nom'] = utf8_encode($data['nom']);
+            $annoncesJson[$key]['tarifService'] = utf8_encode($data['tarifService']);
+            $annoncesJson[$key]['datePublicationService'] = utf8_encode($data['datePublicationService']);
+            $annoncesJson[$key]['commune'] = utf8_encode($data['commune']);
+            $annoncesJson[$key]['descriptionService'] = utf8_encode($data['descriptionService']);
+        };
 
-            #Verification de la validité du formulaire.
-            $noteService = $form->getData();
-            if (!empty($app['user'])) {
-                $dernierComment = $app['idiorm.db']->for_table('note_users')->where('idUserNoted', $idUser)->where('idNotedBy', $app['user']->getIdUser())->order_by_desc('dateCommentaire')->limit(1)->find_one();
-                $timeStampActuel = time();
-                $delai = 60 * 60 * 24;
-                if ($form->isValid()) {
-                    if (!empty($noteService) AND (($timeStampActuel - $dernierComment['dateCommentaire']) > $delai) AND ($app['user']->getIdUser() != $idUser)) {
-                        $nouvelleNote = $app['idiorm.db']->for_table('note_users')->create();
-                        #On associe les colonnes de notre BDD avec les valeurs du formulaire
-                        #Colonne MYSQL                                              #Valeurs du Fomulaire
-                        $nouvelleNote->idUserNoted = $idUser;
-                        $nouvelleNote->idNotedBy = $app['user']->getIdUser();
-                        $nouvelleNote->note = $noteService['note'];
-                        $nouvelleNote->commentaires = $noteService['commentaires'];
-                        $nouvelleNote->dateCommentaire = time();
+        $array = [
+            'annoncesPubliees' => $annoncesJson,
+            'nbAnnoncesPubliees' => $nbAnnoncesPubliees,
+            'pageMax' => $pageMax,
+            'numeroPage' => $numeroPage,
+            'idCategorieService' => $categorie,
+            'lieuService' => $localisation
+        ];
+
+        # Affichage dans la vue
+        return json_encode($array);
+        #return json_encode($debug);
 
 
-                        $nouvelleNote->save();
+    }
+
+    public function affichageProfilAction($idUser ,Application $app, Request $request)
+    {
+        #On fait une requete pour récupérer les informations de l'utilisateur.
+        $infoUser = $app['idiorm.db']
+            ->for_table('users')
+            ->where('idUser', $idUser)
+            ->find_one();
+
+        #On fait une requete pour récuper les services de l'utilisateur
+        $servicesUser = $app['idiorm.db']
+            ->for_table('vue_services_profil')
+            ->where('idUser', $idUser)
+            ->where('ouvert', 1)
+            ->find_result_set();
 
 
-                        return $app->redirect($app['url_generator']->generate('index_profil',
-                                [
-                                    'idUser' => $idUser
-                                ]
-                            ) . '?note=success');
+        $commentairesUser = $app['idiorm.db']
+            ->for_table('vue_commentaires_user')
+            ->where('idUserNoted', $idUser)
+            ->find_result_set();
 
-                    } else {
-                        return $app->redirect($app['url_generator']->generate('index_profil',
-                                [
-                                    'idUser' => $idUser
-                                ]
-                            ) . '?note=error');
-                    }
-                    //                 return $app['twig']->render('annonce.html.twig', [
-                    //                     'service' => $service,
-                    //                     'suggestions' => $suggestions,
-                    //                     'latitude' => $latitude,
-                    //                     'longitude' => $longitude,
-                    //                     'form' => $form->createView()
-                    //                 ]);
+        #On fait une requete pour récupérer note
+        #Simulation d'un profil
+        $noteMoyenne = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$idUser)->avg('note');
+        $nombreStars = round($noteMoyenne, 0, PHP_ROUND_HALF_DOWN);
+
+        if(($noteMoyenne-$nombreStars) > 0.25)
+        {
+            $halfstar = 'Halfstar';
+        }
+        else
+        {
+            $halfstar = '';
+        }
+        $totalNote = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$idUser)->count('note');
+
+
+
+        #On crée le formulaire de notation et de commentaires.
+        $form = $app['form.factory']->createBuilder(FormType::class)
+            ->add('commentaires', TextareaType::class , [
+                'required' => false,
+                'label'    => false,
+                'attr' => [
+                    'class'         => 'form-control'
+                ]
+            ])
+            ->add('note', ChoiceType::class, [
+                'required' => false,
+                'label'    => false,
+                'attr' => [
+                    'class'         => 'form-control'
+                ],
+                'choices'  => array(
+                    '*' => 1,
+                    '**' => 2,
+                    '***' => 3,
+                    '****' => 4,
+                    '*****' => 5)
+            ])
+            ->getForm();
+
+        #Traitement des donneés POST stockées dans $request.
+        $form->handleRequest($request);
+
+        #Verification de la validité du formulaire.
+        $noteService = $form->getData();
+        if(!empty($app['user']))
+        {
+            $dernierComment = $app['idiorm.db']->for_table('note_users')->where('idUserNoted', $idUser)->where('idNotedBy', $app['user']->getIdUser())->order_by_desc('dateCommentaire')->limit(1)->find_one();
+            $timeStampActuel = time();
+            $delai = 60*60*24;
+            if($form->isValid())
+            {
+                if(!empty($noteService) AND (($timeStampActuel - $dernierComment['dateCommentaire']) > $delai) AND ($app['user']->getIdUser() != $idUser))
+                {
+                    $nouvelleNote = $app['idiorm.db']->for_table('note_users')->create();
+                    #On associe les colonnes de notre BDD avec les valeurs du formulaire
+                    #Colonne MYSQL                                              #Valeurs du Fomulaire
+                    $nouvelleNote->idUserNoted           =                          $idUser;
+                    $nouvelleNote->idNotedBy         =                              $app['user']->getIdUser();
+                    $nouvelleNote->note                  =                          $noteService['note'];
+                    $nouvelleNote->commentaires          =                          $noteService['commentaires'];
+                    $nouvelleNote->dateCommentaire       =                          time();
+
+
+                    $nouvelleNote->save();
+
+
+                    return $app->redirect($app['url_generator']->generate('index_profil',
+                            [
+                                'idUser'                 =>                   $idUser
+                            ]
+                        ).'?note=success');
 
                 }
+
+                else
+                {
+                    return $app->redirect($app['url_generator']->generate('index_profil',
+                            [
+                                'idUser'                 =>                   $idUser
+                            ]
+                        ).'?note=error');
+                }
+                //                 return $app['twig']->render('annonce.html.twig', [
+                //                     'service' => $service,
+                //                     'suggestions' => $suggestions,
+                //                     'latitude' => $latitude,
+                //                     'longitude' => $longitude,
+                //                     'form' => $form->createView()
+                //                 ]);
+
             }
-
-
-            return $app['twig']->render('affichageProfil.html.twig', [
-                'infoUser' => $infoUser,
-                'servicesUser' => $servicesUser,
-                'totalNote' => $totalNote,
-                'halfstar' => $halfstar,
-                'noteMoyenne' => $noteMoyenne,
-                'nombreStars' => $nombreStars,
-                'form' => $form->createView(),
-                'commentairesUser' => $commentairesUser
-            ]);
         }
 
-    } // Fin class IndexController
+
+        return $app['twig']->render('affichageProfil.html.twig', [
+            'infoUser'                   => $infoUser,
+            'servicesUser'               => $servicesUser,
+            'totalNote'                  => $totalNote,
+            'halfstar'                   => $halfstar,
+            'noteMoyenne'                => $noteMoyenne,
+            'nombreStars'                => $nombreStars,
+            'form'                       => $form->createView(),
+            'commentairesUser'           => $commentairesUser
+        ]);
+    }
+
+} // Fin class IndexController
