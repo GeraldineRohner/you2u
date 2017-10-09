@@ -25,6 +25,7 @@ Erreur lors de la publication de votre commentaire </p>
             <div class="col-md-8 col-sm-12">
                 <!--post-detail-->
                 <service class="post-detail">
+                {% if service.validation == 1 and service.ouvert == 1 %}
                     <h1>{{ service.titreService }}  </h1>
                     
                         {% if totalNote < 1 %}
@@ -147,7 +148,9 @@ Erreur lors de la publication de votre commentaire </p>
 
                     </ul>
                 </div>
-				
+				{% else %}
+				<div class="alert alert-danger">L'annonce n'a pas été encore publiée ou a été refusée.</div>
+				{% endif %}
                 <!--related post-->
                 <div class="detail-caption">
                     <span>  DANS LA MEME CATEGORIE</span>

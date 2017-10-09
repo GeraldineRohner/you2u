@@ -42,6 +42,7 @@ class MemberController
                 $halfstar = '';
             }
         $totalNote = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$app['user']->getIdUser())->count('note');
+        $annoncesUser = $app['idiorm.db']->for_table('vue_services_profil')->where('idUser',$app['user']->getIdUser())->find_result_set();
     
         if($totalNote != 0)
         {
@@ -51,6 +52,7 @@ class MemberController
                 'noteMoyenne' => $noteMoyenne,
                 'nombreStars' => $nombreStars,
                 'halfstar'    => $halfstar,
+                'annoncesUser' => $annoncesUser,
                 'totalNote' => $totalNote
             ]);
         }
@@ -59,7 +61,8 @@ class MemberController
                 # Affichage dans la Vue
                 return $app['twig']->render('profil.html.twig',[
                     'message' => 'Bienvenue',
-                    'totalNote' => $totalNote
+                    'totalNote' => $totalNote,
+                    'annoncesUser' => $annoncesUser,
                 ]);
             }
     }

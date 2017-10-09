@@ -31,7 +31,7 @@ class IndexController
 
 
         # Connexion à la BDD & Récupération des annonces
-        $services = $app['idiorm.db']->for_table('vue_services')->where('validationService',1)->where('ouvert', 1)->find_result_set();
+        $services = $app['idiorm.db']->for_table('vue_services_profil')->where('validationService',1)->where('ouvert', 1)->order_by_desc('idService')->limit(3)->find_result_set();
 
 
 #----Récupération des 3 annonces en spotlight (utilisateurs les mieux notés)-------#
@@ -123,17 +123,17 @@ class IndexController
                 ]
             ])
             ->add('note', ChoiceType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => false,
                 'attr' => [
                     'class' => 'form-control'
                 ],
                 'choices' => array(
-                    '*' => 1,
-                    '**' => 2,
-                    '***' => 3,
-                    '****' => 4,
-                    '*****' => 5)
+                    '1/5' => 1,
+                    '2/5' => 2,
+                    '3/5' => 3,
+                    '4/5' => 4,
+                    '5/5' => 5)
             ])
             ->getForm();
 
@@ -1069,17 +1069,17 @@ class IndexController
                 ]
             ])
             ->add('note', ChoiceType::class, [
-                'required' => false,
+                'required' => true,
                 'label'    => false,
                 'attr' => [
                     'class'         => 'form-control'
                 ],
                 'choices'  => array(
-                    '*' => 1,
-                    '**' => 2,
-                    '***' => 3,
-                    '****' => 4,
-                    '*****' => 5)
+                    '1/5' => 1,
+                    '2/5' => 2,
+                    '3/5' => 3,
+                    '4/5' => 4,
+                    '5/5' => 5)
             ])
             ->getForm();
 
