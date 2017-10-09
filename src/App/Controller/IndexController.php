@@ -31,7 +31,7 @@ class IndexController
 
 
         # Connexion à la BDD & Récupération des annonces
-        $services = $app['idiorm.db']->for_table('vue_services_profil')->where('validationService',1)->where('ouvert', 1)->order_by_desc('idService')->limit(3)->find_result_set();
+        $services = $app['idiorm.db']->for_table('vue_services_profil')->where('validationService',1)->where('ouvert',1)->order_by_desc('idService')->limit(3)->find_result_set();
 
 
 #----Récupération des 3 annonces en spotlight (utilisateurs les mieux notés)-------#
@@ -858,10 +858,12 @@ class IndexController
 
         $form->handleRequest($request);
 
-
+        
+            
         # Affichage dans la vue
         return $app['twig']->render('recherche.html.twig', [
             'form' => $form->createView()
+            
         ]);
 
     }// Fin public function rechercheAction
@@ -990,6 +992,7 @@ class IndexController
 
 
         }
+       
         # --> FIN CONDITIONS AFFICHAGE RESULTATS RECHERCHE <-- #
 
         $annoncesJson = [];
