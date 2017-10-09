@@ -815,8 +815,7 @@ class IndexController
 
 
 # Affichage de la page de recherche
-    public
-    function rechercheAction(Application $app, Request $request)
+    public function rechercheAction(Application $app, Request $request)
     {
         # Récupération des catégories de services
         $categoriesService = function () use ($app) {
@@ -866,6 +865,69 @@ class IndexController
         ]);
 
     }// Fin public function rechercheAction
+
+
+    public function rechercheMenu(Application $app, Request $request)
+    {
+        # Récupération des catégories de services
+        $categoriesService = function () use ($app) {
+            # Récupération des catégories dans la BDD
+            $categoriesService = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
+
+            # Formatage de l'affichage pour le champ select (ChoiceType) du formulaire
+            $array = [];
+
+            foreach ($categoriesService as $categorie) :
+                $array[$categorie->nomCategorieService] = $categorie->idCategorieService;
+            endforeach;
+
+            return $array;
+        };
+
+        # Création des champs de recherche
+        $form = $app['form.factory']->createBuilder(FormType::class)
+            # -- Catégorie -- #
+            ->add('categorie', ChoiceType::class, array(
+                'choices' => $categoriesService(),
+                'expanded' => false,
+                'multiple' => false,
+                'label' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            ))
+            # -- Localisation -- #
+            ->add('localisation', TextType::class, array(
+                'required' => false,
+                'label' => false,
+                'attr' => array(
+                    'id' => 'recherche',
+                    'class' => 'typeahead form-control',
+                    'placeholder' => 'Localisation'
+                )
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+
+        # Affichage dans la vue
+        if (!isset ($_POST))
+        {
+            return $app['twig']->render('rechercheMenu.html.twig', [
+            'form' => $form->createView()]);
+        }
+        else
+        {
+            return $app['twig']->render('recherche.html.twig', [
+                'form' => $form->createView()]);
+        }
+
+
+    }// Fin public function rechercheMenu
+
+
+
 
     public
     function rechercheActionPost(Application $app, Request $request)

@@ -77,6 +77,8 @@ class IndexControllerProvider implements ControllerProviderInterface {
                 ->get("/recherche", "App\Controller\IndexController::rechercheAction")
                 ->bind('index_recherche');
 
+
+
             # Page de recherche
             $controllers
                 ->post("/recherche", "App\Controller\IndexController::rechercheActionPost")
