@@ -10,3 +10,5 @@ public/img/img_user/
 .idea/you2u.iml
 
 \.idea/you2u\.iml
+
+*.xml

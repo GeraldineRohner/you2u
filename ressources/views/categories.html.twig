@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+
+    {% block title %} Liste des categories {% endblock %}
+
+    {% block contenu %}
+
+
+        <ul>
+
+{% for categorie in categories %}
+
+
+
+    <li>{{ categorie.nomCategorieService }}</li>
+    <li>{{ categorie.descriptionCategorie }}</li>
+
+
+{% endfor %}
+
+        </ul>
+
+
+{% endblock %}

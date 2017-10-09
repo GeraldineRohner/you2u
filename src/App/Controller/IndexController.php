@@ -61,6 +61,15 @@ class IndexController
         ]);
     }
 
+    public function liste_categorieAction(Application $app)
+
+    {
+        $categories = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
+
+        return $app['twig']->render('categories.html.twig',
+            ['categories' => $categories]);
+    }
+
 
     public function categorie_serviceAction($nomCategorieService, Application $app)
     {

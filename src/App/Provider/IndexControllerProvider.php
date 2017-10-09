@@ -26,6 +26,15 @@ class IndexControllerProvider implements ControllerProviderInterface {
             # pour la créations de lien : "controller_action"
             ->bind('index_index');
 
+        $controllers
+            # On associe une Route à un Controller et une Action
+            ->get('/categories', 'App\Controller\IndexController::liste_categorieAction')
+
+            # En option je peux donner un nom à la route, qui servira plus tard
+            # pour la créations de lien : "controller_action"
+            ->bind('index_categories');
+
+
         # Affichage d'une catégorie (services qui y sont liés)
         $controllers
             ->get('/categorie/{nomCategorieService}',
@@ -45,6 +54,9 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->method('GET|POST')
             ->assert('idService', '\d+')
             ->bind('index_annonce');
+
+
+
 
 
         # Page d'inscription
