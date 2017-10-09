@@ -52,7 +52,7 @@
                         		{idService: serviceAValider.idService,
                         		 slugService : serviceAValider.titreService|slug,
                         		 nomCategorieService : serviceAValider.nomCategorieService|lower}) 
-                        		}}">Voir l'annonce</a></td><td><a href="{{ url('admin_bannirUser', {idUser : serviceAValider.idUser}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_fermetureService', {idService : serviceAValider.idService}) }}">Refuser l'annonce</a></td><td><a href="{{ url('admin_validation_service', {idService : serviceAValider.idService}) }}">Accepter l'annonce</a> </td>
+                        		}}">Voir l'annonce</a></td><td><a href="{{ url('admin_bannirUser', {idUser : serviceAValider.idUser,  go : 'admin_serviceavalider'}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_fermetureService', {idService : serviceAValider.idService , go : 'admin_serviceavalider'}) }}">Refuser l'annonce</a></td><td><a href="{{ url('admin_validation_service', {idService : serviceAValider.idService, go : 'admin_serviceavalider' }) }}">Accepter l'annonce</a> </td>
                         	</tr>
                         	{% endfor %}
                         	

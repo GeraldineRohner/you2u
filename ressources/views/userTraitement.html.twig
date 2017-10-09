@@ -41,7 +41,7 @@
                         		<td>{{ signalementUser.pseudo }}</td><td>{{ signalementUser.message }}</td><td>{{ signalementUser.dateAlerte |date('d/m/Y') }}</td><td><a href="
                         		{{ url('index_profil', 
                         		{idUser: signalementUser.idUserSignale}) 
-                        		}}">Voir le profil</a></td><td><a href="{{ url('admin_bannirUser', {idUser : signalementUser.idUserSignale}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_traiterUser', {idUser : signalementUser.idUserSignale}) }}">Ne rien faire</a> </td>
+                        		}}">Voir le profil</a></td><td><a href="{{ url('admin_bannirUser', {idUser : signalementUser.idUserSignale, go : 'admin_traitementSignalementUser'}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_traiterUser', {idUser : signalementUser.idUserSignale, go : 'admin_traitementSignalementUser'}) }}">Ne rien faire</a> </td>
                         	</tr>
                         	{% endfor %}
                         	

@@ -83,10 +83,10 @@
                         		<td></td><td></td><td></td>
                         		{% endif %}
                         		{% if infoUser.roleUser == 'ROLE_USER' %}
-                        		<td><a href="{{ url('admin_bannirUser', {idUser : infoUser.idUser}) }}">Bannir</a></td><td></td><td><a href="{{ url('admin_new_admin', {idUser : infoUser.idUser}) }}">Administrateur</a></td>
+                        		<td><a href="{{ url('admin_bannirUser', {idUser : infoUser.idUser, go : 'admin_gestion_utilisateurs'}) }}">Bannir</a></td><td></td><td><a href="{{ url('admin_new_admin', {idUser : infoUser.idUser}) }}">Administrateur</a></td>
                         		{% endif %}
                         		{% if infoUser.roleUser == 'ROLE_BANNED' %}
-                        		<td><a href="{{ url('admin_debannirUser', {idUser : infoUser.idUser}) }}">Débannir</a></td><td></td><td></td>
+                        		<td><a href="{{ url('admin_debannirUser', {idUser : infoUser.idUser,  go : 'admin_gestion_utilisateurs'}) }}">Débannir</a></td><td></td><td></td>
                         		{% endif %}
                         	</tr>
                         	{% endfor %}

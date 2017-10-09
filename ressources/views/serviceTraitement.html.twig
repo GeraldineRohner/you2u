@@ -53,7 +53,7 @@
                         		{idService: signalementService.idServiceSignale,
                         		 slugService : signalementService.titreService|slug,
                         		 nomCategorieService : signalementService.nomCategorieService|lower}) 
-                        		}}">Voir l'annonce</a></td><td><a href="{{ url('admin_bannirUser', {idUser : signalementService.idUserSignale}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_fermetureService', {idService : signalementService.idServiceSignale}) }}">Fermer l'annonce</a></td><td><a href="{{ url('admin_traiterService', {idService : signalementService.idServiceSignale}) }}">Ne rien faire</a> </td>
+                        		}}">Voir l'annonce</a></td><td><a href="{{ url('admin_bannirUser', {idUser : signalementService.idUserSignale , go : 'admin_traitementSignalementService'}) }}">Bannir l'utilisateur</a></td><td><a href="{{ url('admin_fermetureService', {idService : signalementService.idServiceSignale, go: 'admin_traitementSignalementService'}) }}">Fermer l'annonce</a></td><td><a href="{{ url('admin_traiterService', {idService : signalementService.idServiceSignale, go : 'admin_traitementSignalementService'}) }}">Ne rien faire</a> </td>
                         	</tr>
                         	{% endfor %}
                         	

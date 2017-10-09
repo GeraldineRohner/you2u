@@ -17,6 +17,9 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use App\Validator\Constraints\constraintVille;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Email;
 
 class MemberController
 {
@@ -80,54 +83,81 @@ class MemberController
         
         #creation du formulaire permettant la modification du profil. 
         $form = $app['form.factory']->createBuilder(FormType::class)
-        ->add('pseudo', TextType::class , [
+        ->add('pseudo', TextType::class, array(
             'required' => true,
-            'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir un pseudo')
-                )
-           ),
-            'attr' => [
-                'class'         => 'form-control',
-                'value'   =>  $app['user']->getPseudo()
-            ]   
-        ])
-        ->add('prenom', TextType::class , [
+            'label' => false,
+            'constraints' => array(
+                new Length(array( # Contrainte de longueur
+                    'min' => 3,
+                    'max' => 20,
+                    'minMessage' => 'Votre pseudonyme doit contenir au moins trois caractères',
+                    'maxMessage' => 'Votre pseudonyme ne peut contenir plus de  vingt caractères'
+                )),
+                new Regex(array( # Contraite de contenu
+                    'pattern' => '/^[\w-\']+$/',
+                    'message' => 'Votre pseudonyme ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
+                ))),
+            'attr' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Votre pseudonyme',
+                 'value'   => $app['user']->getPseudo()
+            )
+        ))
+        ->add('prenom', TextType::class, array(
             'required' => true,
-            'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir un prenom')
-                )
-            ),
-            'attr' => [
-                'class'         => 'form-control',
-                'value'   =>  $app['user']->getPrenom()
-            ]
-        ])
-        ->add('nom', TextType::class , [
+            'label' => false,
+            'constraints' => array(
+                new Length(array( # Contrainte de longueur
+                    'min' => 3,
+                    'max' => 35,
+                    'minMessage' => 'Votre prénom doit contenir au moins trois caractères',
+                    'maxMessage' => 'Votre prénom ne peut contenir plus de  trente-cinq caractères'
+                )),
+                new Regex(array( # Contraite de contenu
+                    'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë\'-]*[a-zéèàùûêâôë]$/i',
+                    'message' => 'Votre prénom ne peut contenir que des caractères alphanumériques, tirets ou apostrophes et doit commencer et se terminer par une lettre'
+                ))),
+            'attr' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Votre prénom',
+                 'value'   => $app['user']->getPrenom()
+            )
+        ))
+        ->add('nom', TextType::class, array(
             'required' => true,
-            'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir un prenom')
-                )
-            ),
-            'attr' => [
-                'class'         => 'form-control',
-                'value'   =>  $app['user']->getNom()
-            ]
-        ])
-        ->add('email', EmailType::class , [
+            'label' => false,
+            'constraints' => array(
+                new Length(array( # Contrainte de longueur
+                    'min' => 2,
+                    'max' => 35,
+                    'minMessage' => 'Votre nom doit contenir au moins deux caractères',
+                    'maxMessage' => 'Votre nom ne peut contenir plus de trente-cinq caractères'
+                )),
+                new Regex(array(  # Contraite de contenu
+                    'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë \'-]*[a-zéèàùûêâôë]$/i',
+                    'message' => 'Votre nom ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces, et doit commencer et se terminer par une lettre'
+                ))),
+            'attr' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Votre nom',
+                'value'   => $app['user']->getNom()
+            )
+        ))
+        ->add('email', EmailType::class, array(
             'required' => true,
-            'label'    => false,
-            'constraints' => array(new NotBlank(
-                array('message' => 'Vous devez saisir un email')
-                )
-            ),
-            'attr' => [
-                'class'         => 'form-control',
+            'label' => false,
+            'constraints' => array(new NotBlank(array(
+                'message' => 'Veuillez renseigner votre adresse email')
+                ),
+                new Email(array(
+                    'message' => 'L\'adresse email saisie est invalide',)
+                    )),
+            'attr' => array(
+                'class' => 'form-control',
+                'placeholder' => 'votre.email@exemple.fr',
                 'value'   => $app['user']->getEmail()
-            ]
-        ])
+            )
+        ))
         ->add('adresse', TextType::class , [
             'required' => false,
             'label'    => false,
@@ -137,7 +167,7 @@ class MemberController
             ]
         ])
         ->add('ville', TextType::class , [
-            'required' => true,
+            'required' => false,
             'label'    => false,
             'constraints' => array(new constraintVille(
                 array('message' => 'Vous devez saisir une ville correcte ')

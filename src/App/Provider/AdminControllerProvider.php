@@ -53,19 +53,19 @@ class AdminControllerProvider implements ControllerProviderInterface
         
         # Page de traitement des utilisateurs (sans action)
         $controllers
-        ->get('/user/gestion/traiter/{idUser}', 'App\Controller\AdminController::traiterUserAction')
+        ->get('/utilisateurs/gestion/traiter/{idUser}', 'App\Controller\AdminController::traiterUserAction')
         ->assert('idUser', '\d+')
         ->bind('admin_traiterUser');
         
         #Page de bannisement d'un utilisateur. 
         $controllers
-        ->get('/users/gestion/bannir/{idUser}', 'App\Controller\AdminController::bannirUtilisateurAction')
+        ->get('/utilisateurs/gestion/bannir/{idUser}', 'App\Controller\AdminController::bannirUtilisateurAction')
         ->assert('idUser', '\d+')
         ->bind('admin_bannirUser');
         
         #Page de débannisement d'un utilisateur.
         $controllers
-        ->get('/users/gestion/debannir/{idUser}', 'App\Controller\AdminController::debannirUtilisateurAction')
+        ->get('/utilisateurs/gestion/debannir/{idUser}', 'App\Controller\AdminController::debannirUtilisateurAction')
         ->assert('idUser', '\d+')
         ->bind('admin_debannirUser');
         

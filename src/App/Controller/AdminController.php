@@ -30,7 +30,7 @@ class AdminController
     public function indexAdminAction (Application $app)
     {
         $userSignaleATraiter = $app['idiorm.db']->for_table('signalements_users')->where('traitementAlerte',0)->count('idSignalementUser');
-        $serviceSignaleATraiter = $app['idiorm.db']->for_table('signalements_services')->where('traitementAlerte',0)->count('idSignalement');
+        $serviceSignaleATraiter = $app['idiorm.db']->for_table('vue_signalements_service')->where('traitementAlerte',0)->count('idServiceSignale');
         $serviceAValider = $app['idiorm.db']->for_table('services')->where('validation',0)->count('idService');
         
         
@@ -86,7 +86,16 @@ class AdminController
             
             
             #On redirige vers une page de succes. 
-            return $app->redirect($request->headers->get('referer').'?cloture=ok');
+            
+            $go = $request->get('go');
+            if(!empty($go))
+            {
+                return $app->redirect($app['url_generator']->generate($go).'?cloture=ok');
+            }
+            else
+            {
+                return $app->redirect($request->headers->get('referer').'?cloture=ok');
+            }
    
         }
         
@@ -116,7 +125,15 @@ class AdminController
             
           
             #On redirige vers une page de succes.
-            return $app->redirect($request->headers->get('referer').'?validation=ok');
+            $go = $request->get('go');
+            if(!empty($go))
+            {
+                return $app->redirect($app['url_generator']->generate($go).'?validation=ok');
+            }
+            else
+            {
+                return $app->redirect($request->headers->get('referer').'?validation=ok');
+            }
             
         }
         
@@ -130,12 +147,22 @@ class AdminController
         
     }
     
-    public function traiterAnnonceAction(Application $app, $idService)
+    public function traiterAnnonceAction(Application $app, $idService, Request $request)
     {
         if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
         {
             $fermetureAlerte = $app['idiorm.db']->for_table('signalements_services')->where('idServiceSignale', $idService)->find_result_set()->set('traitementAlerte',1)->save();
-            return $app->redirect($app['url_generator']->generate('admin_traitementSignalementService').'?traiter=ok');
+            
+            $go = $request->get('go');
+            if(!empty($go))
+            {
+                return $app->redirect($app['url_generator']->generate($go).'?traiter=ok');
+            }
+            else
+            {
+                return $app->redirect($request->headers->get('referer').'?traiter=ok');
+            }
+           
         }
         
         #Sinon on le renvoit vers l'espace de connexion.
@@ -145,12 +172,22 @@ class AdminController
         }
     }
     
-    public function traiterUserAction(Application $app, $idUser)
+    public function traiterUserAction(Application $app, $idUser, Request $request)
     {
         if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
         {
             $fermetureAlerte = $app['idiorm.db']->for_table('signalements_users')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
-            return $app->redirect($app['url_generator']->generate('admin_traitementSignalementUser').'?traiter=ok');
+            
+            $go = $request->get('go');
+            if(!empty($go))
+            {
+                return $app->redirect($app['url_generator']->generate($go).'?traiter=ok');
+            }
+            else
+            {
+                return $app->redirect($request->headers->get('referer').'?traiter=ok');
+            }
+           
         }
         
         #Sinon on le renvoit vers l'espace de connexion.
@@ -160,7 +197,7 @@ class AdminController
         }
     }
     
-    public function bannirUtilisateurAction(Application $app, $idUser, Request $request)
+    public function bannirUtilisateurAction(Application $app, $idUser,$go=NULL, Request $request)
     {
         if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
         {
@@ -179,10 +216,20 @@ class AdminController
                 $fermetureAlerte = $app['idiorm.db']->for_table('signalements_users')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
                 #On banni l'utiliseur 
                 $bannisementUser = $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_BANNED')->save();
-                return $app->redirect($request->headers->get('referer').'?bannir=ok');
+                $go = $request->get('go');
+                if(!empty($go))
+                {
+                    return $app->redirect($app['url_generator']->generate($go).'?bannir=ok');
+                }
+                else
+                {    
+                    return $app->redirect($request->headers->get('referer').'?bannir=ok');
+                }
+               
                 
                 
             }
+            
         }
         
         #Sinon on le renvoit vers l'espace de connexion.
@@ -205,9 +252,17 @@ class AdminController
             
             else
             {
-                #On banni l'utiliseur
+                #On débanni l'utiliseur
                 $bannisementUser = $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_USER')->save();
-                return $app->redirect($request->headers->get('referer').'?debannir=ok');
+                $go = $request->get('go');
+                if(!empty($go))
+                {
+                    return $app->redirect($app['url_generator']->generate($go).'?debannir=ok');
+                }
+                else
+                {
+                    return $app->redirect($request->headers->get('referer').'?debannir=ok');
+                }
                 
                 
             }
