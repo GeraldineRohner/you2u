@@ -256,3 +256,9 @@ footer img {
   display: none;
   padding: 15px 20px;
 }
+
+/* Barre de recherche localisation */
+.twitter-typeahead{
+    width:100%;
+    background-color: #FFFFFF;
+}

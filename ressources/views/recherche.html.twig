@@ -7,15 +7,6 @@
     {{ parent() }}
 
     <link href="{{ asset('css/typeahead.css') }}" rel="stylesheet" />
-    <style>
-
-        #pagination li{
-            list-style: none;
-            display: inline;
-            margin-right: 5px;
-        }
-
-    </style>
 
 {% endblock %}
 
@@ -36,8 +27,6 @@
                 </div>
             </form>
 
-            {#<div class="affinerRecherche"></div>#}
-
 
         </div>
     </div>
@@ -45,74 +34,25 @@
     {# Zone de filtre #}
 
     {# Zone de résultat de recherche #}
+    <div class="container-fluid">
+        <div class="row sizeLeft">
+              <div class="col-md-8 connex">
+                <div class="row">
+                    <div class="col-md-6 col-md-push-3">
+                        <h3 class="text-center phrase-count-result"></h3>
+                        <br>
+                    </div>
+                </div>
 
-    <div class="row">
-        <div class="col-md-6 col-md-push-3">
-
-            {#<h3> <b> {{ nbAnnoncesPubliees | striptags }} </b> annonces correspondent à votre recherche </h3>#}
-            <h3 class="text-center phrase-count-result"></h3>
-            <br>
+                <div class="row results">
+                    <div class="col-md-9 col-md-offset-1 annonces"></div>
+                </div>
+              </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 col-md-push-3">
-            <div class="row results">
-                <div class="col-md-9 col-md-offset-1 annonces"></div>
-            </div>
-        </div>
-    </div>
 
 
-    {# Pagination #}{#
-    <div class="row pagination">
-        <ul id="pagination" class="col-md-6 col-md-push-5">
 
-            #}{# Pagination 'début' #}{#
-            <li><button><a href=""> <i class="fa fa-angle-double-left"></i></a></button></li>
-
-            #}{# Pagination page précédente #}{#
-            {% if (numeroPage-1)>0 %}
-            <li><button><a href=""> <i class="fa fa-angle-left"></i> </a></button></li>
-            {% endif %}
-
-            #}{# Pagination -2  #}{#
-            {% if (numeroPage-2)>0 %}
-                #}{# cachée si valeur 0 ou négative #}{#
-                <li><button><a href=""></a></button></li>
-            {% endif %}
-
-            #}{# Pagination -1 #}{#
-            {% if (numeroPage-1)>0 %}
-                #}{# cachée si valeur 0 ou négative #}{#
-                <li><button><a href=""></a></button></li>
-            {% endif %}
-
-            #}{# Page actuelle #}{#
-            <li><button><a href=""><b></b></a></button></li>
-
-            #}{# Pagination +1 #}{#
-            {% if (numeroPage+1) <= pageMax %}
-                #}{# cachée si valeur sup au nb total de page #}{#
-                <li><button><a href=""></a></button></li>
-            {% endif %}
-
-            #}{# Pagination +2 #}{#
-            {% if (numeroPage+2) <= pageMax %}
-                #}{# cachée si valeur sup au nb total de page #}{#
-                <li><button><a href=""></a></button></li>
-            {% endif %}
-
-            #}{# Pagination page suivante #}{#
-            {% if (numeroPage+1) <= pageMax %}
-                #}{# cachée si valeur sup au nb total de page #}{#
-                <li><button><a href=""> <i class="fa fa-angle-right"></i> </a></button></li>
-            {% endif %}
-
-            #}{# Pagination 'fin' #}{#
-            <li><button><a href=""> <i class="fa fa-angle-double-right"></i> </a></button></li>
-
-        </ul>
-    </div>#}
 
 {% endblock %}
 
@@ -171,16 +111,5 @@
     <!-- Script pour le chargement des résultats -->
     <script src="{{ asset ('js/recherche.js') }}"></script>
 
-    <!-- Script pour affiner recherche via holmes.js (https://haroen.me/holmes/) -->
-    {#
-    <script src="{{ asset('js/holmes.js') }}"></script>
-
-    <script>
-
-        holmes({
-            find: '.results .annonces'
-        });
-
-    </script>#}
 
 {% endblock %}

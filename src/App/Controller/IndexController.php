@@ -242,8 +242,7 @@ class IndexController
                     ))),
 
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre nom'
+                    'class' => 'form-control'
                 )
             ))
             ->add('prenom', TextType::class, array(
@@ -262,8 +261,7 @@ class IndexController
                     ))),
 
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre prénom'
+                    'class' => 'form-control'
                 )
             ))
             ->add('email', EmailType::class, array(
@@ -276,8 +274,7 @@ class IndexController
                             'message' => 'L\'adresse email saisie est invalide',)
                     )),
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'votre.email@exemple.fr'
+                    'class' => 'form-control'
                 )
             ))
             ->add('pseudo', TextType::class, array(
@@ -290,15 +287,14 @@ class IndexController
                         'minMessage' => 'Votre pseudonyme doit contenir au moins trois caractères',
                         'maxMessage' => 'Votre pseudonyme ne peut contenir plus de  vingt caractères'
                     )),
-                    new Regex(array( # Contraite de contenu
+                    new Regex(array( # Contrainte de contenu
                         'pattern' => '/^[\w-\']+$/',
                         'message' => 'Votre pseudonyme ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
                     ))),
 
 
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre pseudonyme'
+                    'class' => 'form-control'
                 )
             ))
             # -- Mot de passe -- #
@@ -317,8 +313,7 @@ class IndexController
                         'message' => 'Votre mot de passe ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
                     ))),
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '******'
+                    'class' => 'form-control'
                 )
             ))
             ->add('motDePasseConfirmation', PasswordType::class, array(
@@ -328,8 +323,7 @@ class IndexController
                         'message' => 'Veuillez renseigner une seconde fois votre mot de passe')
                 )),
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Veuillez retaper votre mot de passe'
+                    'class' => 'form-control'
                 )
             ))
             /*  ------------------------------------------------------------------------------
@@ -867,14 +861,7 @@ class IndexController
 
     }// Fin public function rechercheAction
 
-
-
-
-
-
-
-    public
-    function rechercheActionPost(Application $app, Request $request)
+    public function rechercheActionPost(Application $app, Request $request)
     {
 
         $annoncesPubliees[] = null;
