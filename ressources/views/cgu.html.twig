@@ -4,6 +4,17 @@
 
 {% set active = 'cgu' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        li
+        {
+            list-style: circle;
+            margin-left: 50px;
+        }
+    </style>
+{% endblock %}
+
 {% block contenu %}
 
     <div class="row">
@@ -16,124 +27,138 @@
             </p>
 
             <h2>CREDITS</h2>
-            <p>
+            <div>
                 Ce Site a été réalisé dans le cadre du projet de fin de formation de Webforce3 Lyon (12 juin au 11 octobre 2017) avec la collaboration de :
                 Bertrand Fernandez, Simon Gallet, Mariza Kalic, Flore Leclerc, Géraldine Rohner
 
                 Les présentes Conditions Générales d'Utilisation déterminent les règles d’accès au site www.you2u.fr.
                 En naviguant sur ce site, vous reconnaissez, en votre qualité d’utilisateur, en connaître les termes, les accepter sans réserve et vous y conformer.
-            </p>
+            </div>
             <h2>1 – MENTION CNIL</h2>
             <h3>a - Déclaration à la CNIL</h3>
-            <p>
+            <div>
                 Conformément aux dispositions de la loi dite « Informatique et Libertés » du 6 janvier 1978, vous êtes informé(e) de ce que nous procédons à des traitements automatisés de vos données personnelles, notamment lors de votre connexion à notre site ou dans le cadre des formulaires en ligne remplis par vos soins.
                 Déclaration auprès de La Commission Nationale de l’Informatique et des Libertés (CNIL) :
                 Le site a fait l’objet d’une déclaration à la CNIL et est enregistré sous le n°XXXXXX.
-            </p>
+            </div>
 
             <h3>b- Collecte et utilisation de vos données personnelles</h3>
-            <p>
+            <div>
                 Les informations nominatives que vous serez amené à fournir sur le site ne sont utilisées que pour le bon fonctionnement du site et ne sont transmise à aucun autre organisme.
                 Nous vous informons de ce que ces données pourront être utilisées par le site, conformément aux dispositions légales en vigueur, à des fins de prospection directe pour vous proposer des produits ou services analogues. Ces données pourront par la suite être utilisées par les sociétés partenaires à des fins de prospections uniquement sur votre accord.
                 Conformément aux dispositions de la loi dite « informatique et libertés », le traitement de vos données peut donner lieu à l’exercice du droit d’accès et de rectification ainsi que d’un droit d’opposition et de suppression pour motifs légitimes, en adressant un message via notre formulaire de contact.
                 Vous pouvez ainsi exiger que soient rectifiées, complétées, clarifiées, mises à jour ou effacées les informations vous concernant qui sont inexactes, incomplètes, équivoques, ou périmées.
-            </p>
+            </div>
 
             <h3>c – Implémentation de « Cookies » </h3>
-            <p>
-                <b>Que sont les « Cookies » ?</b>
+            <div>
+                <b>Que sont les « Cookies » ?</b><br>
                 Un cookie est un fichier texte qui enregistre des informations relatives à votre navigation sur internet. Ce fichier placé à l’occasion d’une consultation, par le site serveur, sur le disque dur de l’utilisateur, ne peut pas contenir de virus ni être exécuté. Il n’est pas actif. De plus vous pouvez le lire, le détruire ou le modifier. Un cookie ne peut pas être utilisé pour récupérer des données personnelles de votre disque dur, lire votre adresse mail ou se procurer des informations personnelles.
-
-            <b>Pourquoi des « Cookies » ?</b>
+                <br><br>
+                <b>Pourquoi des « Cookies » ?</b><br>
                 Personnalisation des offres que nous vous proposons, identification et accès à votre compte client, établir des statistiques, accès aux services personnalisés…sont autant de services dont vous ne pourrez pas bénéficier, sans l’implémentation de cookies.
-                Dans un souci d’être au plus près de vos attentes, nous souhaitons donc en implémenter sur votre terminal.
+                Dans un souci d’être au plus près de vos attentes, nous souhaitons donc en implémenter sur votre terminal.<br><br>
 
-            <b>Paramétrage de votre navigateur</b>
+                <b>Paramétrage de votre navigateur</b><br>
                 Conformément à l’Ordonnance du 24 août 2011 relative à l’application des directives européennes en matière de protection de la vie privée sur Internet, un cookie ne peut être implanté sur votre mobile sans votre consentement préalable.
                 Dans ce contexte, Nous vous informons que vous pouvez paramétrer votre navigateur pour refuser l’implémentation de cookies.
                 Pour la gestion des cookies et de vos choix, la configuration de chaque navigateur est différente. Elle est décrite dans le menu d'aide de votre navigateur, qui vous permettra de savoir de quelle manière modifier vos souhaits en matière de cookies.
-
-                - Pour Internet Explorer™ : http://windows.microsoft.com/fr-FR/windows-vista/Block-or-allow-cookies
-                - Pour Safari™ : http://docs.info.apple.com/article.html?path=Safari/3.0/fr/9277.html
-                - PourChrome™: http://support.google.com/chrome/bin/answer.py?hl=fr&hlrm=en&answer=95647
-                - PourFirefox™: http://support.mozilla.org/fr/kb/Activer%20et%20d%C3%A9sactiver%20les%20cookies
-                - Pour Opera™ : http://help.opera.com/Windows/10.20/fr/cookies.htm
-            </p>
+                <br><br>
+                <ul>
+                    <li><a href="http://windows.microsoft.com/fr-FR/windows-vista/Block-or-allow-cookies" target="_blank">Pour Internet Explorer™ : http://windows.microsoft.com/fr-FR/windows-vista/Block-or-allow-cookies</a></li>
+                    <li><a href="http://docs.info.apple.com/article.html?path=Safari/3.0/fr/9277.html" target="_blank" >Pour Safari™ : http://docs.info.apple.com/article.html?path=Safari/3.0/fr/9277.html</a></li>
+                    <li><a href="http://support.google.com/chrome/bin/answer.py?hl=fr&hlrm=en&answer=95647" target="_blank">Pour Chrome™ : http://support.google.com/chrome/bin/answer.py?hl=fr&hlrm=en&answer=95647</a></li>
+                    <li><a href="http://support.mozilla.org/fr/kb/Activer%20et%20d%C3%A9sactiver%20les%20cookies" target="_blank">Pour Firefox™ : http://support.mozilla.org/fr/kb/Activer%20et%20d%C3%A9sactiver%20les%20cookies </a></li>
+                    <li><a href="http://help.opera.com/Windows/10.20/fr/cookies.html" target="_blank">Pour Opera™ : http://help.opera.com/Windows/10.20/fr/cookies.html</a></li>
+                </ul>
+            </div>
 
             <h2>2 – ACTIVITÉS DE YOU2U</h2>
-            <p>
+            <div>
                 You2U est une plateforme de service et mise en relation transgénérationnelle.
                 Notre rôle est celui d'un intermédiaire technique et consiste en la mise à disposition de sa plateforme de mise en relation et des services à l’ensemble des utilisateurs.
                 Nous ne prenons pas part contractuellement à la fourniture des Prestations. Les transactions se forment directement entre les utilisateurs. You2U n'encourt en conséquence aucune responsabilité en relation avec les échanges, négociations, la conclusion puis l'exécution des prestations de services et ne fournit aucune garantie quant à la bonne fin des prestations ou du paiement des transactions entre les parties.
                 You2U n'assume aucune responsabilité en ce qui concerne :
-                i. la qualité, la conformité de l'offre à la loi ou l'adéquation des prestations de services proposées par les utilisateurs ;
-                ii. la fiabilité, l'exactitude ou la licéité de toute information relative aux prestations de services ou à l'identification des utilisateurs ;
-                iii. la qualification professionnelle des utilisateurs qui proposent leurs services ;
-                iv. la solvabilité des utilisateurs qui achètent les services
-
+                <br><br>
+                <ul>
+                    <li>a qualité, la conformité de l'offre à la loi ou l'adéquation des prestations de services proposées par les utilisateurs ;</li>
+                    <li>la fiabilité, l'exactitude ou la licéité de toute information relative aux prestations de services ou à l'identification des utilisateurs ;</li>
+                    <li>la qualification professionnelle des utilisateurs qui proposent leurs services ;</li>
+                    <li>la solvabilité des utilisateurs qui achètent les services</li>
+                </ul><br>
                 You2U se réserve le droit de procéder à des purges régulières afin de supprimer les annonces obsolètes.
                 Autant que de besoin, nous vous rappelons que le Site est une plateforme de mise en relation, qui ne participe à quelque sélection ni décision que ce soit dans le choix des annonceurs.
-            </p>
+            </div>
 
             <h2>3 - ANNONCES</h2>
-            <p>
+            <div>
                 Le site permet aux séniors de déposer leurs annonces gratuitement afin de mettre leurs compétences et savoirs à disposition des autres générations.
-
-                <b>Déposer une annonce</b>
+                <br><br>
+                <b>Déposer une annonce</b><br>
                 Pour déposer une annonce, il vous suffit de compléter tous les champs de saisie proposés lors de la rédaction de votre annonce en veillant bien à communiquer des informations exactes et conformes à la réalité, à décrire le service proposé et vos compétences effectives, à ne pas induire en erreur les autres utilisateurs, ne pas rédiger des informations fausses et bien évidemment de respecter les dispositions visées à dans l’article 10 précisant les principes éthiques.
                 Si vous détectez un abus, nous vous remercions de nous en informer en envoyant un e-mail via le formulaire de signalement
-
-                <b>Supprimer une annonce</b>
+                <br><br>
+                <b>Supprimer une annonce</b><br>
                 Il suffit de vous connecter sur votre compte via l’espace « Mon profil». Si vous souhaitez supprimer votre compte il vous suffit de nous en informer via le formulaire de contact, nous nous en chargeons pour vous. Un email de confirmation vous sera envoyé dans un délais de 48h.
-
-                <b>Responsabilité de l’utilisateur</b>
+                <br><br>
+                <b>Responsabilité de l’utilisateur</b><br>
                 Le contenu des textes des petites annonces déposées, leur mise à jour, leur suppression n’engagent en aucun cas la responsabilité de You2u qui ne peut contrôler la qualité, véracité, sincérité ou légalité de toute l'information qui est déposée.
                 Les annonces sont publiées sous la garantie des annonceurs qui en assument l’entière responsabilité et les utilisateurs du site sont responsables de l’utilisation qu’ils en font.
                 Cependant,You2u se réserve le droit de supprimer les annonces incomplètes, anonymes ou contraires à sa déontologie.
                 You2u se réserve la faculté de supprimer ou modifier les annonces pour que les annonces soient en conformité avec la loi.
                 Les utilisateurs du Site s’engagent à supprimer les annonces quand elles sont obsolètes et à les modifier quand les informations ne sont plus à jour. Pour cela il suffit de vous rendre dans l'espace « Mon Compte » mais vous pouvez aussi nous adresser une demande par écrit pour supprimer une annonce.
-            </p>
+            </div>
 
             <h2>4 – LICENCE DE DROIT D’USAGE</h2>
-            <p>
+            <div>
                 L'accès au Site vous confère un droit d'usage privé, non collectif et non exclusif sur le contenu dudit Site. Toute mise en réseau et toute rediffusion, quelle qu'en soit la forme, sont interdites.
                 Le droit de reproduire ne s'entend qu'aux fins de représentation sur écran monoposte et est strictement réservé à votre usage privé. Si vous souhaitez faire un usage commercial des informations figurant sur ce site, il convient de solliciter un accord exprès de notre part.
-            </p>
+            </div>
 
             <h2>5 - MODERATION</h2>
-            <p>
+            <div>
                 L’ensemble des Contributions destinées à être diffusées sur le Site font l’objet d’une modération a posteriori consistant pour le modérateur du Site à ne les vérifier qu’après leur publication. Sur ces rubriques, conformément aux dispositions de l’article 6 - I - 7. alinéas 3 et 4 de la loi pour La Confiance dans l'Économie Numérique du 21 juin 2004, vous avez la possibilité de signaler la publication de toute Contribution (texte, photo, illustration …) dont vous auriez connaissance, qui ne serait pas en rapport avec le sujet abordé, la ligne éditoriale et/ou qui contreviendrait aux lois et règlements en vigueur et notamment qui relèveraient des infractions prévues aux articles 24 alinéas 5 et 8 de la loi sur la presse et 227-23 du Code Pénal tels que l’apologie des crimes contre l’humanité, l’incitation à la haine raciale, la pornographie enfantine.
 
                 Cette faculté peut être exercée en adressant un message au modérateur du Site en cliquant sur le lien « Signaler un abus », accessible sur toutes les pages de ces rubriques. You2U se réserve ainsi le droit de retirer un contenu et de suspendre l’accès à un membre du Site, s’il a été porté à sa connaissance, dans les conditions telles que visées ci-dessus, que ce contenu était manifestement illicite ou sur demande d’une autorité judiciaire.
 
                 Vous devez néanmoins être conscient que le fait d’abuser de la faculté de signalement d’un contenu illicite est susceptible d’engager la responsabilité de celui qui l’exerce. Notamment, sont susceptibles de donner lieu à des poursuites judiciaires :
-                - le fait de signaler un message ou une activité comme étant illicite dans le seul but d’en obtenir le retrait ou d’en faire cesser la diffusion, tout en sachant que cette information est inexacte,
-                - la dénonciation, effectuée par tout moyen de communication y compris par voie électronique et dirigée contre une personne déterminée, d'un fait qui est de nature à entraîner des sanctions judiciaires, et que l'on sait totalement ou partiellement inexact.
-            </p>
+                <br><br>
+                <ul>
+                    <li>le fait de signaler un message ou une activité comme étant illicite dans le seul but d’en obtenir le retrait ou d’en faire cesser la diffusion, tout en sachant que cette information est inexacte,</li>
+                    <li>la dénonciation, effectuée par tout moyen de communication y compris par voie électronique et dirigée contre une personne déterminée, d'un fait qui est de nature à entraîner des sanctions judiciaires, et que l'on sait totalement ou partiellement inexact.</li>
+                </ul>
+            </div>
 
             <h2>6 – LIMITATION DE RESPONSABILITE</h2>
-            <p>
+            <div>
                 Vous êtes seul responsable des dommages et préjudices, directs ou indirects, matériels ou immatériels dès lors qu'ils auraient pour cause, fondement ou origine un usage du Site par vous-même ou par toute personne autorisée par vous à utiliser ce Site. Par usage, il convient d'entendre tout usage du Site quel qu'il soit, frauduleux ou non frauduleux.
                 A ce titre, vous renoncez à toute réclamation ou action en justice relative à de tels dommages et préjudices, sur le fondement de la responsabilité contractuelle de You2U en sa qualité d'éditeur de ce Site ou sur tout autre fondement.
                 Des liens hypertextes peuvent renvoyer vers d'autres sites que le Site. En cliquant sur ces liens, vous quittez le Site et aboutissez ainsi sur des sites sur lesquels You2U n'exerce aucun contrôle. En conséquence, cette dernière dégage toute responsabilité dans le cas où le contenu de ces sites contreviendrait aux dispositions légales et réglementaires en vigueur.
                 En outre, il est rappelé qu'aucun lien hypertexte ne peut renvoyer sur le Site sans l'autorisation préalable et expresse de l'éditeur du Site. A défaut d'autorisation, un tel lien est considéré comme constitutif du délit de contrefaçon, délit dont les peines ont d'ores et déjà été rappelées ci-dessus.
                 You2U met en garde les personnes titulaires de l'autorité parentale sur la diversité et la nature des contenus disponibles sur le réseau Internet, lesquels peuvent être susceptibles de porter préjudice aux mineurs. Les parents sont donc encouragés à surveiller leurs enfants lorsqu'ils se connectent. Il est en outre rappelé aux parents et à toute personne exerçant l'autorité parentale, qu'il leur appartient, d'une part, de déterminer quels services accessibles sur le Site leur enfant mineur est autorisé à utiliser et, d'autre part, de surveiller l'utilisation que celui-ci fait de ces services.
                 You2UL s'engage à faire ses meilleurs efforts pour sécuriser l'accès, la consultation et l'utilisation des Matériels conformément aux règles d'usages de l'Internet. L'accès au Site est possible vingt-quatre (24) heures sur vingt-quatre (24), sept (7) jours sur sept (7) sauf en cas de force majeure ou d'événement hors du contrôle You2U et sous réserve des éventuelles pannes et interventions de maintenance nécessaires au bon fonctionnement du Site et des Matériels, qui pourront être effectuées sans vous en avoir averti au préalable.
-                En conséquence, la responsabilité de SENIORS A VOTRE SERVICE SARL ne peut être engagée dans les cas suivants :
-                - Interruptions momentanées d'une durée de quelques minutes pour la mise à jour de certains fichiers ;
-                - Difficultés de fonctionnement ou interruption momentanée de ces services indépendamment de la volonté de You2U notamment en cas d'interruption des services d'électricité ou de télécommunication, d’hébergement sur les serveurs ;
-                - Interruptions momentanées des services nécessaires à leurs évolutions ou maintenance ;
-                - Défaillance ou dysfonctionnements du réseau Internet dans la transmission de messages ou documents.
+                En conséquence, la responsabilité de You2U ne peut être engagée dans les cas suivants :
+                <br><br>
+                <ul>
+                    <li>Interruptions momentanées d'une durée de quelques minutes pour la mise à jour de certains fichiers ;</li>
+                    <li>Difficultés de fonctionnement ou interruption momentanée de ces services indépendamment de la volonté de You2U notamment en cas d'interruption des services d'électricité ou de télécommunication, d’hébergement sur les serveurs ;</li>
+                    <li>Interruptions momentanées des services nécessaires à leurs évolutions ou maintenance ;</li>
+                    <li>Défaillance ou dysfonctionnements du réseau Internet dans la transmission de messages ou documents.</li>
+
+                </ul>
+                <br><br>
                 Vous déclarez accepter les caractéristiques et les limites de l'Internet, et en particulier reconnaître :
-                - que vous avez connaissance de la nature de l'Internet, en particulier de ses performances techniques et des temps de réponse pour consulter, interroger ou transférer les Informations ;
-                - que la communication de vos éventuels codes d'accès et précisément de votre identifiant et de votre mot de passe ou d'une manière générale de toute information jugée confidentielle est faite sous votre propre responsabilité ;
-                - qu'il vous appartient de prendre toutes mesures nécessaires pour s'assurer que les caractéristiques techniques de votre ordinateur vous permettent la consultation des Informations ;
-                - qu'il vous appartient de prendre toutes les mesures appropriées de façon à protéger vos propres données et/ou logiciels de la contamination par d'éventuels virus circulant à travers le Site et/ou les Informations ;
-                - il est précisé que le téléchargement des Matériels emporte acceptation sans réserve desdits Matériels et des présentes Conditions Générales d'Utilisation.
-            </p>
+                <ul>
+                    <li>que vous avez connaissance de la nature de l'Internet, en particulier de ses performances techniques et des temps de réponse pour consulter, interroger ou transférer les Informations ;</li>
+                    <li>que la communication de vos éventuels codes d'accès et précisément de votre identifiant et de votre mot de passe ou d'une manière générale de toute information jugée confidentielle est faite sous votre propre responsabilité ;</li>
+                    <li>qu'il vous appartient de prendre toutes mesures nécessaires pour s'assurer que les caractéristiques techniques de votre ordinateur vous permettent la consultation des Informations ;</li>
+                    <li>qu'il vous appartient de prendre toutes les mesures appropriées de façon à protéger vos propres données et/ou logiciels de la contamination par d'éventuels virus circulant à travers le Site et/ou les Informations ;</li>
+                    <li>il est précisé que le téléchargement des Matériels emporte acceptation sans réserve desdits Matériels et des présentes Conditions Générales d'Utilisation.</li>
+                </ul>
+            </div>
 
             <h2>7 – CONDITIONS PARTICULIÈRES DES AVIS</h2>
-            <p>
+            <div>
                 You2U met à votre disposition des espaces et outils dédiés aux commentaires et avis réservés à la libre communication entre internautes (Ci-après désignés ensemble « les Contributions »). A ce titre, You2U agit exclusivement en qualité d’hébergeur des espaces communautaires qu’il met à votre disposition et sa responsabilité est donc celle d’un prestataire technique tel que défini à l’article 6.I-1 de la loi sur la Confiance dans l'Économie numérique du 21 juin 2004.
 
                 Vous reconnaissez être pleinement responsables des Contributions que vous publiez sur cette rubrique, et que ces Commentaires ne relèvent pas de l’activité éditoriale de You2U.
@@ -143,23 +168,27 @@
                 Nous vous rappelons que les espaces communautaires sont des lieux d'échange, de débat d'idées, où la convivialité et le respect d'autrui sont primordiaux. Chacun doit donc respecter les autres contributeurs et le pluralisme des opinions nécessaire à l'animation de la communauté. Toute Contributions comportant des agressions verbales, moqueries gratuites ou vulgarités, pourra entrer dans le champ d’une modération et en conséquence être retiré du Site.
 
                 Ces Contributions ne sauraient comprendre un contenu constitutif ou incitatif à la commission d’agissements réprimés par la loi. Vous vous engagez donc à respecter les principes éthiques énumérés ci-après, sans que cette liste soit limitative :
-                - Les Contributions ne doivent pas porter atteinte ou être contraires à l'ordre public, aux bonnes mœurs ni heurter la sensibilité des mineurs ;
-                - Les Contributions ne doivent pas porter atteinte de quelque manière que ce soit aux droits à la réputation, à la vie privée de tiers et à l'image de ces derniers ;
-                - Les Contributions ne doivent pas être dénigrantes, diffamatoires, injurieux, obscènes, violents, racistes, xénophobes, porter atteinte à l'image et à la réputation d'une marque ou d'une quelconque personne physique ou morale, de quelque manière que ce soit ;
-                - Les Contributions ne doivent pas être utilisées à des fins de menaces ou de harcèlement, de quelque manière que ce soit ;
-                - Les Contributions ne doivent pas inciter à la haine, à la violence, au suicide, au racisme, à l'antisémitisme, à la xénophobie, à l’homophobie, faire l'apologie des crimes de guerre ou des crimes contre l'humanité ;
-                - Les Contributions ne doivent pas inciter à la discrimination d'une personne ou d'un groupe de personne en raison de son appartenance à une ethnie, à une religion, à une race, ou du fait de son orientation sexuelle ou de son handicap ;
-                - Les Contributions ne doivent pas inciter à commettre un crime, un délit ou un acte de terrorisme ;
-                - Les Contributions ne doivent pas présenter de caractère pornographique ou pédophile ;
-                - Les Contributions ne doivent pas porter atteinte à la sécurité ou à l'intégrité d'un Etat ou d'un territoire, quel qu'il soit ;
-                - Les Contributions ne doivent pas porter atteinte aux droits de propriété intellectuelle de quelque personne que ce soit.
-
+                <br><br>
+                <ul>
+                    <li>Les Contributions ne doivent pas porter atteinte ou être contraires à l'ordre public, aux bonnes mœurs ni heurter la sensibilité des mineurs ;
+                    <li>Les Contributions ne doivent pas porter atteinte de quelque manière que ce soit aux droits à la réputation, à la vie privée de tiers et à l'image de ces derniers ;</li>
+                    <li>Les Contributions ne doivent pas être dénigrantes, diffamatoires, injurieux, obscènes, violents, racistes, xénophobes, porter atteinte à l'image et à la réputation d'une marque ou d'une quelconque personne physique ou morale, de quelque manière que ce soit ;</li>
+                    <li>Les Contributions ne doivent pas être utilisées à des fins de menaces ou de harcèlement, de quelque manière que ce soit ;</li>
+                    <li>Les Contributions ne doivent pas inciter à la haine, à la violence, au suicide, au racisme, à l'antisémitisme, à la xénophobie, à l’homophobie, faire l'apologie des crimes de guerre ou des crimes contre l'humanité ;</li>
+                    <li>Les Contributions ne doivent pas inciter à la discrimination d'une personne ou d'un groupe de personne en raison de son appartenance à une ethnie, à une religion, à une race, ou du fait de son orientation sexuelle ou de son handicap ;</li>
+                    <li>Les Contributions ne doivent pas inciter à commettre un crime, un délit ou un acte de terrorisme ;</li>
+                    <li>Les Contributions ne doivent pas présenter de caractère pornographique ou pédophile ;</li>
+                    <li>Les Contributions ne doivent pas porter atteinte à la sécurité ou à l'intégrité d'un Etat ou d'un territoire, quel qu'il soit ;</li>
+                    <li>Les Contributions ne doivent pas porter atteinte aux droits de propriété intellectuelle de quelque personne que ce soit.</li>
+                </ul><br><br>
                 Toute Contribution qui ne respecterait pas ces principes pourra être supprimé par le modérateur du site, voire faire l’objet d’un signalement aux autorités publiques conformément aux dispositions de l’article 6-1-7 de la loi du 21 juin 2004 pour la Confiance dans l'Économie Numérique.
 
                 Conformément à l'article 6 - I de la loi du 21 juin 2004 pour la Confiance dans l'Économie Numérique, You2U est tenu en sa qualité d'hébergeur de contenus, aux obligations suivantes :
-                1. Détenir et conserver les données de nature à permettre l'identification de toute personne ayant diffusé des contenus par son intermédiaire, pour le cas ou les autorités judiciaires en feraient la demande,
-                2. Retirer et ou empêcher l'accès aux contenus illicites dès qu'il en a connaissance.
-
+                <br><br>
+                <ul>
+                    <li>Détenir et conserver les données de nature à permettre l'identification de toute personne ayant diffusé des contenus par son intermédiaire, pour le cas ou les autorités judiciaires en feraient la demande,</li>
+                    <li>Retirer et ou empêcher l'accès aux contenus illicites dès qu'il en a connaissance.</li>
+                </ul><br><br>
                 Toutefois, You2U n'est pas soumis à une obligation générale de surveillance et de contrôle des informations et contenus diffusés, ni même à une obligation générale de rechercher des faits ou circonstances révélant d'activités illicites.
 
                 Ainsi, vous ne vous engagez qu’à diffuser des contenus dont vous disposez des droits, pour lesquels le titulaire des droits vous a expressément autorisé à les diffuser ou qui sont libres de tous droits. Pour rappel, le Code de la propriété intellectuelle interdit toute représentation ou reproduction intégrale ou partielle faite sans le consentement de l’auteur ou de ses ayants-droit.
@@ -175,17 +204,17 @@
                 Conformément aux dispositions de l’article 6 - I - 7. alinéas 3 et 4 de la loi pour La Confiance dans l'Économie Numérique du 21 juin 2004, vous avez la possibilité dans l’espace Avis de signaler la publication de toute Contribution dont vous auriez connaissance, qui ne serait pas en rapport avec le sujet abordé, la ligne éditoriale et/ou qui contreviendrait aux lois et règlements en vigueur et notamment qui relèveraient des infractions prévues aux articles 24 alinéas 5 et 8 de la loi sur la presse et 227-23 du Code Pénal tels que l’apologie des crimes contre l’humanité, l’incitation à la haine raciale, la pornographie enfantine. Cette faculté peut être exercée en cliquant sur le lien [« ! Signaler un Abus »] accessible sur toutes les pages de la présente rubrique, lien qui vous redirigera vers une fenêtre vous permettant d’adresser un message précis à une équipe de modérateurs du Site.
 
                 Nous vous recommandons de ne pas diffuser en ligne, à un étranger, d'informations personnelles vous concernant susceptibles de vous identifier et plus généralement toute donnée sensible ou confidentielle (adresse postale, numéro de téléphone, numéro de sécurité sociale, de carte de crédit, numéro de permis de conduire, …) et qui pourraient être utilisées à votre encontre ou à des fins illégales ou préjudiciables. Il en est ainsi même lorsque cette divulgation est sollicitée par une personne avec laquelle vous dialoguez, même si cette personne se présente comme étant habilitée par You2U ou toute autre société. En tout état de cause, une telle divulgation se ferait à vos risques et périls, sans que la responsabilité de You2U ne puisse être engagée. Aucun agent, employé ou salarié de You2U n'est en effet autorisé à solliciter de votre part les informations suivantes y compris dans le cadre de l'utilisation que vous faites des services mis à disposition sur le présent site : nom, prénom, adresse, numéro de carte de crédit.
-            </p>
+            </div>
 
             <h2>8 - DÉPÔT PHOTOS</h2>
-            <p>
+            <div>
                 L'utilisateur reconnaît disposer des droits d'utilisation et de diffusion des images, photos ou visuels utilisés. L'utilisateur reconnaît et garantit à ce titre You2U contre tout recours de tiers quant à l'exploitation desdits photos. L'utilisateur cède gracieusement les droits de reproduction, de représentation et d'adaptation des visuels, photos ... déposés en vue de leur exploitation par You2U pendant la durée de la mise en ligne sur le site, pour le monde entier.
-            </p>
+            </div>
 
             <h2>9 – APPLICATION DE LA LOI FRANÇAISE</h2>
-            <p>
+            <div>
                 Le réseau Internet étant par nature un réseau mondial, mais le présent site étant destiné à un public français, les règles applicables à tous les contenus et toutes les transmissions de données sur et autour du Site sont déterminées par la loi française. En cas de litige, les tribunaux français seront seuls compétents.
-            </p>
+            </div>
 
         </div>
     </div>
