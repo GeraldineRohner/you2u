@@ -27,17 +27,19 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url('index_index') }}">Accueil</a></li>
                     <li><a href="#">Qui sommes-nous?</a></li>
-                    <li><a href="#">Catégories</a></li>
+                   {# <li><a href="{{ url ('index_categorie'}}">Catégories</a></li>#}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li><a href="{{ url('membre_index') }}">Profil</a></li>
                     <li><a href="{{ url('deconnexion') }}">Deconnexion</a></li>
                     {% else %}
                     <li><a href="{{ url('index_connexion') }}">Connexion</a></li>
                     {% endif %}
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ url('index_recherche') }}">Rechercher une annonce</a></li>
+                    <li><a href="{{ url('index_inscription') }}">Inscription</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
                 </div><!--/.nav-collapse -->
-                {{ render(controller('App\\Controller\\IndexController::rechercheMenu')) }}
+
 
             </div>
         </nav>
