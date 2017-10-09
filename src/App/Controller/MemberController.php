@@ -383,15 +383,19 @@ class MemberController
 
 
             # -- Localisation -- #
-            ->add('localisation', TextType::class, array(
-                'required'          => false,
+            ->add('lieuService', TextType::class , [
+                'required'          => true,
                 'label'             => false,
-                'attr'              => array(
-                    'id'            => 'recherche',
-                    'class'         => 'typeahead form-control',
-                    'placeholder'   => 'Localisation'
+                'constraints'       => array(new constraintVille(
+                    array(
+                        'message'   => 'Vous devez saisir une ville correcte '
+                    )
                 )
-            ))
+                ),
+                'attr'              => [
+                    'class'         => 'form-control typeahead'
+                ]
+            ])
 
             # -- Périmètre d'action possible -- #
             ->add('perimetreAction', IntegerType::class, array(
@@ -403,18 +407,6 @@ class MemberController
                 )
             ))
 
-            # -- Localisation -- #
-            ->add('lieuService', TextType::class , [
-                'required' => true,
-                'label'    => false,
-                'constraints' => array(new constraintVille(
-                    array('message' => 'Vous devez saisir une ville correcte ')
-                )
-                ),
-                'attr'      => [
-                    'class' => 'form-control typeahead'
-                ]
-            ])
 
             # -- Description -- #
             ->add('descriptionService', TextareaType::class, array(
@@ -432,7 +424,7 @@ class MemberController
             ->add('submit', SubmitType::class, array(
                 'label'             => 'Publier',
                 'attr'              => array(
-                    'class'         => 'btn btn-info'
+                    'class'         => 'btn btn-warning'
                 )
             ))
 

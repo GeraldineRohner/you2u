@@ -14,14 +14,18 @@
 {# Block de Contenu défini dans base.html.twig #}
 {% block contenu %}
 
-    <div class="container">
-        <div class="starter-template">
+<div class="container-fluid">
+    <div class="row sizeLeft">
+      <div class="col-md-8 connex">
+        <div class="acroche"> <img src="{{ asset('img/ajoutAnnonce.svg') }}"><br></div>
 
             <div class="row">
                 <div class="col-xs-10 col-xs-offset-1">
-
-                    <h1> Ajouter une annonce </h1>
-
+                    <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3">
+                        <h1> Ajouter une annonce : </h1>
+                        </div>
+                    </div>
                     {% if global.request.get('ajoutAnnonce') == 'success' %}
 
                         <div class="alert alert-success">
@@ -31,11 +35,6 @@
                         </div>
 
                     {% else %}
-
-                         <div class="container-fluid">
-    <div class="row sizeLeft">
-      <div class="col-md-8 connex">
-        <div class="acroche"> <img src="img/ajoutAnnonce.svg"><br></div>
 
                     <form class="form-horizontal" method="POST">
 
@@ -81,19 +80,22 @@
 
                         <!-- Bouton -->
                         <div class="form-group">
-                            <div class="col-xs-10 col-xs-offset-1"> {{ form_row(form.submit) }} </div>
+                            <div class="col-xs-12 col-xs-offset-1">
+                                <div class="form-group">
+                                    <div class="col-md-2 col-md-push-2">
+                                        {{ form_row(form.submit) }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     </form>
                     {% endif %}
                 </div>
             </div>
 
-
-
-
         </div>
     </div>
+</div>
 
 {% endblock %}
 {% block javascripts %}
