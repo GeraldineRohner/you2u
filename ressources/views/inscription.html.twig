@@ -6,8 +6,11 @@
 
     <div class="row">
         <div class="col-xs-6 col-xs-push-3">
-            {% if message is defined %}
-                {{ message | raw }}
+            {% if messages is defined %}
+                {%  for message in messages%}
+                   {{  message | raw}}
+                {%  endfor %}
+
             {% endif %}
 
             <h2 class="text-center">Inscription d'un Membre</h2>

@@ -1,9 +1,10 @@
 <?php
 
 use Silex\Provider\SecurityServiceProvider;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+
 use Silex\Provider\SessionServiceProvider;
 use App\Provider\MemberProvider;
+use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 
 # use Silex\Provider\SessionServiceProvider;
 $app->register(new SessionServiceProvider());
@@ -42,12 +43,12 @@ $app->register(new SecurityServiceProvider(), array(
 
 
 # use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-$app['security.encoder.digest'] = function() use($app) {
-    return new MessageDigestPasswordEncoder('sha1', false, 1);
+$app['security.encoder.bcrypt'] = function() use($app) {
+    return new BCryptPasswordEncoder(10);
 };
 
 $app['security.default_encoder'] = function() use($app) {
-    return $app['security.encoder.digest'];
+    return $app['security.encoder.bcrypt'];
 };
 
 
