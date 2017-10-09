@@ -36,8 +36,6 @@ class MemberController
 
         if (($noteMoyenne - $nombreStars) > 0.25) {
             $halfstar = 'Halfstar';
-        } else {
-            $halfstar = '';
         }
             else
             {
@@ -57,13 +55,7 @@ class MemberController
                 'annoncesUser' => $annoncesUser,
                 'totalNote' => $totalNote
             ]);
-        } else {
-            # Affichage dans la Vue
-            return $app['twig']->render('profil.html.twig', [
-                'message' => 'Bienvenue',
-                'totalNote' => $totalNote
-            ]);
-        }
+        } 
             else
             {
                 # Affichage dans la Vue
