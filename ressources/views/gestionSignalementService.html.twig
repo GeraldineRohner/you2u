@@ -13,7 +13,7 @@
 
     {% for signalement in signalements %}
 
-        <li class="signalement" {{ signalement.idUserSignale }} </li>
+        {{ signalement.idUserSignale }}
         {{ signalement.idServiceSignale }}
         {{ signalement.idUserAlertant }}
         {{ signalement.dateAlerte }}
