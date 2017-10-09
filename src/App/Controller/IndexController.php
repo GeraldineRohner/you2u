@@ -814,9 +814,8 @@ class IndexController
     }
 
 
-# Affichage de la page de recherche
-    public
-    function rechercheAction(Application $app, Request $request)
+    # Affichage de la page de recherche
+    public function rechercheAction(Application $app, Request $request)
     {
         # Récupération des catégories de services
         $categoriesService = function () use ($app) {
@@ -867,8 +866,7 @@ class IndexController
 
     }// Fin public function rechercheAction
 
-    public
-    function rechercheActionPost(Application $app, Request $request)
+    public function rechercheActionPost(Application $app, Request $request)
     {
 
         $annoncesPubliees[] = null;
@@ -1151,5 +1149,13 @@ class IndexController
             'commentairesUser'           => $commentairesUser
         ]);
     }
+
+    # Affichage de la page CGU
+    public function cguAction(Application $app)
+    {
+        # Affichage dans la vue
+        return $app['twig']->render('cgu.html.twig');
+    }
+
 
 } // Fin class IndexController

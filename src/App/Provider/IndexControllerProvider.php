@@ -89,6 +89,11 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->method('GET|POST')
             ->bind('index_profil');
 
+            # Page CGU
+            $controllers
+            ->get("/cgu", "App\Controller\IndexController::cguAction")
+            ->bind("index_cgu");
+
 
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;
