@@ -3,15 +3,28 @@
 
 
 {% if !IS_AUTHENTICATED_FULLY %}
-<ul>
-    <li><a href="{{  }}">Déposer une annonce (connexion requise)</a></li>
-    {#<li><a href="">Parlez-en à vos amis</a></li>#}
-    <li><a href="">S’inscrire  (connexion requise)</a></li>
-    <li><a href="">Se connecter  (connexion requise)</a></li>
-    <li><a href="">Réseaux sociaux</a></li>
-</ul>
+    <ul>
+    <li>{{ app.user.prenom }} {{ app.user.nom }}</li>
+<li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>
+<li><a href="{{  url ('index_inscription') }}">Créer un nouveau compte  </a></li>
+<li><a href="#">Réseaux sociaux</a></li>
+    </ul>
+
+
+
 
 {% else %}
+<ul>
+    <li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>
+    {#<li><a href="">Parlez-en à vos amis</a></li>#}
+    <li><a href="{{  url ('index_inscription') }}">S'inscrire  </a></li>
+    <li><a href="{{ url ('index_connexion') }}">Se connecter  </a></li>
+    <li><a href="#">Réseaux sociaux</a></li>
+</ul>
+
+{% endif%}
+
+
 
 
 
