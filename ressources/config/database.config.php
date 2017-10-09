@@ -5,7 +5,7 @@ use Silex\Provider\HttpFragmentServiceProvider;
 
 #1 : Connexion BDD
 define('DBHOST',     'localhost');
-define('DBNAME',     'you2ubeta');
+define('DBNAME',     'you2u');
 define('DBUSERNAME', 'root');
 define('DBPASSWORD', '');
 

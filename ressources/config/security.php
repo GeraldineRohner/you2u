@@ -35,8 +35,7 @@ $app->register(new SecurityServiceProvider(), array(
     array('^/membre', 'ROLE_USER', 'http')
 ),
     'security.role_hierarchy' => array(
-    'ROLE_ADMIN' => array('ROLE_USER'),
-    'ROLE_USER'  => array('ROLE_BANNED')
+    'ROLE_ADMIN' => array('ROLE_USER')
 ) # Fin de 'security.role_hierarchy'
 ));
 
