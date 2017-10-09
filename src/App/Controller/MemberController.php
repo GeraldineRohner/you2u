@@ -335,8 +335,8 @@ class MemberController
             {
                 
                 #On encode les password
-                $motDePasseModifie = $app['security.encoder.digest']
-                ->encodePassword($modificationMotDePasse['motDePasse'],'');
+                $el = substr($modifProfil['pseudo'], 0, 3);
+                $motDePasseModifie = $app['security.encoder.bcrypt']->encodePassword($modificationMotDePasse['motDePasse'], $el);
                 
                 #On modifie dans la base de données
                 $modifMDP = $app['idiorm.db']->for_table('users')->find_one($app['user']->getIdUser());
