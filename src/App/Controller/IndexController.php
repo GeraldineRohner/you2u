@@ -152,11 +152,15 @@ class IndexController
         #Verification de la validité du formulaire.
         $noteService = $form->getData();
         if (!empty($app['user'])) {
+            #On verifie quel utilisateur propose le service 
+            $infoService = $app['idiorm.db']->for_table('note_services')->where('idService', $idService)->find_one();
+            
+            #On recupère le dernier commentaire.
             $dernierComment = $app['idiorm.db']->for_table('note_services')->where('idService', $idService)->where('idUserNotant', $app['user']->getIdUser())->order_by_desc('dateCommentaire')->limit(1)->find_one();
             $timeStampActuel = time();
             $delai = 60 * 60 * 24;
             if ($form->isValid()) {
-                if (!empty($noteService) AND (($timeStampActuel - $dernierComment['dateCommentaire']) > $delai)) {
+                if (!empty($noteService) AND (($timeStampActuel - $dernierComment['dateCommentaire']) > $delai) AND ($infoService['idUserProposantService'] != $app['user']->getIdUser())) {
                     $nouvelleNote = $app['idiorm.db']->for_table('note_services')->create();
                     #On associe les colonnes de notre BDD avec les valeurs du formulaire
                     #Colonne MYSQL                                              #Valeurs du Fomulaire
@@ -673,12 +677,9 @@ class IndexController
 
         $form->handleRequest($request);
 
-        
-            
         # Affichage dans la vue
         return $app['twig']->render('recherche.html.twig', [
-            'form' => $form->createView()
-            
+            'form' => $form->createView()   
         ]);
 
     }// Fin public function rechercheAction

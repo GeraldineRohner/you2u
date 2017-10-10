@@ -27,7 +27,11 @@ Erreur lors de la publication de votre commentaire </p>
             <div class="box-caption">
         {% if infoUser is not empty  %}    
 		<h1>{{ infoUser.pseudo }}</h1>
-		{#Affichage des notes #}
+        {% if is_granted('ROLE_USER') %}
+		{# Affichage du bouton pour signaler l'utilisateur #}
+		<h4><i class="fa fa-exclamation-circle" aria-hidden="true"></i><a href="{{ url('membre_signalement_utilisateur',{idUser : infoUser.idUser}) }}">Signaler l'utilisateur</a></h4>
+		{% endif %}
+		{# Affichage des notes #}
 		Note utilisateur : 
 		 {% if totalNote < 1 %}
                     	Vous n'avez pas de note.
@@ -57,7 +61,7 @@ Erreur lors de la publication de votre commentaire </p>
                     slugService         : service.titreService | slug ,
                     idService         : service.idService 
                  }
-        		 )}}">{{ service.titreService }}</a></td><td>{{ service.nomCategorieService }}</td><td>{{ service.commune }}</td><td>{{ service.perimetreAction }} KM</td><td><a href="{{ url('index_annonce' , {
+        		 )}}">{{ service.titreService }}</a></td><td><a href="{{ url('index_categorie', {nomCategorieService : service.nomCategorieService | lower }) }}">{{ service.nomCategorieService }}</a></td><td>{{ service.commune }}</td><td>{{ service.perimetreAction }} KM</td><td><a href="{{ url('index_annonce' , {
                     nomCategorieService : service.nomCategorieService | lower,
                     slugService         : service.titreService | slug ,
                     idService         : service.idService 
@@ -74,7 +78,8 @@ Erreur lors de la publication de votre commentaire </p>
         {# Affichage de la liste des services #}
         
         <h2>Coordonnées</h2>
-		{% if infoUser.profilVisible == 1 %}
+        {# Si l'utilisateur a indiqué son profil comme étant visible ou que la personne consultant la page est admin #}
+		{% if infoUser.profilVisible == 1 or is_granted('ROLE_ADMIN') %}
 		
 		
 		

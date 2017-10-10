@@ -25,11 +25,11 @@ Erreur lors de la publication de votre commentaire </p>
             <div class="col-md-8 col-sm-12">
                 <!--post-detail-->
                 <service class="post-detail">
-                {% if service.validationService == 1 and service.ouvert == 1 %}
-                    <h1>{{ service.titreService }}  </h1>
+                {% if service.validationService == 1 and service.ouvert == 1 or is_granted('ROLE_ADMIN') %}
+                    <h1>{{ service.titreService }}<h1></h1> {% if is_granted('ROLE_USER') %} <h4><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <a href="{{ url('membre_signalement_annonce',{idService : service.idService}) }}">Signaler l'annonce</a> {% endif %}</h4>
                     
                         {% if totalNote < 1 %}
-                    	Vous n'avez pas de note.
                     	{% else %}
                     	{% for nombreStars in 1.. nombreStars %}
                         <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i> 
@@ -57,7 +57,7 @@ Erreur lors de la publication de votre commentaire </p>
 
                     {{ service.descriptionService|raw }}
 
-                    <h5 class="text-right font-heading"><strong>{{ service.pseudo }}</strong> </h5>
+                    
                     
                     
                     
