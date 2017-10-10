@@ -32,7 +32,8 @@ class MemberController
         $message = 'Espace Membre You2u';
 
 
-        #Simulation d'un profil 
+        #Simulation d'un profil
+        $profilVisible = $app['idiorm.db']->for_table('users')->select('profilVisible')->where('idUser', $app['user']->getIdUser())->find_one();
         $noteMoyenne = $app['idiorm.db']->for_table('note_users')->where('idUserNoted', $app['user']->getIdUser())->avg('note');
         $nombreStars = round($noteMoyenne, 0, PHP_ROUND_HALF_DOWN);
 
@@ -45,6 +46,7 @@ class MemberController
             }
         $totalNote = $app['idiorm.db']->for_table('note_users')->where('idUserNoted',$app['user']->getIdUser())->count('note');
         $annoncesUser = $app['idiorm.db']->for_table('vue_services_profil')->where('idUser',$app['user']->getIdUser())->find_result_set();
+
     
         if($totalNote != 0)
         {
@@ -55,7 +57,8 @@ class MemberController
                 'nombreStars' => $nombreStars,
                 'halfstar'    => $halfstar,
                 'annoncesUser' => $annoncesUser,
-                'totalNote' => $totalNote
+                'totalNote' => $totalNote,
+                'profilVisible' => $profilVisible
             ]);
         } 
             else
@@ -65,6 +68,7 @@ class MemberController
                     'message' => 'Bienvenue',
                     'totalNote' => $totalNote,
                     'annoncesUser' => $annoncesUser,
+                    'profilVisible' => $profilVisible
                 ]);
             }
     }
@@ -87,7 +91,14 @@ class MemberController
             return $array;
         };
 
-        #creation du formulaire permettant la modification du profil. 
+        #creation du formulaire permettant la modification du profil.
+        if ($app['user']->getProfilVisible() == 1)
+        {
+        $profilVisible = 'checked';
+    }
+    else {
+        $profilVisible = false;
+    }
         $form = $app['form.factory']->createBuilder(FormType::class)
             ->add('pseudo', TextType::class, array(
                 'required' => true,
@@ -121,7 +132,7 @@ class MemberController
                     )),
                     new Regex(array( # Contraite de contenu
                         'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë\'-]*[a-zéèàùûêâôë]$/i',
-                        'message' => 'Votre prénom ne peut contenir que des caractères alphanumériques, tirets ou apostrophes et doit commencer et se terminer par une lettre'
+                        'message' => 'Votre prénom ne peut contenir que des lettres, tirets ou apostrophes et doit commencer et se terminer par une lettre'
                     ))),
                 'attr' => array(
                     'class' => 'form-control',
@@ -141,7 +152,7 @@ class MemberController
                     )),
                     new Regex(array(  # Contraite de contenu
                         'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zéèàùûêâôë \'-]*[a-zéèàùûêâôë]$/i',
-                        'message' => 'Votre nom ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces, et doit commencer et se terminer par une lettre'
+                        'message' => 'Votre nom ne peut contenir que des lettres, tirets apostrophes ou espaces, et doit commencer et se terminer par une lettre'
                     ))),
                 'attr' => array(
                     'class' => 'form-control',
@@ -217,8 +228,10 @@ class MemberController
                 ]
             ])
             ->add('profilVisible', CheckboxType::class, [
-                'label' => '',
+
+                'label' => false,
                 'required' => false,
+                'attr' => array('checked'   => $profilVisible)
             ])
             ->add('photo', FileType::class, [
                 'required' => false,
@@ -272,14 +285,14 @@ class MemberController
                     'pseudo' => htmlspecialchars(utf8_encode($modifProfil['pseudo'])),
                     'prenom' => htmlspecialchars(utf8_encode($modifProfil['prenom'])),
                     'nom' => htmlspecialchars(utf8_encode($modifProfil['nom'])),
-                    'email' => $modifProfil['email'],
+                    'email' => htmlspecialchars($modifProfil['email']),
                     'adresse' => htmlspecialchars(utf8_encode($modifProfil['adresse'])),
                     'ville' => $villeCP['commune'],
                     'codePostal' => $villeCP['codePostal'],
                     'codeINSEE' => $villeCP['codeINSEE'],
                     'telMobile' => htmlspecialchars($modifProfil['telMobile']),
                     'telFixe' => htmlspecialchars($modifProfil['telFixe']),
-                    'profilVisible' => $modifProfil['profilVisible'],
+                    'profilVisible' => htmlspecialchars($modifProfil['profilVisible']),
                     'photo' => $urlFichier,
                     'descriptionUser' => htmlspecialchars($modifProfil['descriptionUser'])
                 )
@@ -593,13 +606,43 @@ $userEmail = $app['user']->getEmail();
                         'value' => utf8_encode($userEmail)
                     )
                 ))
-                # Champ texte où l'utilisateur signalant pourra décrire son problème
-                ->add('contact', TextareaType::class, [
+                ->add('messageSujet', TextType::class, [
                     'required' => true,
                     'label' => false,
-                    'constraints' => array(new NotBlank(
-                        array('message' => 'Merci de décrire le problème rencontré')
-                    )
+                    'constraints' => array(
+                        new Length(array( # Contrainte de longueur
+                            'min' => 1,
+                            'max' => 100,
+                            'minMessage' => 'Votre sujet doit contenir au moins un caractère',
+                            'maxMessage' => 'Votre sujet ne peut contenir plus de cent caractères'
+                        )),
+                        new Regex(array(  # Contraite de contenu
+                            'pattern' => '/^[\w -\'éèàùûêâôë]+$/i',
+                            'message' => 'Votre sujet ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces'
+                        ))),
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+
+
+
+
+                # Champ texte où l'utilisateur signalant pourra décrire son problème
+                ->add('messageContact', TextareaType::class, [
+                    'required' => true,
+                    'label' => false,
+                    'constraints' => array(
+                        new Length(array( # Contrainte de longueur
+                            'min' => 5,
+                            'max' => 500,
+                            'minMessage' => 'Votre message doit contenir au moins cinq caractères',
+                            'maxMessage' => 'Votre message ne peut contenir plus de cinq cents caractères'
+                        )),
+                        new Regex(array(  # Contraite de contenu
+                            'pattern' => '/^[\w -\'éèàùûêâôë]+$/i',
+                            'message' => 'Votre message ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces'
+                        ))
                     ),
                     'attr' => [
                         'class' => 'form-control'
@@ -633,7 +676,8 @@ $userEmail = $app['user']->getEmail();
                     # Insertion BDD (infos utilisateur signalé/signalant, et timestamp)
                     $enregistrementMessage->idUserContactant = $idUser;
                     $enregistrementMessage->dateContact = time();
-                    $enregistrementMessage->messageContact = htmlspecialchars($envoiMessage['contact']);
+                    $enregistrementMessage->messageSujet = utf8_encode(htmlspecialchars($envoiMessage['messageSujet']));
+                    $enregistrementMessage->messageContact = htmlspecialchars($envoiMessage['messageContact']);
 
                     # Enregistrement
                     $enregistrementMessage->save();

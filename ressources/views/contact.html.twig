@@ -46,13 +46,22 @@
                                         {# On affiche dans un champ texte verrouillé le pseudo de l'utilisateur, cette donnée est purement visuelle (pas d'incidence si l'utilisateur le change en trifouillant le HTML) #}
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
+                                        Sujet de votre demande
+                                    </label>
+                                    <div class="col-md-7">
+                                        {{ form_row(contact.messageSujet) }}
+                                    </div>
+                                </div>
+
 
                                 <div class="form-group">
                                     <label for="" class="col-md-3 control-label">
                                         Votre message
                                     </label>
                                     <div class="col-md-7">
-                                        {{ form_row(contact.contact) }}
+                                        {{ form_row(contact.messageContact) }}
                                     </div>
                                 </div>
                                 {# Important pour la validation du Token #}

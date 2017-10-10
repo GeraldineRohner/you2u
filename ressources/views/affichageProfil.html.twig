@@ -9,6 +9,8 @@
 {# Contenu de la Page #}
 {% block contenu %}
 
+                    		<td>Ville : </td><td>{{ infoUser.ville | decode}} </td>
+<<<<<<< HEAD
 	{% if global.request.get('note') == 'success' %}
 		<div class="alert alert-success">
 			<p class="text-center"><i class="fa fa-thumbs-up"></i>Félications !. </p>
@@ -16,6 +18,89 @@
 		</div>
 	{% endif %}
 
+						<td> {% if infoUser.photo == null %}
+                                        <img src="{{ asset('img/avatar.png') }}" alt="{{ infoUser.pseudo | decode }}" />
+                                        {% else %}
+                                        <img src="{{ asset('img/img_user/'~infoUser.photo) }}" alt="{{ infoUser.pseudo | decode }}" />>{%  endif %}</td>
+                    	</tr>
+        </table>
+        
+        
+        
+          
+        
+        
+		{% else %}
+		{# L'utilisateur a défini son profil comme étant privé #}
+				<table align="center" class="table table-condensed">
+			<tr>
+				<td>Email : </td><td>{{ infoUser.email | decode }} </td>
+			</tr>
+				</table>
+                            <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							L'utilisateur a défini son profil comme étant privé </p>
+                           
+                       
+		{% endif %}
+		{# Fin de la condition d'affichage public #}
+		<h3> Liste des commentaires</h3>
+		{% if commentairesUser is not empty %}
+        {% for commentaire in commentairesUser %}
+        
+        <br />
+        Commentaire de <a href="{{ url('index_profil', {idUser : commentaire.idNotedBy}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
+        
+        {% endfor %} 
+        {% else %}
+        Vous n'avez pas encore recu de commentaires.
+        {% endif %}
+        {% if is_granted('ROLE_USER') %}
+		<h3>Noter l'utilisateur</h3>
+		<div class="container">
+                        <div class="starter-template">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" >
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Note : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.note) }}
+                            	</div>
+                    	</div>
+                    	<div class="form-group">
+                        	<label for="" class="col-md-3 control-label">
+            					Commentaires : 
+            				</label>
+                				<div class="col-md-7">
+                            	{{ form_row(form.commentaires) }}
+                            	</div>
+                    	</div>
+                    	{{ form_row(form._token) }}
+        				<div class="form-group">
+            				<label for="" class="col-md-3 control-label">
+            					
+            				</label>
+            					<div class="col-md-7">
+            					<input type="submit" class="btn btn-primary" value="Noter" />
+            					</div>
+            				</div>
+        				</form>	
+                  
+                    </div>
+                  </div> 	
+        {% endif %} 
+        {#Fin de la condition de notation #}
+        {% else %}
+      	<div class="alert alert-danger">
+            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                L'utilisateur a été banni. </p>
+        {% endif %}  
+        
+        {% else %}
+      	<div class="alert alert-danger">
+            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existence de cette fiche. </p>
+        {% endif %}    
 	{% if global.request.get('note') == 'error' %}
 		<div class="alert alert-danger">
 			<p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Erreur lors de la publication de votre commentaire </p>
