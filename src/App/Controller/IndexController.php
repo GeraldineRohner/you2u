@@ -338,7 +338,7 @@ class IndexController
             ))
 
             ->add('accepterConditions', CheckboxType::class, array(
-                'label' => '',
+                'label' => false,
                 'required' => true,
                 'constraints' => array(new NotBlank(array(
                         'message' => 'Vous devez accepter les conditions générales de vente')
