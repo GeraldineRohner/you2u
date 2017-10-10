@@ -691,8 +691,8 @@ class IndexController
 
         $annoncesJson = [];
         foreach ($annoncesPubliees as $key => $data) {
-            $annoncesJson[$key]['titreService'] = utf8_decode($data['titreService']);
-            $annoncesJson[$key]['titreServiceSlug'] = utf8_decode(str_replace(' ', '-', $data['titreService']));
+            $annoncesJson[$key]['titreService'] = str_replace('?', '', utf8_decode($data['titreService']));
+            $annoncesJson[$key]['titreServiceSlug'] = preg_replace('~[^\pL\d]+~u','-',utf8_decode($data['titreService']));
             $annoncesJson[$key]['photo'] = utf8_decode($data['photo']);
             $annoncesJson[$key]['nomCategorieService'] = utf8_decode(lcfirst($data['nomCategorieService']));
             $annoncesJson[$key]['idService'] = utf8_decode($data['idService']);
