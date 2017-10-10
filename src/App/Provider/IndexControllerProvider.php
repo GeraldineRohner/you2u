@@ -26,6 +26,14 @@ class IndexControllerProvider implements ControllerProviderInterface {
             # pour la créations de lien : "controller_action"
             ->bind('index_index');
 
+
+        $controllers
+            # On associe une Route à un Controller et une Action
+            ->get('/about', 'App\Controller\IndexController::presentationAction')
+            # En option je peux donner un nom à la route, qui servira plus tard
+            # pour la créations de lien : "controller_action"
+            ->bind('index_about');
+
         $controllers
             # On associe une Route à un Controller et une Action
             ->get('/categories', 'App\Controller\IndexController::liste_categorieAction')
