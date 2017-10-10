@@ -49,20 +49,25 @@
                                              class="img-responsive"/>#}
                                     </a>
                                     <h5><a href="{{ url('index_categorie', {
-                                        nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">Catégorie : {{ service.nomCategorieService }}</a></h5>
+                                        nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">Catégorie : {{ service.nomCategorieService | decode }}</a></h5>
                                 </div>
                                 <h3><a href="{{ url('index_annonce', {
                                         nomCategorieService : service.nomCategorieService | lower,
                                         slugService         : service.titreService | slug ,
-                                        idService         : service.idService }) }}">{{ service.titreService }}</a></h3>
+                                        idService         : service.idService }) }}">{{ service.titreService | decode }}</a></h3>
                                 <div class="meta-post">
                                     <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
-                                        {{ service.pseudo }}
-                                        <img src="{{ asset('img/img_user/'~service.photo) }}" alt="{{ service.pseudo }}" />
+                                        {{ service.pseudo | decode }}
+                                        {% if service.photo == null %}
+                                        <img src="{{ asset('img/avatar.png') }}" alt="{{ service.pseudo | decode }}" />
+                                        {% else %}
+                                        <img src="{{ asset('img/img_user/'~service.photo) }}" alt="{{ service.pseudo | decode }}" />
+
+                                        {% endif %}
                                     </a>
                                     <em></em>
                                     <span>
-                                    {{ service.datePublicationService|date("d/m/Y")  }}
+                                    {{ service.datePublicationService|date("d/m/Y")| decode  }}
                                 </span>
                                 </div>
                             </div>

@@ -50,7 +50,7 @@ class IndexController
     public function liste_categorieAction(Application $app)
 
     {
-        $categories = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
+        $categories = $app['idiorm.db']->for_table('categorie_service')->where_not_equal('idCategorieService', 1)->find_result_set();
 
         return $app['twig']->render('categories.html.twig',
             ['categories' => $categories]);

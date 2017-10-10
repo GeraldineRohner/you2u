@@ -61,7 +61,7 @@ Erreur lors de la publication de votre commentaire </p>
                     slugService         : service.titreService | slug ,
                     idService         : service.idService 
                  }
-        		 )}}">{{ service.titreService }}</a></td><td><a href="{{ url('index_categorie', {nomCategorieService : service.nomCategorieService | lower }) }}">{{ service.nomCategorieService }}</a></td><td>{{ service.commune }}</td><td>{{ service.perimetreAction }} KM</td><td><a href="{{ url('index_annonce' , {
+        		 )}}">{{ service.titreService | decode }}</a></td><td><a href="{{ url('index_categorie', {nomCategorieService : service.nomCategorieService | lower }) }}">{{ service.nomCategorieService | decode }}</a></td><td>{{ service.commune }}</td><td>{{ service.perimetreAction | decode }} KM</td><td><a href="{{ url('index_annonce' , {
                     nomCategorieService : service.nomCategorieService | lower,
                     slugService         : service.titreService | slug ,
                     idService         : service.idService 
@@ -85,31 +85,35 @@ Erreur lors de la publication de votre commentaire </p>
 		
 		<table align="center" class="table table-condensed">
                     	<tr>
-                    		<td>Nom public : </td><td>{{ infoUser.pseudo }} </td>
+                    		<td>Nom public : </td><td>{{ infoUser.pseudo | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Description : </td><td>{{ infoUser.descriptionUser }} </td>
+                    		<td>Description : </td><td>{{ infoUser.descriptionUser | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Email : </td><td>{{ infoUser.email }} </td>
+                    		<td>Email : </td><td>{{ infoUser.email | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Adresse : </td><td>{{ infoUser.adresse }} </td>
+                    		<td>Adresse : </td><td>{{ infoUser.adresse | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Code Postal : </td><td>{{infoUser.codePostal }} </td>
+                    		<td>Code Postal : </td><td>{{infoUser.codePostal | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Ville : </td><td>{{ infoUser.ville}} </td>
+                    		<td>Ville : </td><td>{{ infoUser.ville | decode}} </td>
                     	</tr>
                     	<tr>
-                    		<td>Téléphone (mobile) : </td><td>{{ infoUser.telMobile }} </td>
+                    		<td>Téléphone (mobile) : </td><td>{{ infoUser.telMobile | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Téléphone (fixe) : </td><td>{{ infoUser.telFixe }}</td>
+                    		<td>Téléphone (fixe) : </td><td>{{ infoUser.telFixe | decode }}</td>
                     	</tr>
                     	<tr>
-                    		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~infoUser.photo) }}"></td>
+
+                    		<td> {% if infoUser.photo == null %}
+                                        <img src="{{ asset('img/avatar.png') }}" alt="{{ infoUser.pseudo | decode }}" />
+                                        {% else %}
+                                        <img src="{{ asset('img/img_user/'~infoUser.photo) }}" alt="{{ infoUser.pseudo | decode }}" />>{%  endif %}</td>
                     	</tr>
         </table>
         

@@ -60,7 +60,7 @@ require PATH_RESSOURCES . '/config/security.php';
 
 #11 : Gestion des Erreurs
 #   : https://gist.github.com/tournasdim/171b443065936bbb5ef3
-$app->error(function (\Exception $e) use ($app) {
+/*$app->error(function (\Exception $e) use ($app) {
     if ($e instanceof NotFoundHttpException) {
         return $app['twig']->render('erreur.html.twig', [
             'message' => 'Cette page n\'existe pas'
@@ -75,7 +75,7 @@ $app->error(function (\Exception $e) use ($app) {
     else return $app['twig']->render('erreur.html.twig', [
         'message' => 'Vous n\'avez pas l\'autorisation d\'accéder à cette page'
     ]);
-});
+});*/
 
 #12 : On retourne $app
 return $app;
