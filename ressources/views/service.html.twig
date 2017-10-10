@@ -47,7 +47,7 @@
                                             idService		    : service.idService } ) }}">{{ service.titreService }}</a></h3>
                                     <div class="meta-post">
                                         <a href="#">
-                                            {{ service.pseudo }}
+                                            {{ service.pseudo | decode }}
                                         </a>
                                         <a href="{{ url('membre_signalement_utilisateur',
                                         {
@@ -56,10 +56,10 @@
                                         }}"> Signaler l'utilisateur </a>
                                         <em></em>
                                         <span>
-                                            {{ service.datePublicationService }}
+                                            {{ service.datePublicationService | decode }}
                                     </span>
                                     </div>
-                                    {{ service.descriptionService | accroche }}
+                                    {{ service.descriptionService | accroche | decode }}
                                 </div>
                             </div>
                         </service>

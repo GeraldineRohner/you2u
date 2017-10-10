@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+
+
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -412,7 +414,14 @@ class MemberController
                 'constraints' => array(new Regex(array( # Contraite de contenu
                     'pattern' => '/^[a-zé,èàùûêâôë \'-]*$/i',
                     'message' => 'Le titre est invalide. Il ne peut pas contenir de caractères spéciaux.'
-                ))),
+                )),
+                    new Length(array( # Contraite de contenu
+                        'min' => 3,
+                        'max' => 100,
+                        'minMessage' => 'Votre titre doit contenir au moins trois caractères',
+                        'maxMessage' => 'Votre titre ne peut contenir plus de cent caractères'
+                    ))
+                    ),
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -423,6 +432,11 @@ class MemberController
                 'expanded' => false,
                 'multiple' => false,
                 'label' => false,
+                'constraints' => array(
+                    new Regex(array( # Contrainte de longueur
+                        'pattern' => '/^[1-9]{1}[0-9]{0,5}$/i',
+                        'message' => 'N° d\'annonce non valide'
+                    ))),
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -431,9 +445,11 @@ class MemberController
             ->add('tarifService', NumberType::class, array(
                 'label' => false,
                 'required' => true,
-                'constraints' => array(new NotBlank(array(
-                        'message' => 'Veuillez renseigner un tarif (mettez 0 si vous souhaitez rendre ce service gratuitement)')
-                )),
+                'constraints' => array(
+                    new Regex(array( # Contrainte de longueur
+                        'pattern' => '/^[0-9]{1,4}$/i',
+                        'message' => 'Prix invalide. Il doit être compris entre 1 et 9999 (mettez 0 si vous ne souhaitez pas facturer le service proposé)'
+                    ))),
                 'attr' => array(
                     'class' => 'form-control',
                     'min' => 0
@@ -453,6 +469,11 @@ class MemberController
             ->add('perimetreAction', IntegerType::class, array(
                 'label' => false,
                 'required' => false,
+                'constraints' => array(
+                    new Regex(array( # Contrainte de longueur
+                        'pattern' => '/^[1-2]{1}[0-9]{0,2}$/i',
+                        'message' => 'Périmetre invalide. Veuillez saisir un nombre compris entre 1 et 299'
+                    ))),
                 'attr' => array(
                     'class' => 'form-control',
                     'min' => 0
@@ -474,9 +495,17 @@ class MemberController
             ->add('descriptionService', TextareaType::class, array(
                 'required' => true,
                 'label' => false,
-                'constraints' => array(new NotBlank(array(
-                        'message' => 'Veuillez renseigner le descriptif de votre annonce')
+                'constraints' => array(new Regex(array( # Contraite de contenu
+                    'pattern' => '/^[a-zé,èàùûêâôë \'-]*$/i',
+                    'message' => 'La description est invalide. elle ne peut pas contenir de caractères spéciaux.'
                 )),
+                    new Length(array( # Contraite de contenu
+                        'min' => 5,
+                        'max' => 500,
+                        'minMessage' => 'Votre description doit contenir au moins cinq caractères',
+                        'maxMessage' => 'Votre description ne peut contenir plus de cinq cents caractères'
+                    ))
+                    ),
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -508,7 +537,14 @@ class MemberController
             # Colonnes BDD                      # Champs du formulaire
             $annonceDb->titreService = htmlspecialchars(utf8_encode($annonce['titreService']));
             $annonceDb->idCategorieService = $annonce['idCategorieService'];
-            $annonceDb->tarifService = htmlspecialchars(utf8_encode($annonce['tarifService']));
+
+            if ($annonce['tarifService'] == 0) {
+                $annonceDb->tarifService = htmlspecialchars(utf8_encode($annonce['tarifService']));
+            }
+            else {
+                $tarif = ltrim(htmlspecialchars(utf8_encode($annonce['tarifService'])), '0');
+                $annonceDb->tarifService = $tarif;
+            }
             $annonceDb->lieuService = $villeCP['codeINSEE'];
             $annonceDb->perimetreAction = htmlspecialchars(utf8_encode($annonce['perimetreAction']));
             $annonceDb->descriptionService = htmlspecialchars(utf8_encode($annonce['descriptionService']));

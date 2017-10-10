@@ -693,17 +693,17 @@ class IndexController
 
         $annoncesJson = [];
         foreach ($annoncesPubliees as $key => $data) {
-            $annoncesJson[$key]['titreService'] = utf8_encode($data['titreService']);
-            $annoncesJson[$key]['titreServiceSlug'] = utf8_encode(str_replace(' ', '-', $data['titreService']));
-            $annoncesJson[$key]['photo'] = utf8_encode($data['photo']);
-            $annoncesJson[$key]['nomCategorieService'] = utf8_encode(lcfirst($data['nomCategorieService']));
-            $annoncesJson[$key]['idService'] = utf8_encode($data['idService']);
-            $annoncesJson[$key]['prenom'] = utf8_encode($data['prenom']);
-            $annoncesJson[$key]['nom'] = utf8_encode($data['nom']);
-            $annoncesJson[$key]['tarifService'] = utf8_encode($data['tarifService']);
-            $annoncesJson[$key]['datePublicationService'] = utf8_encode(date("d/m/Y", $data['datePublicationService']));
-            $annoncesJson[$key]['commune'] = utf8_encode($data['commune']);
-            $annoncesJson[$key]['descriptionService'] = utf8_encode($data['descriptionService']);
+            $annoncesJson[$key]['titreService'] = utf8_decode($data['titreService']);
+            $annoncesJson[$key]['titreServiceSlug'] = utf8_decode(str_replace(' ', '-', $data['titreService']));
+            $annoncesJson[$key]['photo'] = utf8_decode($data['photo']);
+            $annoncesJson[$key]['nomCategorieService'] = utf8_decode(lcfirst($data['nomCategorieService']));
+            $annoncesJson[$key]['idService'] = utf8_decode($data['idService']);
+            $annoncesJson[$key]['prenom'] = utf8_decode($data['prenom']);
+            $annoncesJson[$key]['nom'] = utf8_decode($data['nom']);
+            $annoncesJson[$key]['tarifService'] = utf8_decode($data['tarifService']);
+            $annoncesJson[$key]['datePublicationService'] = utf8_decode(date("d/m/Y", $data['datePublicationService']));
+            $annoncesJson[$key]['commune'] = utf8_decode($data['commune']);
+            $annoncesJson[$key]['descriptionService'] = utf8_decode($data['descriptionService']);
         };
 
         $array = [
