@@ -430,10 +430,7 @@ class MemberController
             ->add('titreService', TextType::class, array(
                 'required' => true,
                 'label' => false,
-                'constraints' => array(new Regex(array( # Contraite de contenu
-                    'pattern' => '/^[a-zé,èàùûêâôë \'-]*$/i',
-                    'message' => 'Le titre est invalide. Il ne peut pas contenir de caractères spéciaux.'
-                )),
+                'constraints' => array(
                     new Length(array( # Contraite de contenu
                         'min' => 3,
                         'max' => 100,
@@ -514,10 +511,7 @@ class MemberController
             ->add('descriptionService', TextareaType::class, array(
                 'required' => true,
                 'label' => false,
-                'constraints' => array(new Regex(array( # Contraite de contenu
-                    'pattern' => '/^[a-zé,èàùûêâôë \'-]*$/i',
-                    'message' => 'La description est invalide. elle ne peut pas contenir de caractères spéciaux.'
-                )),
+                'constraints' => array(
                     new Length(array( # Contraite de contenu
                         'min' => 5,
                         'max' => 500,
@@ -644,12 +638,7 @@ $userEmail = $app['user']->getEmail();
                             'max' => 500,
                             'minMessage' => 'Votre message doit contenir au moins cinq caractères',
                             'maxMessage' => 'Votre message ne peut contenir plus de cinq cents caractères'
-                        )),
-                        new Regex(array(  # Contraite de contenu
-                            'pattern' => '/^[\w -\'éèàùûêâôë]+$/i',
-                            'message' => 'Votre message ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces'
-                        ))
-                    ),
+                        ))),
                     'attr' => [
                         'class' => 'form-control'
                     ]
