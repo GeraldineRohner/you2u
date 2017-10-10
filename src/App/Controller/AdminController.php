@@ -205,7 +205,15 @@ class AdminController
             $infoUser = $app['idiorm.db']->for_table('users')->find_one($idUser);
             if($infoUser['roleUser'] == 'ROLE_ADMIN')
             {
-                return $app->redirect($request->headers->get('referer').'?bannir=echec');
+                $go = $request->get('go');
+                if(!empty($go))
+                {
+                    return $app->redirect($app['url_generator']->generate($go).'?bannir=echec');
+                }
+                else
+                {
+                    return $app->redirect($request->headers->get('referer').'?bannir=echec');
+                }
             }
             else
             {

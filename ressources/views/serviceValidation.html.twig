@@ -47,7 +47,7 @@
                         	<th>Service </th><th>Proposé par : </th><th>Message</th><th>Date de soumission de l'alerte</th><th colspan="4" align="center">Actions</th>
                         	{% for serviceAValider in servicesAValider %}
                         	<tr>
-                        		<td>{{ serviceAValider.titreService }}</td><td>{{ serviceAValider.pseudo }}</td><td>{{ serviceAValider.descriptionService }}</td><td>{{ serviceAValider.datePublicationService |date('d/m/Y') }}</td><td><a href="
+                        		<td>{{ serviceAValider.titreService | decode }}</td><td>{{ serviceAValider.pseudo | decode  }}</td><td>{{ serviceAValider.descriptionService  | decode }}</td><td>{{ serviceAValider.datePublicationService |date('d/m/Y') }}</td><td><a href="
                         		{{ url('index_annonce', 
                         		{idService: serviceAValider.idService,
                         		 slugService : serviceAValider.titreService|slug,

@@ -717,7 +717,7 @@ $userEmail = $app['user']->getEmail();
                     $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
                     $enregistrementSignalement->idUserSignale = $idUser;
                     $enregistrementSignalement->dateAlerte = time();
-                    $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
+                    $enregistrementSignalement->message = utf8_encode(htmlspecialchars($envoiSignalement['signalement']));
 
                     # Enregistrement
                     $enregistrementSignalement->save();
@@ -822,7 +822,7 @@ $userEmail = $app['user']->getEmail();
                     $enregistrementSignalement->idUserAlertant = $app['user']->getIdUser();
                     $enregistrementSignalement->idUserSignale = $userProposantService->idUser;
                     $enregistrementSignalement->dateAlerte = time();
-                    $enregistrementSignalement->message = htmlspecialchars($envoiSignalement['signalement']);
+                    $enregistrementSignalement->message = utf8_encode(htmlspecialchars($envoiSignalement['signalement']));
 
 
                     $enregistrementSignalement->save();

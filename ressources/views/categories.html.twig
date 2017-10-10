@@ -6,6 +6,7 @@
 
     {% block contenu %}
 
+<<<<<<< HEAD
         <section id="portfolio" class=" portfolio">
             <div class="container">
                 <div class="row">
@@ -32,6 +33,22 @@
             </div>
             </div>
         </section>
+=======
+
+        <ul>
+
+{% for categorie in categories %}
+
+
+
+    <li><p><a href="{{ url ('index_categorie',{nomCategorieService : categorie.nomCategorieService | lower }) }}">{{ categorie.nomCategorieService }}</a></p>
+        <p>{{ categorie.descriptionCategorie }}</p></li>
+
+
+{% endfor %}
+
+        </ul>
+>>>>>>> c100b60a64f00e006e6ccf3d5a168a7f6930c4e7
 
 
 {% endblock %}
