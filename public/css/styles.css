@@ -1,0 +1,99 @@
+/*!
+ * Feuille de style du site MyFolio
+ */
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	margin-bottom: 30px;
+	padding-top: 50px;
+	background-color: #F1F1F1;
+}
+
+/** Couleur perso de la navbar **/
+.navbar-custom {
+	background: #061339;
+	border-color: #061339;
+}
+.navbar-custom .navbar-brand {
+	color: #FFF;
+	font-size: 22px;
+	font-family: 'Merienda', cursive;
+}
+.navbar-custom .navbar-brand:focus,
+.navbar-custom .navbar-brand:hover {
+	color: #7986AC;
+}
+
+/** Le premier bloc **/
+#masthead {
+	background-image: url('../img/background.jpg');
+	background-repeat: repeat;
+	background-color: #B9CDFF;
+}
+#masthead h1 {
+	text-align: center;
+	color: #FFF;
+	font-weight: 400;
+	font-family: 'Merienda', cursive;
+	padding: 50px 0;
+	margin: 20px auto;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+
+/** Le contenu avec le carousel **/
+
+#content {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+#content aside h2 {
+	color: #2F4073;
+	font-size: 20px;
+	font-family: 'Merienda', cursive;
+	margin: 10px auto 20px;
+	text-align: center;
+}
+
+.carousel-caption {
+	text-shadow: 2px 2px 2px rgba(0,0,0,.9);
+}
+
+/* Nos chats à adopter */
+#about {
+	background-color: #DDD;
+	padding: 15px 0;
+}
+#about h2 {
+	color: #2F4073;
+	font-family: 'Merienda', cursive;
+	margin: 15px 0 20px;
+}
+
+#about .catHead {
+	background-color: #7885A5;
+	-webkit-transition: background-color 1s linear;
+	-moz-transition: background-color 1s linear;
+	-o-transition: background-color 1s linear;
+	transition: background-color 1s linear;
+}
+#about:hover .catHead {
+	background-color: #061339;
+}
+
+/** Le footer, toujours collé en bas **/
+/** http://getbootstrap.com/examples/sticky-footer-navbar/ **/
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 30px;
+	background-color: #061339;
+}
+footer p {
+	margin-bottom: 0;
+	line-height: 30px;
+	font-size: 12px;
+	color: #DDD;
+}

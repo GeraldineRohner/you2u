@@ -4,180 +4,102 @@
 
 {% block contenu %}
 
-    <div class="row">
-        <div class="col-xs-6 col-xs-push-3">
+<!-- Debut section connexion-->
+<div class="container-fluid">
+    <div class="row sizeLeft">
+        <div class="col-md-8 connex">
+            <div class="acroche">
+                <img src="{{ asset('img/inscription.svg') }}"><br>
+            </div>
+
             {% if messages is defined %}
+
                 {%  for message in messages%}
-                   {{  message | raw}}
+                    {{  message | raw}}
                 {%  endfor %}
 
             {% endif %}
 
-            <h2 class="text-center">Inscription d'un Membre</h2>
-
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <h1>Inscription d'un Membre :</h1>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-xs-10 col-xs-offset-1">
                     <form enctype="multipart/form-data" class="form-horizontal" method="POST">
 
-
-
                         <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre nom*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.nom) }}
+                            <label for="" class="col-md-3 control-label">Votre nom*</label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.nom) }}
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre prénom*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.prenom) }}
+                            <div class="form-group">
+                                <label for="" class="col-md-3 control-label">Votre prénom*</label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.prenom) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre nom d'utilisateur*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.pseudo) }}
+
+                            <div class="form-group">
+                                <label for="" class="col-md-3 control-label">Votre nom d'utilisateur*</label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.pseudo) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre email*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.email) }}
+
+                            <div class="form-group">
+                                <label for="" class="col-md-3 control-label">Votre email*</label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.email) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre mot de passe*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.motDePasse) }}
+
+                            <div class="form-group">
+                                <label for="" class="col-md-3 control-label">Votre mot de passe*</label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.motDePasse) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Confirmez votre mot de passe*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.motDePasseConfirmation) }}
+
+                            <div class="form-group">
+                                <label for="" class="col-md-3 control-label">Confirmez votre mot de passe*</label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.motDePasseConfirmation) }}
+                                </div>
                             </div>
-                        </div>
 
-                        {#
-
-
-                      PARTIE FINALEMENT RESERVEE AU PROFIL
-    ----------------------------------------------------------------------
-
-                      <div class="form-group" id="the-basics">
-                            <label for="" class="col-md-3 control-label">
-                                Votre ville*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.ville) }}
+                            <div class="form-group">
+                                <label for="" class="col-md-3 control-label">
+                                    Accepter les conditions générales de vente
+                                </label>
+                                <div class="col-md-7">
+                                    {{ form_row(formInscription.accepterConditions) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre n° et nom de voie*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.adresse) }}
+
+                            {# Important pour la validation du Token #}
+                            {{ form_row(formInscription._token) }}
+
+                            <!-- Submit -->
+                            <div class="form-group">
+                                <div class="col-xs-7 col-xs-offset-3">
+                                    <button type="submit" class="btn btn-primary" value="S'inscrire">S'inscrire</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre code postal*
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.codePostal) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre n° de télephone fixe
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.telFixe) }}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Votre n° de télephone mobile
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.telMobile) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Une petite photo ?
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.photo) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Cochez cette case si vous souhaitez que vous informations personnelles n'apparaissent pas
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.profilVisible) }}
-                            </div>
-                        </div>
-
-                        
-
-    ------------------------------------------------------------------- -#}
-
-
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">
-                                Accepter les conditions générales de vente
-                            </label>
-                            <div class="col-md-7">
-                                {{ form_row(formInscription.accepterConditions) }}
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-                        {# Important pour la validation du Token #}
-                        {{ form_row(formInscription._token) }}
-
-                        <!-- Submit -->
-                        <div class="form-group">
-                            <div class="col-xs-7 col-xs-offset-3">
-                                <button type="submit" class="btn btn-primary" value="S'inscrire">
-                                    S'inscrire</button>
-                            </div>
-                        </div>
-
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
+
+
 
 {% endblock %}
 

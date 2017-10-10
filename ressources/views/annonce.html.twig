@@ -26,7 +26,7 @@ Erreur lors de la publication de votre commentaire </p>
                 <!--post-detail-->
                 <service class="post-detail">
                 {% if service.validationService == 1 and service.ouvert == 1 or is_granted('ROLE_ADMIN') %}
-                    <h1>{{ service.titreService }}<h1></h1> {% if is_granted('ROLE_USER') %} <h4><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <h1>Intitulé : {{ service.titreService | decode}}<h1></h1> {% if is_granted('ROLE_USER') %} <h4><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                     <a href="{{ url('membre_signalement_annonce',{idService : service.idService}) }}">Signaler l'annonce</a> {% endif %}</h4>
                     
                         {% if totalNote < 1 %}
@@ -45,17 +45,17 @@ Erreur lors de la publication de votre commentaire </p>
                    
                     <div class="meta-post">
                         <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
-                            {{ service.pseudo }}
+                            {{ service.pseudo | decode }}
                         </a>
                         <em></em>
                         <span>
-                                {{ service.datePublicationService |date("d/m/Y") }}
+                                {{ service.datePublicationService | date("d/m/Y") | decode }}
                             </span>
                     </div>
 
                   {#  <img alt="" src="{{ asset('images/product/'~service.FEATUREDIMAGEservice) }}" class="img-responsive" /> #}
 
-                    {{ service.descriptionService|raw }}
+                    Description : {{ service.titreService|raw | decode }}
 
                     
                     
@@ -64,7 +64,7 @@ Erreur lors de la publication de votre commentaire </p>
             
              
                 </service>
-                <h3>Localisation  : {{ service.commune }} </h3>
+                <h3>Localisation  : {{ service.commune | decode }} </h3>
                 
                <div id="map"></div>
        			 <h3>Commentaires</h3>
@@ -166,7 +166,7 @@ Erreur lors de la publication de votre commentaire </p>
                                             nomCategorieService: service.nomCategorieService | lower,
                                             slugService : service.titreService | slug,
                                             idService : service.idService }) }}">
-                                            <img alt="{{ service.titreService }}" src="{{ asset('img'~service.photo) }}">
+                                            <img alt="{{ service.titreService | decode }}" src="{{ asset('img'~service.photo) }}">
                                         </a>
                                         <a href="{{ url('index_categorie', {
                                             nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">{{ service.nomCategorieService }}</a>
@@ -174,14 +174,14 @@ Erreur lors de la publication de votre commentaire </p>
                                     <h3><a href="{{ url('index_annonce', {
                                             nomCategorieService : service.nomCategorieService | lower,
                                             slugService : service.titreService | slug,
-                                            idService : service.idService }) }}">{{ service.titreService }}</a></h3>
+                                            idService : service.idService }) }}">Intitulé : {{ service.titreService | decode  }}</a></h3>
                                     <div class="meta-post">
                                         <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
-                                            {{ service.pseudo }}
+                                            {{ service.pseudo | decode  }}
                                         </a>
                                         <em></em>
                                         <span>
-                                            {{ service.datePublicationService|date("d/m/Y") }}
+                                            {{ service.datePublicationService|date("d/m/Y")  | decode }}
                                         </span>
                                     </div>
                                 </div>

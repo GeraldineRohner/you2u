@@ -50,7 +50,9 @@ class IndexController
     public function liste_categorieAction(Application $app)
 
     {
-        $categories = $app['idiorm.db']->for_table('categorie_service')->find_result_set();
+        $categories = $app['idiorm.db'] ->for_table('categorie_service')
+                                        ->where_not_equal('idCategorieService', 1)
+                                        ->find_result_set();
 
         return $app['twig']->render('categories.html.twig',
             ['categories' => $categories]);
@@ -248,8 +250,7 @@ class IndexController
                     ))),
 
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre nom'
+                    'class' => 'form-control'
                 )
             ))
             ->add('prenom', TextType::class, array(
@@ -268,8 +269,7 @@ class IndexController
                     ))),
 
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre prénom'
+                    'class' => 'form-control'
                 )
             ))
             ->add('email', EmailType::class, array(
@@ -282,8 +282,7 @@ class IndexController
                             'message' => 'L\'adresse email saisie est invalide',)
                     )),
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'votre.email@exemple.fr'
+                    'class' => 'form-control'
                 )
             ))
             ->add('pseudo', TextType::class, array(
@@ -296,15 +295,12 @@ class IndexController
                         'minMessage' => 'Votre pseudonyme doit contenir au moins trois caractères',
                         'maxMessage' => 'Votre pseudonyme ne peut contenir plus de  vingt caractères'
                     )),
-                    new Regex(array( # Contraite de contenu
+                    new Regex(array( # Contrainte de contenu
                         'pattern' => '/^[\w-\']+$/',
                         'message' => 'Votre pseudonyme ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
                     ))),
-
-
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre pseudonyme'
+                    'class' => 'form-control'
                 )
             ))
             # -- Mot de passe -- #
@@ -323,8 +319,7 @@ class IndexController
                         'message' => 'Votre mot de passe ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
                     ))),
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => '******'
+                    'class' => 'form-control'
                 )
             ))
             ->add('motDePasseConfirmation', PasswordType::class, array(
@@ -334,8 +329,7 @@ class IndexController
                         'message' => 'Veuillez renseigner une seconde fois votre mot de passe')
                 )),
                 'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Veuillez retaper votre mot de passe'
+                    'class' => 'form-control'
                 )
             ))
 
@@ -534,6 +528,7 @@ class IndexController
         return $app['twig']->render('recherche.html.twig', [
             'form' => $form->createView()   
         ]);
+       
 
     }// Fin public function rechercheAction
 
@@ -693,17 +688,17 @@ class IndexController
 
         $annoncesJson = [];
         foreach ($annoncesPubliees as $key => $data) {
-            $annoncesJson[$key]['titreService'] = utf8_encode($data['titreService']);
-            $annoncesJson[$key]['titreServiceSlug'] = utf8_encode(str_replace(' ', '-', $data['titreService']));
-            $annoncesJson[$key]['photo'] = utf8_encode($data['photo']);
-            $annoncesJson[$key]['nomCategorieService'] = utf8_encode(lcfirst($data['nomCategorieService']));
-            $annoncesJson[$key]['idService'] = utf8_encode($data['idService']);
-            $annoncesJson[$key]['prenom'] = utf8_encode($data['prenom']);
-            $annoncesJson[$key]['nom'] = utf8_encode($data['nom']);
-            $annoncesJson[$key]['tarifService'] = utf8_encode($data['tarifService']);
-            $annoncesJson[$key]['datePublicationService'] = utf8_encode(date("d/m/Y", $data['datePublicationService']));
-            $annoncesJson[$key]['commune'] = utf8_encode($data['commune']);
-            $annoncesJson[$key]['descriptionService'] = utf8_encode($data['descriptionService']);
+            $annoncesJson[$key]['titreService'] = utf8_decode($data['titreService']);
+            $annoncesJson[$key]['titreServiceSlug'] = utf8_decode(str_replace(' ', '-', $data['titreService']));
+            $annoncesJson[$key]['photo'] = utf8_decode($data['photo']);
+            $annoncesJson[$key]['nomCategorieService'] = utf8_decode(lcfirst($data['nomCategorieService']));
+            $annoncesJson[$key]['idService'] = utf8_decode($data['idService']);
+            $annoncesJson[$key]['prenom'] = utf8_decode($data['prenom']);
+            $annoncesJson[$key]['nom'] = utf8_decode($data['nom']);
+            $annoncesJson[$key]['tarifService'] = utf8_decode($data['tarifService']);
+            $annoncesJson[$key]['datePublicationService'] = utf8_decode(date("d/m/Y", $data['datePublicationService']));
+            $annoncesJson[$key]['commune'] = utf8_decode($data['commune']);
+            $annoncesJson[$key]['descriptionService'] = utf8_decode($data['descriptionService']);
         };
 
         $array = [
