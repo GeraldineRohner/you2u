@@ -89,6 +89,9 @@ class IndexController
         $suggestions = $app['idiorm.db']->for_table('vue_services')
             # Je récupère uniquement les annonces de la même catégorie que mon annonce
             ->where('nomCategorieService', ucfirst($nomCategorieService))
+            #Et que l'annonce est ouverte
+            ->where('validationService', 1)
+            ->where('ouvert', 1)
             # Sauf mon annonce en cours
             ->where_not_equal('idService', $idService)
             # 3 annonces maximum
