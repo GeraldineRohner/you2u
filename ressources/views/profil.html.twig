@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
-
 {# Block de title défini dans base.html.twig #}
 {% block title %} Espace Membre {% endblock %}
 
+<<<<<<< HEAD
 {# Block de Contenu défini dans base.html.twig #}
 {% block contenu %}
         
@@ -117,8 +117,140 @@
                         Vous devez être inscrit-e et/ou connecté-e pour accéder à cet espace <br />
                         <b>Connexion</b> - <b>Inscription</b></div>
                 {% endif %}
+=======
+    {# Block de Contenu défini dans base.html.twig #}
+    {% block contenu %}
+
+
+       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+           {% if global.request.get('ajoutAnnonce') == 'success' %}
+
+            <div class="alert alert-success">
+                <p class="text-center"><i class="fa fa-thumbs-up"></i> Votre annonce est soumise à validation. </p>
+                <p class="text-center"> Celle-ci sera publiée dans les 24 à 48 prochaines heures</p>
+>>>>>>> CSS2
             </div>
-        </div>
-        <!-- /.container -->
-    
+
+        {% endif %}
+
+
+        <div class="container-fluid">
+            <div class="row sizeLeft">
+              <div class="col-md-8 connex">
+                {% if app.user.photo == null %}
+                    <div class="imgprofil"><img src="{{asset ('img/avatar.png') }}" class="img-responsive" style='width:150px' src="{{ asset('img/img_user/'~app.user.photo) }}"></div>
+                    {%else%}
+                    <img class="img-responsive" width="150px" src="{{ asset('img/img_user/'~app.user.photo) }}">
+                {% endif %}
+
+                <div class="nomprenom"> 
+                    <h2>{{ app.user.pseudo }}</h2>
+                </div>
+
+
+                <div class="manote">
+                  <h3>Ma note utilisateur moyenne : </h3>
+              </div>
+
+              <div class="etoile">
+                  {% if nombreStars is not defined %}
+                   Vous n'avez pas de note.
+               {% else %}
+                   {% for nombreStars in 1.. nombreStars %}
+                    <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i> 
+                {% endfor %}
+
+                {% if halfstar is not empty %} 
+                  <i class="fa fa-star-half" aria-hidden="true" style="color:#ffd700"></i>
+              {% endif %}
+
+              / 5 sur une base de {{ totalNote }} note(s)</big>
+          {% endif %}
+      </div>
+
+      <div class="mesannonces">
+          {% if annoncesUser is not empty %} 
+           <h3>Vos annonces en cours et validées</h3>
+           <table class="table table-responsive">
+               <tr>
+                  <th> Nom de l'annonce </th> <th> Categorie </th> <th>Status</th> <th>Voir l'annonce</th> 
+              </tr>
+              {% for annonceUser in annoncesUser %}
+               <tr> <td> {{ annonceUser.titreService | decode }} </td><td>{{ annonceUser.nomCategorieService | decode }}</td>
+                   <td>
+                       {% if annonceUser.ouvert == 0 and annonceUser.validationService == 1 %}
+                           Refusée
+                       {% elseif annonceUser.ouvert == 1 and annonceUser.validationService == 1 %}
+                           Acceptée
+                       {% else %}
+                           En attente
+                       {% endif %}
+
+                   </td>
+                   <td>
+                       <a href="{{ url('index_annonce', 
+                       {idService: annonceUser.idService,
+                       slugService : annonceUser.titreService|slug|decode,
+                       nomCategorieService : annonceUser.nomCategorieService|lower|decode})
+                   }} ">Voir l'annonce</a>
+               </td>
+           {% endfor %}
+       </table>
+   {% endif %}
+</div>
+
+<div class="mesinfos">
+ <h3>Mes informations</h3>  
+</div>
+<table align="center" class="table table-condensed">
+ <tr>
+  <td class="black">Nom public : </td><td>{{ app.user.pseudo }} </td>
+</tr>
+<tr>
+  <td class="black">Email : </td><td>{{ app.user.email }} </td>
+</tr>
+<tr>
+  <td class="black">Adresse : </td><td>{{ app.user.adresse }} </td>
+</tr>
+<tr>
+  <td class="black">Code Postal : </td><td>{{ app.user.codePostal }} </td>
+</tr>
+<tr>
+  <td class="black">Ville : </td><td>{{ app.user.ville}} </td>
+</tr>
+<tr>
+  <td class="black">Téléphone (mobile) : </td><td>{{ app.user.telMobile }} </td>
+</tr>
+<tr>
+  <td class="black">Téléphone (fixe) : </td><td>{{ app.user.telFixe }}</td>
+</tr>
+
+</table>
+
+<div class="infoplus">
+  <div class="form-group">
+    <div class="col-md-5 col-md-push-3">
+        <a href="{{ url('member_ajout_annonce') }}" style="font-size:12px;"><u> Ajouter une annonce </u></a>
+        -
+        <a href="{{ url('membre_modif') }}" style="font-size:12px;"><u> Modifier le profil </u></a>
+        -
+        <a href="{{ url('membre_motdepasse')}}" style="font-size:12px;"><u> Changer le mot de passe </u></a>
+    </div>
+</div>
+</div>
+
+
+{% else %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        Vous devez être inscrit-e et/ou connecté-e pour accéder à cet espace <br />
+        <b>Connexion</b> - <b>Inscription</b></div>
+    {% endif %}
+
+
+</div>
+</div>
+</div>
+<!-- /.container -->
+
 {% endblock %}
