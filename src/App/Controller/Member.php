@@ -22,7 +22,8 @@ class Member implements UserInterface
             $photo,
             $cleValidation,
             $roleUser,
-            $codeINSEE;
+            $codeINSEE,
+            $descriptionUser;
 
     public function __construct(
         $idUser,
@@ -39,7 +40,8 @@ class Member implements UserInterface
         $photo,
         $cleValidation,
         $roleUser,
-        $codeINSEE)
+        $codeINSEE,
+        $descriptionUser)
     {
         $this->idUser           = $idUser;
         $this->pseudo           = $pseudo;
@@ -56,6 +58,7 @@ class Member implements UserInterface
         $this->cleValidation    = $cleValidation;
         $this->roleUser[]       = $roleUser;
         $this->codeINSEE        = $codeINSEE;
+        $this->descriptionUser  = $descriptionUser;
     }
 
 
@@ -143,6 +146,11 @@ class Member implements UserInterface
     public function getVille()
     {
         return $this->ville;
+    }
+    
+    public function getDescriptionUser()
+    {
+        return $this->descriptionUser;
     }
 
 
