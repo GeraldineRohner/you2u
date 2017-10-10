@@ -25,7 +25,9 @@ Erreur lors de la publication de votre commentaire </p>
         <!--colleft-->
         <div class="col-md-8 col-sm-12">
             <div class="box-caption">
-        {% if infoUser is not empty  %}    
+        {# S'il n'existe pas de fiche que l'utilisateur est banni et que la personne consultant cette page n'est pas admin #} 
+        {% if infoUser is not empty %}   
+        {% if ((infoUser.roleUser != 'ROLE_BANNED') or is_granted('ROLE_ADMIN')) %}    
 		<h1>{{ infoUser.pseudo }}</h1>
         {% if is_granted('ROLE_USER') %}
 		{# Affichage du bouton pour signaler l'utilisateur #}
@@ -180,7 +182,16 @@ Erreur lors de la publication de votre commentaire </p>
 		{# L'id du profil ne corespondant pas #}
 		 <div class="alert alert-danger">
                             <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-							Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existance de cette fiche. </p>
+							 Votre requête n'a pas pu aboutir : l'utilisateur n'a pas été banni. </p>
+                           
+                        </div>
+		
+		{% endif  %}
+		{% else %}
+		{# L'id du profil ne corespondant pas #}
+		 <div class="alert alert-danger">
+                            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							 Votre requête n'a pas pu aboutir : le système n'a pas trouvé de fiche correspondante. </p>
                            
                         </div>
 		
