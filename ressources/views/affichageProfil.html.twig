@@ -25,7 +25,9 @@ Erreur lors de la publication de votre commentaire </p>
         <!--colleft-->
         <div class="col-md-8 col-sm-12">
             <div class="box-caption">
-        {% if infoUser is not empty  %}    
+        {% if (infoUser is not empty) %}
+       	{% if (infoUser.roleUser != 'ROLE_BANNED') or is_granted('ROLE_ADMIN') %}
+        
 		<h1>{{ infoUser.pseudo }}</h1>
         {% if is_granted('ROLE_USER') %}
 		{# Affichage du bouton pour signaler l'utilisateur #}
@@ -174,17 +176,22 @@ Erreur lors de la publication de votre commentaire </p>
                   </div> 	
         {% endif %} 
         {#Fin de la condition de notation #}
+        {% else %}
+      	<div class="alert alert-danger">
+            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                L'utilisateur a été banni. </p>
+        {% endif %}  
         
-      
-		{% else %}
-		{# L'id du profil ne corespondant pas #}
-		 <div class="alert alert-danger">
-                            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-							Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existance de cette fiche. </p>
-                           
-                        </div>
+        {% else %}
+      	<div class="alert alert-danger">
+            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existance de cette fiche. </p>
+        {% endif %}    
+
+        </div>
+
 		
-		{% endif  %}
+		
 		
 		
         <div class="container">
