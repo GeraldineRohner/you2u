@@ -30,6 +30,7 @@
                     <li><a href="{{ url('index_recherche') }}">Rechercher une annonce</a></li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li><a href="{{ url('membre_index') }}">Profil</a></li>
+                    <li><a href="{{ url('membre_contact') }}">Assistance</a></li>
                     {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ url('index_admin') }}">Administration</a></li>
                     {% endif %}
