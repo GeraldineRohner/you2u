@@ -34,6 +34,10 @@ class IndexController
         return $app['twig']->render('presentation.html.twig');
     }
 
+   /* public function cguAction(Application $app)
+    {
+        return $app['twig']->render('cgu.html.twig');
+    }*/
 
 
     public function indexAction(Application $app)
