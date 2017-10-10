@@ -185,6 +185,10 @@ class MemberController
             ->add('telFixe', TextType::class, [
                 'required' => false,
                 'label' => false,
+                'constraints' => array(new Regex(array( # Contraite de contenu
+                    'pattern' => '/^\d{2}([\s\-.]?)((\d){2}\1){3}(\d){2}$/',
+                    'message' => 'Le n° de téléphone entré est invalide'
+                ))),
                 'attr' => [
                     'class' => 'form-control',
                     'value' => $app['user']->getTelFixe()
@@ -193,6 +197,10 @@ class MemberController
             ->add('telMobile', TextType::class, [
                 'required' => false,
                 'label' => false,
+                'constraints' => array(new Regex(array( # Contraite de contenu
+                    'pattern' => '/^\d{2}([\s\-.]?)((\d){2}\1){3}(\d){2}$/',
+                    'message' => 'Le n° de téléphone entré est invalide'
+                ))),
                 'attr' => [
                     'class' => 'form-control',
                     'value' => $app['user']->getTelMobile()
@@ -251,17 +259,17 @@ class MemberController
                 $changementEmail = 0;
             }
             $modifUser->set(array(
-                    'pseudo' => htmlspecialchars($modifProfil['pseudo']),
-                    'prenom' => htmlspecialchars($modifProfil['prenom']),
-                    'nom' => htmlspecialchars($modifProfil['nom']),
+                    'pseudo' => htmlspecialchars(utf8_encode($modifProfil['pseudo'])),
+                    'prenom' => htmlspecialchars(utf8_encode($modifProfil['prenom'])),
+                    'nom' => htmlspecialchars(utf8_encode($modifProfil['nom'])),
                     'email' => $modifProfil['email'],
-                    'adresse' => htmlspecialchars($modifProfil['adresse']),
+                    'adresse' => htmlspecialchars(utf8_encode($modifProfil['adresse'])),
                     'ville' => $villeCP['commune'],
                     'codePostal' => $villeCP['codePostal'],
                     'codeINSEE' => $villeCP['codeINSEE'],
                     'telMobile' => htmlspecialchars($modifProfil['telMobile']),
                     'telFixe' => htmlspecialchars($modifProfil['telFixe']),
-                    'profilVisible' => $modifProfil['profilVisible'],
+                    'profilVisible' => htmlspecialchars(utf8_encode($modifProfil['profilVisible'])),
                     'photo' => $urlFichier
                 )
             );
@@ -293,10 +301,16 @@ class MemberController
             ->add('motDePasse', PasswordType::class, [
                 'required' => true,
                 'label' => false,
-                'constraints' => array(new NotBlank(
-                    array('message' => 'Vous devez saisir un mot de passe')
-                )
-                ),
+                'constraints' => array(new Length(array( # Contrainte de longueur
+                    'min' => 6,
+                    'max' => 20,
+                    'minMessage' => 'Votre mot de passe doit contenir au moins six caractères',
+                    'maxMessage' => 'Votre mot de passe ne peut contenir plus de  vingt caractères'
+                )),
+                    new Regex(array( # Contraite de contenu
+                        'pattern' => '/^[\w-\']+$/',
+                        'message' => 'Votre mot de passe ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
+                    ))),
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => '*********'
@@ -386,9 +400,10 @@ class MemberController
             ->add('titreService', TextType::class, array(
                 'required' => true,
                 'label' => false,
-                'constraints' => array(new NotBlank(array(
-                        'message' => 'Veuillez renseigner un titre')
-                )),
+                'constraints' => array(new Regex(array( # Contraite de contenu
+                    'pattern' => '/^[a-zé,èàùûêâôë \'-]*$/i',
+                    'message' => 'Le titre est invalide. Il ne peut pas contenir de caractères spéciaux.'
+                ))),
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -482,12 +497,12 @@ class MemberController
 
             # Association des colonnes de la BDD avec les champs du formulaire
             # Colonnes BDD                      # Champs du formulaire
-            $annonceDb->titreService = htmlspecialchars($annonce['titreService']);
+            $annonceDb->titreService = htmlspecialchars(utf8_encode($annonce['titreService']));
             $annonceDb->idCategorieService = $annonce['idCategorieService'];
-            $annonceDb->tarifService = htmlspecialchars($annonce['tarifService']);
+            $annonceDb->tarifService = htmlspecialchars(utf8_encode($annonce['tarifService']));
             $annonceDb->lieuService = $villeCP['codeINSEE'];
-            $annonceDb->perimetreAction = htmlspecialchars($annonce['perimetreAction']);
-            $annonceDb->descriptionService = htmlspecialchars($annonce['descriptionService']);
+            $annonceDb->perimetreAction = htmlspecialchars(utf8_encode($annonce['perimetreAction']));
+            $annonceDb->descriptionService = htmlspecialchars(utf8_encode($annonce['descriptionService']));
             $annonceDb->datePublicationService = time();
             $annonceDb->idUserProposantService = $app['user']->getIdUser();
 

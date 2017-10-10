@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Validator\Constraints\constraintVille;
+use App\Validator\Constraints\constraintVilleValidator;
 use function json_encode;
 use function print_r;
 use Silex\Application;
@@ -33,22 +35,6 @@ class IndexController
         # Connexion à la BDD & Récupération des annonces
         $services = $app['idiorm.db']->for_table('vue_services_profil')->where('validationService',1)->where('ouvert',1)->order_by_desc('idService')->limit(3)->find_result_set();
 
-
-#----Récupération des 3 annonces en spotlight (utilisateurs les mieux notés)-------#
-#------------------NON FONCTIONNEl, A TRAITER RAPIDEMENT---------------------------#
-#----------------------------------------------------------------------------------#
-
-
-        /*  $notesUsers = $app['idiorm.db']->for_table('users')->order_by_desc('noteMoyenne')->find_many();
-
-          foreach ($notesUsers as $noteUsers) {
-              $derniereAnnonce[] = $app['idiorm.db']->for_table('vue_services')->where('idUserProposantService', $noteUsers->idUser)->order_by_desc('idService')->find_one();
-          }*/
-
-
-#----------------------------------------------------------------------------------#
-#----------------------------------------------------------------------------------#
-#----------------------------------------------------------------------------------#
 
 
         $spotlight = $app['idiorm.db']->for_table('vue_services')->find_result_set();
@@ -97,9 +83,7 @@ class IndexController
     {
 
         # Récupération de l'annonce
-        $service = $app['idiorm.db']->for_table('vue_services')
-            /*->where('idService',$idService)*/
-            ->find_one($idService);
+        $service = $app['idiorm.db']->for_table('vue_services')->find_one($idService);
 
         # Récupérer des Articles de la Catégories (suggestions)
         $suggestions = $app['idiorm.db']->for_table('vue_services')
@@ -127,6 +111,18 @@ class IndexController
             ->add('commentaires', TextareaType::class, [
                 'required' => false,
                 'label' => false,
+                'constraints' => array(
+                    new Regex(array(  # Contraite de contenu
+                        'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zé,èàùûêâôë \'-]*$/i',
+                        'message' => 'Votre commentaire ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces, et doit commencer par une lettre'
+                )),
+                    new Length(array(  # Contraite de taille
+                        'min' => 5,
+                        'max' => 500,
+                        'minMessage' => 'Votre message doit contenir au moins cinq caractères.',
+                        'maxMessage' => 'Votre nom ne peut contenir plus de cinq cents caractères.'
+                    ))
+                    ),
                 'attr' => [
                     'class' => 'form-control'
                 ]
@@ -134,6 +130,10 @@ class IndexController
             ->add('note', ChoiceType::class, [
                 'required' => true,
                 'label' => false,
+                'constraints' => array(
+                    new Regex(array(  # Contraite de contenu
+                        'pattern' => '/^[1-5]{1,5}$/'
+                    ))),
                 'attr' => [
                     'class' => 'form-control'
                 ],
@@ -162,8 +162,8 @@ class IndexController
                     #Colonne MYSQL                                              #Valeurs du Fomulaire
                     $nouvelleNote->idService = $idService;
                     $nouvelleNote->idUserNotant = $app['user']->getIdUser();
-                    $nouvelleNote->note = $noteService['note'];
-                    $nouvelleNote->commentaires = $noteService['commentaires'];
+                    $nouvelleNote->note = utf8_encode(htmlspecialchars($noteService['note']));
+                    $nouvelleNote->commentaires = utf8_encode(htmlspecialchars($noteService['commentaires']));
                     $nouvelleNote->dateCommentaire = time();
 
 
@@ -187,13 +187,6 @@ class IndexController
                             ]
                         ) . '?note=error');
                 }
-                //                 return $app['twig']->render('annonce.html.twig', [
-                //                     'service' => $service,
-                //                     'suggestions' => $suggestions,
-                //                     'latitude' => $latitude,
-                //                     'longitude' => $longitude,
-                //                     'form' => $form->createView()
-                //                 ]);
 
             }
         }
@@ -341,89 +334,6 @@ class IndexController
                     'placeholder' => 'Veuillez retaper votre mot de passe'
                 )
             ))
-            /*  ------------------------------------------------------------------------------
-            ------------------------------------------------------------------------------------
-            CES CHAMPS SERONT A REMPLIR DANS LE PROFIL AFIN D'ALLEGER LA PROCÉDURE D'INSCRIPTION
-            ------------------------------------------------------------------------------------
-            ------------------------------------------------------------------------------------
-
-              ->add('adresse', TextType::class, array(
-                  'required' => true,
-                  'label' => false,
-                  'constraints' => array(new NotBlank(array(
-                          'message' => 'Veuillez entrer un nom et n° de voie')
-                  )),
-                  'attr' => array(
-                      'class' => 'form-control',
-                      'placeholder' => 'voie'
-                  )
-              ))
-              ->add('codePostal', TextType::class, array(
-                  'required' => true,
-                  'label' => false,
-                  'disabled' => true,
-                  'constraints' => array(new NotBlank(array(
-                          'message' => 'Veuillez entrer un code postal valide')
-                  )),
-                  'attr' => array(
-                      'class' => 'form-control',
-                      'placeholder' => 'Votre code postal'
-                  )
-              ))
-              ->add('ville', TextType::class, array(
-                  'required' => true,
-                  'label' => false,
-                  'constraints' => array(new NotBlank(array(
-                          'message' => 'Veuillez entrer une ville')
-                  )),
-                  'attr' => array(
-                      'class' => 'form-control typeahead',
-                      'placeholder' => 'Votre ville de résidence'
-                  )
-              ))
-
-              ->add('telFixe', TextType::class, array(
-                      'required' => false,
-                      'label'    => false,
-                      'attr' => array(
-                      'class' => 'form-control',
-                      'placeholder' => 'N° de téléphone fixe'
-                      )
-              ))
-
-
-              ->add('telMobile', TextType::class, array(
-                  'required' => false,
-                  'label'    => false,
-                  'attr' => array(
-                      'class' => 'form-control',
-                      'placeholder' => 'N° de téléphone mobile'
-                  )
-              ))
-
-              ->add('photo', FileType::class, [
-
-                  'required'      => false,
-                  'label'         => false,
-                  'attr'          =>
-                      ['class' => 'dropify'],
-                  'constraints'   => [new File([
-                      'maxSize' => '4096k',
-                      'mimeTypes' => [
-                          'image/png',
-                          'image/jpeg',
-                          'image/gif'
-                      ]
-                  ])]
-              ])
-              ->add('profilVisible', CheckboxType::class, array(
-                  'label'    => '',
-                  'required' => false,
-              ))
-
-
-            ------------------------------------------------------------------------------------
-            ------------------------------------------------------------------------------------*/
 
             ->add('accepterConditions', CheckboxType::class, array(
                 'label' => '',
@@ -453,57 +363,25 @@ class IndexController
             $creationMembre = $formInscription->getData();
 
 
-            # Récupération des données du Formulaire
-
-
-            # Récupération de l'image
-
-            /*
-
-
-            ------------------------------------------------------------------------------------
-            ----------INSERTION DE LA PHOTO ET DU CODE INSEE (A METTRE DANS PROFIL)-------------
-            ------------------------------------------------------------------------------------
-
-            $photo  = $creationMembre['photo'];
-                $chemin = PATH_PUBLIC.'/img';
-
-
-
-
-
-                $villeCI = $app['idiorm.db']->for_table('villes_rhone')->select('codeINSEE')->where('codePostal', $creationMembre['codePostal'])->where('commune',strtoupper($creationMembre['ville']))->find_one();
-               */
-
-
-            #On récupère la ville et le CP avec le code Insee
-
-
-            #On associe les colonnes de notre BDD avec les valeurs du Formulaire
-            #Colonne mySQL                         #Valeurs du Formulaire
-
             $insertionMembre = $app['idiorm.db']->for_table('users')->create();
 
-            $insertionMembre->nom = htmlspecialchars($creationMembre['nom']);
-            $insertionMembre->prenom = htmlspecialchars($creationMembre['prenom']);
+            $insertionMembre->nom = htmlspecialchars(utf8_encode($creationMembre['nom']));
+            $insertionMembre->prenom = htmlspecialchars(utf8_encode($creationMembre['prenom']));
 
 
-            /* if (mb_strlen($creationMembre['pseudo'] < 3)) {
-                 $erreurs[] = "<div class='alert alert-danger' style='text-align:center;'>Le pseudonyme choisi est <strong>trop court</strong>. Merci de saisir au moins <strong>trois</strong> caractères.</div>";
-             }
-             else {*/
 
 
-            $insertionMembre->pseudo = htmlspecialchars($creationMembre['pseudo']);
+
+            $insertionMembre->pseudo = htmlspecialchars(utf8_encode($creationMembre['pseudo']));
 
 
-            /*}*/
+
 
             # On recherche dans la BDD un mail similaire, et si la requête n'aboutit pas (false), on sauvegarde le mail
             if (!$app['idiorm.db']->for_table('users')->select('email')->where('email', $creationMembre['email'])->find_one()) {
 
 
-                $insertionMembre->email = htmlspecialchars($creationMembre['email']);
+                $insertionMembre->email = htmlspecialchars(utf8_encode($creationMembre['email']));
 
 
             } else {
@@ -519,36 +397,7 @@ class IndexController
             else{
                 $erreurs[]="<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mots de passe identiques.</div>";
             }
-            /*} elseif (mb_strlen($creationMembre['motDePasse']) < 6) {
-                $erreurs[] = "<div class='alert alert-danger' style='text-align:center;'>Veuillez saisir deux mots de passe identiques.</div>";
-            }*/
 
-            /*
-            ------------------------------------------------------------------------------------
-            -----------------------DONNÉES A INSERER DANS LA BDD VIA LE PROFIL------------------
-            ------------------------------------------------------------------------------------
-
-            $insertionMembre->adresse              = $creationMembre['adresse'];
-            $insertionMembre->codePostal           = $creationMembre['codePostal'];
-            $insertionMembre->codeINSEE            = $villeCI;
-            $insertionMembre->ville                = $creationMembre['ville'];
-            $insertionMembre->telFixe              = $creationMembre['telFixe'];
-            $insertionMembre->telMobile            = $creationMembre['telMobile'];
-            $insertionMembre->profilVisible        = $creationMembre['profilVisible'];
-
-
-
-            if (isset($creationMembre['photo']))
-            {
-                $extension = $photo->guessExtension();
-                $photo->move($chemin, $this->generateSlug($photo) . '.' . $extension);
-
-                $insertionMembre->photo = $this->generateSlug($creationMembre['photo'] . '.' . $extension);
-            }
-
-            ------------------------------------------------------------------------------------
-            ------------------------------------------------------------------------------------
-            ------------------------------------------------------------------------------------*/
 
 
             if (!isset($erreurs)) { # Si pas d'erreurs dans le formulaire
@@ -625,7 +474,7 @@ class IndexController
     }
 
 
-    # Page de signalement utilisateur
+
 
 
 
@@ -655,6 +504,10 @@ class IndexController
                 'expanded' => false,
                 'multiple' => false,
                 'label' => false,
+                'constraints' => array(new constraintVille(
+                    array('message' => 'Vous devez saisir une ville correcte ')
+                )
+                ),
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -949,8 +802,8 @@ class IndexController
                     #Colonne MYSQL                                              #Valeurs du Fomulaire
                     $nouvelleNote->idUserNoted           =                          $idUser;
                     $nouvelleNote->idNotedBy         =                              $app['user']->getIdUser();
-                    $nouvelleNote->note                  =                          htmlspecialchars($noteService['note']);
-                    $nouvelleNote->commentaires          =                          htmlspecialchars($noteService['commentaires']);
+                    $nouvelleNote->note                  =                          htmlspecialchars(utf8_encode($noteService['note']));
+                    $nouvelleNote->commentaires          =                          htmlspecialchars(utf8_encode($noteService['commentaires']));
                     $nouvelleNote->dateCommentaire       =                          time();
 
 
@@ -973,13 +826,7 @@ class IndexController
                             ]
                         ).'?note=error');
                 }
-                //                 return $app['twig']->render('annonce.html.twig', [
-                //                     'service' => $service,
-                //                     'suggestions' => $suggestions,
-                //                     'latitude' => $latitude,
-                //                     'longitude' => $longitude,
-                //                     'form' => $form->createView()
-                //                 ]);
+
 
             }
         }

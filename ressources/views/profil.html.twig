@@ -42,13 +42,13 @@
                     	
                     	
                     	{% if annoncesUser is not empty %} 
-                    	<h2>Vos annonces en cours et validés</h2>
+                    	<h2>Vos annonces en cours et validées</h2>
                     	<table class="table table-responsive">
                     	<tr>
                     		<th> Nom de l'annonce </th> <th> Categorie </th> <th>Status</th> <th>Voir l'annonce</th> 
                     	</tr>
                     	{% for annonceUser in annoncesUser %}
-                    	<tr> <td> {{ annonceUser.titreService }} </td><td>{{ annonceUser.nomCategorieService }}</td>
+                    	<tr> <td> {{ annonceUser.titreService | decode }} </td><td>{{ annonceUser.nomCategorieService | decode }}</td>
                     	<td>
                     	{% if annonceUser.ouvert == 0 and annonceUser.validationService == 1 %}
                     	Refusée
@@ -62,8 +62,8 @@
                     	<td>
                     	<a href="{{ url('index_annonce', 
                         		{idService: annonceUser.idService,
-                        		 slugService : annonceUser.titreService|slug,
-                        		 nomCategorieService : annonceUser.nomCategorieService|lower}) 
+                        		 slugService : annonceUser.titreService|slug|decode,
+                        		 nomCategorieService : annonceUser.nomCategorieService|lower|decode})
                         		}} ">Voir l'annonce</a>
                     	</td>
                     	{% endfor %}

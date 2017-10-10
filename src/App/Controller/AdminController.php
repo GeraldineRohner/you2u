@@ -151,7 +151,7 @@ class AdminController
     {
         if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
         {
-            $fermetureAlerte = $app['idiorm.db']->for_table('signalements_services')->where('idServiceSignale', $idService)->find_result_set()->set('traitementAlerte',1)->save();
+            $app['idiorm.db']->for_table('signalements_services')->where('idServiceSignale', $idService)->find_result_set()->set('traitementAlerte',1)->save();
             
             $go = $request->get('go');
             if(!empty($go))
@@ -176,7 +176,7 @@ class AdminController
     {
         if(in_array('ROLE_ADMIN', $app['user']->getRoleUser()))
         {
-            $fermetureAlerte = $app['idiorm.db']->for_table('signalements_users')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
+            $app['idiorm.db']->for_table('signalements_users')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
             
             $go = $request->get('go');
             if(!empty($go))
@@ -210,12 +210,12 @@ class AdminController
             else
             {
                 #On cloture toutes les annonces de l'utilisateurs. 
-                $fermetureAnnonce = $app['idiorm.db']->for_table('services')->where('idUserProposantService', $idUser)->find_result_set()->set('ouvert',0)->save();
+                $app['idiorm.db']->for_table('services')->where('idUserProposantService', $idUser)->find_result_set()->set('ouvert',0)->save();
                 #On cloture toutes les demandes liées à cette utilisateurs dans les deux signalements (USERS ET SERVICES)
-                $fermetureAlerte = $app['idiorm.db']->for_table('signalements_services')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
-                $fermetureAlerte = $app['idiorm.db']->for_table('signalements_users')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
-                #On banni l'utiliseur 
-                $bannisementUser = $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_BANNED')->save();
+                $app['idiorm.db']->for_table('signalements_services')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
+                $app['idiorm.db']->for_table('signalements_users')->where('idUserSignale', $idUser)->find_result_set()->set('traitementAlerte',1)->save();
+                #On bannit l'utiliseur
+                $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_BANNED')->save();
                 $go = $request->get('go');
                 if(!empty($go))
                 {
@@ -252,8 +252,8 @@ class AdminController
             
             else
             {
-                #On débanni l'utiliseur
-                $bannisementUser = $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_USER')->save();
+                #On débannit l'utiliseur
+                $app['idiorm.db']->for_table('users')->find_one($idUser)->set('roleUser','ROLE_USER')->save();
                 $go = $request->get('go');
                 if(!empty($go))
                 {

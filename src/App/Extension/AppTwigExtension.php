@@ -62,10 +62,20 @@ class AppTwigExtension extends \Twig_Extension
 
                 return $text;
 
-            }) # -- Fin de Twig_Filter Slug
+            }), # -- Fin de Twig_Filter Slug
 
-        ); # -- Fin du Array
+            new \Twig_Filter('decode', function($text) {
+
+                # Supprimer toutes les balises HTML
+                $string = utf8_decode($text);
+
+                # Si ma chaine de caractère est supérieur à 170, je poursuis
+                # Sinon c'est inutile
+                return $string;
+            }
+
+        )); # -- Fin du Array
 
     } # -- Fin de la fonction getFilters
 
-} # -- Fin de la Classe TechNewsTwigExtension
+} # -- Fin de la Classe AppTwigExtension

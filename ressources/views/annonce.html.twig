@@ -71,7 +71,7 @@ Erreur lors de la publication de votre commentaire </p>
                     {% for commentaire in commentairesService %}
                     
                     <br />
-                    Commentaire de <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires }}
+                    Commentaire de <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires | decode }}
                     
                     {% endfor %} 
                {% if is_granted('ROLE_USER') %}

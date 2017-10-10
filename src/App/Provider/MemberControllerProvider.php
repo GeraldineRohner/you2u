@@ -18,7 +18,7 @@ class MemberControllerProvider implements ControllerProviderInterface
         
         $controllers = $app['controllers_factory'];
         
-        #page d'Accueil
+        #page d'Accueil (profil)
         $controllers
         #on associe une route à un controller et une action
         ->get('/','App\Controller\MemberController::indexAction')
