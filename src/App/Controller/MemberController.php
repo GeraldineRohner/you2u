@@ -186,6 +186,12 @@ class MemberController
             ->add('descriptionUser', TextType::class, [
                 'required' => false,
                 'label' => false,
+                'constraints' => array(
+                    new Length(array( # Contrainte de longueur
+                        'min' => 0,
+                        'max' => 500,
+                        'maxMessage' => 'Votre description ne peut pas contenir plus de cinq cents caractères'
+                    ))),
                 'attr' => [
                     'class' => 'form-control',
                     'value' => $app['user']->getDescriptionUser()
@@ -294,7 +300,7 @@ class MemberController
                     'telFixe' => htmlspecialchars($modifProfil['telFixe']),
                     'profilVisible' => htmlspecialchars($modifProfil['profilVisible']),
                     'photo' => $urlFichier,
-                    'descriptionUser' => htmlspecialchars($modifProfil['descriptionUser'])
+                    'descriptionUser' => htmlspecialchars(utf8_encode($modifProfil['descriptionUser']))
                 )
             );
             $modifUser->save();

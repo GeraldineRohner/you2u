@@ -117,10 +117,6 @@ class IndexController
                 'required' => false,
                 'label' => false,
                 'constraints' => array(
-                    new Regex(array(  # Contraite de contenu
-                        'pattern' => '/^[a-zéèàùûêâôë]{1}[a-zé,èàùûêâôë \'-]*$/i',
-                        'message' => 'Votre commentaire ne peut contenir que des caractères alphanumériques, tirets apostrophes ou espaces, et doit commencer par une lettre'
-                )),
                     new Length(array(  # Contraite de taille
                         'min' => 5,
                         'max' => 500,
