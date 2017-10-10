@@ -152,8 +152,8 @@ class IndexController2
                     #Colonne MYSQL                                              #Valeurs du Fomulaire
                     $nouvelleNote->idService = $idService;
                     $nouvelleNote->idUserNotant = $app['user']->getIdUser();
-                    $nouvelleNote->note = $noteService['note'];
-                    $nouvelleNote->commentaires = $noteService['commentaires'];
+                    $nouvelleNote->note = htmlspecialchars(utf8_encode($noteService['note']));
+                    $nouvelleNote->commentaires = htmlspecialchars(utf8_encode($noteService['commentaires']));
                     $nouvelleNote->dateCommentaire = time();
 
 
@@ -474,8 +474,8 @@ class IndexController2
 
             $insertionMembre = $app['idiorm.db']->for_table('users')->create();
 
-            $insertionMembre->nom = htmlspecialchars($creationMembre['nom']);
-            $insertionMembre->prenom = htmlspecialchars($creationMembre['prenom']);
+            $insertionMembre->nom = htmlspecialchars(utf8_encode($creationMembre['nom']));
+            $insertionMembre->prenom = htmlspecialchars(utf8_encode($creationMembre['prenom']));
 
 
             /* if (mb_strlen($creationMembre['pseudo'] < 3)) {
@@ -484,7 +484,7 @@ class IndexController2
              else {*/
 
 
-            $insertionMembre->pseudo = htmlspecialchars($creationMembre['pseudo']);
+            $insertionMembre->pseudo = htmlspecialchars(utf8_encode($creationMembre['pseudo']));
 
 
             /*}*/
@@ -493,7 +493,7 @@ class IndexController2
             if (!$app['idiorm.db']->for_table('users')->select('email')->where('email', $creationMembre['email'])->find_one()) {
 
 
-                $insertionMembre->email = htmlspecialchars($creationMembre['email']);
+                $insertionMembre->email = htmlspecialchars(utf8_encode($creationMembre['email']));
 
 
             } else {
