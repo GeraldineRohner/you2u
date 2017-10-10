@@ -4,6 +4,7 @@
     font-family: 'Ubuntu', sans-serif;
 
     font-family: 'Vollkorn', serif;
+    font-family: 'Merienda, cursive;
     */
 
     /* Global Styles */
@@ -194,21 +195,71 @@
 
   }
 
-  /*Propriete section fonctionnement*/
-  .ill{
-
-    width: 80%;
+  /* Propriete profil */
+  .nomprenom{
+    color: #d5a368;
+    font-size: 30px; 
+    font-family: 'Merienda', cursive;
+  }
+  .manote h3{
+    color: #d5a368;
+    font-size: 21px; 
+    font-family: 'Open Sans', sans-serif;
+  }
+  .etoile{
+    width: auto;
+    height:25px;
+  }
+  .mesannonces h3{
+    color: #d5a368;
+    font-size: 21px; 
+    font-family: 'Open Sans', sans-serif;
   }
 
-  section {
 
-   margin: 0 auto;
-   height: auto;
-   margin-bottom: 20px;
+  th{
+    height: 14px;
+    background-color: #d5a368;
+  }
+  td {
+    height: 30px;
+    background-color: #f2eee7;
+    color: #d5a368;
+    font-size: 14px; 
+    font-family: 'Open Sans', sans-serif;
+  }
+  .mesinfos h3{
+   color: #d5a368;
+   font-size: 21px; 
+   font-family: 'Open Sans', sans-serif;
 
  }
+ .black{
+  color:#000000;
+}
 
- section p {
+.infoplus{
+  width: 100%;
+  height: 20px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+/*Propriete section fonctionnement*/
+.ill{
+
+  width: 80%;
+}
+
+section {
+
+ margin: 0 auto;
+ height: auto;
+ margin-bottom: 20px;
+
+}
+
+section p {
 
   margin-bottom: 20px;
 
@@ -259,6 +310,6 @@ footer img {
 
 /* Barre de recherche localisation */
 .twitter-typeahead{
-    width:100%;
-    background-color: #FFFFFF;
+  width:100%;
+  background-color: #FFFFFF;
 }
