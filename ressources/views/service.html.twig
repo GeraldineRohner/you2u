@@ -16,10 +16,11 @@
                     {# https://silex.symfony.com/doc/2.0/providers/twig.html#global-variable #}
                     {# <span>{{ nomCategorieService }}</span> #}
                     {# <span>{{ services[0].nomCategorieService }}</span> #}
-                    <span>{{ global.request.get('nomCategorieService') }}</span>
+                    
                 </div>
                 <!--list-news-cate-->
                 <div class="list-news-cate">
+                <h2 align="center">Annonce de la catégorie : {{ global.request.get('nomCategorieService') }}</h1>
                     {% for service in services %}
                         <service class="news-cate-item">
                             <div class="row">
@@ -34,11 +35,6 @@
                                        {# <img alt="{{ service.titreService }}"
                                              src="{{ asset('img'~service.FEATUREDIMAGEservice) }}">#}
                                     </a>
-                                    <a href="{{ url('membre_signalement_annonce',
-                                    {
-                                        idService : service.idService
-                                    })
-                                    }}"> Signaler l'annonce </a>
                                 </div>
                                 <div class="col-md-7 col-sm-7 col-xs-12">
                                     <h3><a href="{{ url('index_annonce', {
@@ -46,17 +42,12 @@
                                             slugService		    : service.titreService | slug,
                                             idService		    : service.idService } ) }}">{{ service.titreService }}</a></h3>
                                     <div class="meta-post">
-                                        <a href="#">
-                                            {{ service.pseudo | decode }}
-                                        </a>
-                                        <a href="{{ url('membre_signalement_utilisateur',
-                                        {
-                                            idUser : service.idUser
-                                        })
-                                        }}"> Signaler l'utilisateur </a>
+                                        
+                                           Proposé par : <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}"> {{ service.pseudo | decode }}</a>
+                                       
                                         <em></em>
                                         <span>
-                                            {{ service.datePublicationService | decode }}
+                                            Publiée le : {{ service.datePublicationService |decode|date("d/m/Y") }}
                                     </span>
                                     </div>
                                     {{ service.descriptionService | accroche | decode }}

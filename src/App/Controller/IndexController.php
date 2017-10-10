@@ -63,6 +63,8 @@ class IndexController
         # Connexion à la BDD et la Récupération des services de la categorie choisie par l'utilisateur
         $services = $app['idiorm.db']->for_table('vue_services')
             ->where('nomCategorieService', ucfirst($nomCategorieService))
+            ->where('validationService' , 1)
+            ->where('ouvert', 1)
             ->find_result_set();
 
 
