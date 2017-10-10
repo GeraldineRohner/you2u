@@ -7,22 +7,30 @@
 
 {# Block de Contenu défini dans base.html.twig #}
     {% block contenu %}
-    {% if global.request.get('note') == 'success' %}
-                         <div class="alert alert-success">
-                            <p class="text-center"><i class="fa fa-thumbs-up"></i>Félications !. </p>
-                            <p class="text-center"> Votre avis concernant le service de l'utilisateur a bien été pris en compte !</p>
-                        </div>
-    {% endif %}
-    {% if global.request.get('note') == 'error' %}
-                         <div class="alert alert-danger">
-                            <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-Erreur lors de la publication de votre commentaire </p>
-                            <p class="text-center"> Vous devez être inscrit et connecté, Avoir rempli au moins l'un des deux champs et avoir attendu 24 heures pour valider un deuxieme commentaire!</p>
-                        </div>
-    {% endif %}
+
+        {% if global.request.get('note') == 'success' %}
+             <div class="alert alert-success">
+                <p class="text-center"><i class="fa fa-thumbs-up"></i>Félications !. </p>
+                <p class="text-center"> Votre avis concernant le service de l'utilisateur a bien été pris en compte !</p>
+            </div>
+        {% endif %}
+
+        {% if global.request.get('note') == 'error' %}
+             <div class="alert alert-danger">
+                <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    Erreur lors de la publication de votre commentaire </p>
+                <p class="text-center"> Vous devez être inscrit et connecté, Avoir rempli au moins l'un des deux champs et avoir attendu 24 heures pour valider un deuxieme commentaire!</p>
+            </div>
+        {% endif %}
+
+    <div class="container">
         <div class="row">
             <!--colleft-->
-            <div class="col-md-8 col-sm-12">
+
+            <div class="col-sm-6">
+                <img class="img-responsive" src="http://localhost/projet/you2u/public/img/manquante.png" alt="">
+            </div>
+            <div class="col-sm-6 col-sm-12">
                 <!--post-detail-->
                 <service class="post-detail">
                 {% if service.validationService == 1 and service.ouvert == 1 or is_granted('ROLE_ADMIN') %}
@@ -56,145 +64,110 @@ Erreur lors de la publication de votre commentaire </p>
                   {#  <img alt="" src="{{ asset('images/product/'~service.FEATUREDIMAGEservice) }}" class="img-responsive" /> #}
 
                     Description : {{ service.titreService|raw | decode }}
-
-                    
-                    
-                    
-                    
-            
              
                 </service>
                 <h3>Localisation  : {{ service.commune | decode }} </h3>
                 
-               <div id="map"></div>
+                 <div id="map"></div>
        			 <h3>Commentaires</h3>
                     {% for commentaire in commentairesService %}
-                    
-                    <br />
-                    Commentaire de <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires | decode }}
-                    
-                    {% endfor %} 
-               {% if is_granted('ROLE_USER') %}
-                     <div class="container">
-                        <div class="starter-template">
-                        <form class="form-horizontal" method="POST" enctype="multipart/form-data" >
-                    	<div class="form-group">
-                        	<label for="" class="col-md-3 control-label">
-            					Note : 
-            				</label>
-                				<div class="col-md-7">
-                            	{{ form_row(form.note) }}
-                            	</div>
-                    	</div>
-                    	<div class="form-group">
-                        	<label for="" class="col-md-3 control-label">
-            					Commentaires : 
-            				</label>
-                				<div class="col-md-7">
-                            	{{ form_row(form.commentaires) }}
-                            	</div>
-                    	</div>
-                    	{{ form_row(form._token) }}
-        				<div class="form-group">
-            				<label for="" class="col-md-3 control-label">
-            					
-            				</label>
-            					<div class="col-md-7">
-            					<input type="submit" class="btn btn-primary" value="Noter" />
-            					</div>
-            				</div>
-        				</form>	
-                  
-                    </div>
-                  </div> 	
-               {% endif %} 
-                       
-               
-                <!--social-detail-->
-                <div class="social-detail">
-                    <span>Partager notre service</span>
+                        <br />
+                        Commentaire de <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">{{commentaire.pseudo}}</a> note de {{ commentaire.note }} <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>   le {{ commentaire.dateCommentaire | date("d/m/Y") }} : {{ commentaire.commentaires | decode }}
+                    {% endfor %}
 
-                    <ul class="list-social-icon">
-                        <li>
-                            <a href="#" class="facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="google">
-                                <i class="fa fa-google"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="youtube">
-                                <i class="fa fa-youtube-play"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="pinterest">
-                                <i class="fa fa-pinterest-p"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="rss">
-                                <i class="fa fa-rss"></i>
-                            </a>
-                        </li>
+                       {% if is_granted('ROLE_USER') %}
+                             <div class="row">
+                                <div class="starter-template">
+                                <form class="form-horizontal" method="POST" enctype="multipart/form-data" >
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
+                                        Note :
+                                    </label>
+                                        <div class="col-md-7">
+                                        {{ form_row(form.note) }}
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
+                                        Commentaires :
+                                    </label>
+                                        <div class="col-md-7">
+                                        {{ form_row(form.commentaires) }}
+                                        </div>
+                                </div>
+                                {{ form_row(form._token) }}
+                                <div class="form-group">
+                                    <label for="" class="col-md-3 control-label">
 
-                    </ul>
-                </div>
+                                    </label>
+                                        <div class="col-md-7">
+                                        <input type="submit" class="btn btn-primary" value="Noter" />
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                          </div>
+                       {% endif %}
+
 				{% else %}
 				<div class="alert alert-danger">L'annonce n'a pas été encore publiée ou a été refusée.</div>
 				{% endif %}
-                <!--related post-->
-                <div class="detail-caption">
-                    <span>  DANS LA MEME CATEGORIE</span>
-                </div>
-                <section class="spotlight-thumbs spotlight-thumbs-related">
-                    <div class="row">
 
-                        {% for service in suggestions %}
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                <div class="spotlight-item-thumb">
-                                    <div class="spotlight-item-thumb-img">
-                                        <a href="{{ url('index_annonce', {
-                                            nomCategorieService: service.nomCategorieService | lower,
-                                            slugService : service.titreService | slug,
-                                            idService : service.idService }) }}">
-                                            <img alt="{{ service.titreService | decode }}" src="{{ asset('img'~service.photo) }}">
-                                        </a>
-                                        <a href="{{ url('index_categorie', {
-                                            nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">{{ service.nomCategorieService }}</a>
-                                    </div>
-                                    <h3><a href="{{ url('index_annonce', {
-                                            nomCategorieService : service.nomCategorieService | lower,
-                                            slugService : service.titreService | slug,
-                                            idService : service.idService }) }}">Intitulé : {{ service.titreService | decode  }}</a></h3>
-                                    <div class="meta-post">
-                                        <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
-                                            {{ service.pseudo | decode  }}
-                                        </a>
-                                        <em></em>
-                                        <span>
+            </div>
+        </div>
+          {#  {{ render(controller('App\\Controller\\IndexController::sidebar')) }}#}
+        </div>
+
+<div class="container-full expfull mt-80">
+    <div class="container">
+        <div class="row experience">
+            <div class="col-xs-12">
+
+            <!--related post-->
+            <div class="detail-caption">
+                <h2>  DANS LA MEME CATEGORIE</h2>
+            </div>
+            <section class="spotlight-thumbs spotlight-thumbs-related">
+                <div class="row">
+
+                    {% for service in suggestions %}
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="spotlight-item-thumb">
+                                <div class="spotlight-item-thumb-img">
+                                    <a href="{{ url('index_annonce', {
+                                        nomCategorieService: service.nomCategorieService | lower,
+                                        slugService : service.titreService | slug,
+                                        idService : service.idService }) }}">
+                                        <img alt="{{ service.titreService | decode }}" src="{{ asset('img'~service.photo) }}">
+                                    </a>
+                                    <a href="{{ url('index_categorie', {
+                                        nomCategorieService : service.nomCategorieService | lower} ) }}" class="cate-tag">{{ service.nomCategorieService }}</a>
+                                </div>
+                                <h3><a href="{{ url('index_annonce', {
+                                        nomCategorieService : service.nomCategorieService | lower,
+                                        slugService : service.titreService | slug,
+                                        idService : service.idService }) }}">Intitulé : {{ service.titreService | decode  }}</a></h3>
+                                <div class="meta-post">
+                                    <a href="{{ url('index_profil', {idUser : service.idUserProposantService}) }}">
+                                        {{ service.pseudo | decode  }}
+                                    </a>
+                                    <em></em>
+                                    <span>
                                             {{ service.datePublicationService|date("d/m/Y")  | decode }}
                                         </span>
-                                    </div>
                                 </div>
                             </div>
-                        {% endfor %}
+                        </div>
+                    {% endfor %}
 
-                    </div>
-                </section>
-            </div>
+                </div>
+            </section>
 
-          {#  {{ render(controller('App\\Controller\\IndexController::sidebar')) }}#}
 
-        </div>
+            </div></div></div></div>
+
+
 {% endblock %}        
 {% block javascripts %}
 {# Pour afficher le contenu intial du block javascripts sinon remplace par les nouveaux élements. Pour eviter ça il faut utiliser la fonction parent() #}
@@ -212,8 +185,6 @@ Erreur lors de la publication de votre commentaire </p>
 	        });
 	      }
 	    </script>
-			
-
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOkS2l5PbE8xo6Vhq24PlimyUg36gLoRE&callback=initMap">
 		</script>
 {% endblock %}

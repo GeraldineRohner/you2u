@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    function decodeEntities(encodedString) {
+        var textArea = document.createElement('textarea');
+        textArea.innerHTML = encodedString;
+        return textArea.value;
+    }
+
    $('form').submit(function(e){
 
         e.preventDefault();
@@ -39,13 +45,23 @@ $(document).ready(function() {
                     for(let i = 0 ; i < nbAnnonces ; i++) {
 
                         $('.annonces').append(`
-                            <div class="col-md-5 annonce-item">
-                                <h4 class="titre_annonce"><a href="${urlPublic}/${annonces[i].nomCategorieService}/${annonces[i].titreServiceSlug}_${annonces[i].idService}.html">${annonces[i].titreService}</a></h4>
-                                <p class="categorie_annonce">${annonces[i].nomCategorieService}</p>
-                                <p class="annonceur">${annonces[i].prenom} ${annonces[i].nom}</p>
-                                <p class="tarif_annonce">${annonces[i].tarifService} EUR</p>
-                                <p class="date_publication_annonce">${annonces[i].datePublicationService}</p>
-                                <p class="localisation_annonce">${annonces[i].commune}</p>
+                            <div class="col-md-4 annonce-item">
+                                <div class="col-sm-6">
+                                    <img class="img-responsive" src="http://localhost/projet/you2u/public/img/manquante.png" alt="">
+                                </div>
+                                <div class="col-sm-6">
+                                    <h4 class="titre_annonce text-left"><a href="${urlPublic}/${annonces[i].nomCategorieService}/${annonces[i].titreServiceSlug}_${annonces[i].idService}.html">` + decodeEntities(annonces[i].titreService) + `</a></h4>
+                                    <p class="categorie_annonce"><em>${annonces[i].nomCategorieService}</em></p>
+                                </div>
+                                <div class="col-sm-12">
+                                    <p>&nbsp;</p>                             
+                                    <p class="annonceur">
+                                        ${annonces[i].prenom} vous propose ce service pour ${annonces[i].tarifService} EUR. <br><br>
+                                        <strong>Date de la Publication : </strong>${annonces[i].datePublicationService} <br>
+                                        <strong>Commune : </strong> ${annonces[i].commune} <br>
+                                    </p>
+                                    <a href="${urlPublic}/${annonces[i].nomCategorieService}/${annonces[i].titreServiceSlug}_${annonces[i].idService}.html" class="btn btn-primary">Consulter</a>
+                                </div>
                             </div>                    
                         `)
                     }

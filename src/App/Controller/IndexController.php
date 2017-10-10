@@ -477,9 +477,6 @@ class IndexController
 
 
 
-
-
-
     # Affichage de la page de recherche
     public function rechercheAction(Application $app, Request $request)
     {

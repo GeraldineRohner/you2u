@@ -2,10 +2,38 @@
 
 {# Block de title défini dans base.html.twig #}
 
-    {% block title %} Liste des categories {% endblock %}
+    {% block title %} Liste des catégories {% endblock %}
 
     {% block contenu %}
 
+
+        <section id="portfolio" class=" portfolio">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto text-center service">
+                        <h2>NOS SERVICES</h2>
+                        <hr class="small">
+                    </div>
+                </div>
+                <div class="row">
+
+                {% for categorie in categories %}
+
+                    <div class="col-md-6">
+                        <div class="service-item">
+                            <a href="{{ url('index_categories') }}">
+                                <img class="img-portfolio img-fluid" src="img/bricolage1.jpg">
+                                <p> {{ categorie.nomCategorieService }} </p>
+                            </a>
+                        </div>
+
+                {% endfor %}
+
+                </div>
+            </div>
+            </div>
+        </section>
+s
 
         <ul>
 
@@ -20,6 +48,7 @@
 {% endfor %}
 
         </ul>
+>>>>>>> c100b60a64f00e006e6ccf3d5a168a7f6930c4e7
 
 
 {% endblock %}
