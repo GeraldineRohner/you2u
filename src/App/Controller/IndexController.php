@@ -300,8 +300,6 @@ class IndexController
                         'pattern' => '/^[\w-\']+$/',
                         'message' => 'Votre pseudonyme ne doit contenir que des caractères alphanumériques, tirets, apostrophes ou underscores'
                     ))),
-
-
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Votre pseudonyme'

@@ -85,28 +85,28 @@
                           
                     	<table align="center" class="table table-condensed">
                     	<tr>
-                    		<td>Nom public : </td><td>{{ app.user.pseudo }} </td>
+                    		<td>Nom public : </td><td>{{ app.user.pseudo | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Description : </td><td>{{ app.user.descriptionUser }} </td>
+                    		<td>Description : </td><td>{{ app.user.descriptionUser | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Email : </td><td>{{ app.user.email }} </td>
+                    		<td>Email : </td><td>{{ app.user.email | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Adresse : </td><td>{{ app.user.adresse }} </td>
+                    		<td>Adresse : </td><td>{{ app.user.adresse | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Code Postal : </td><td>{{ app.user.codePostal }} </td>
+                    		<td>Code Postal : </td><td>{{ app.user.codePostal | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Ville : </td><td>{{ app.user.ville}} </td>
+                    		<td>Ville : </td><td>{{ app.user.ville | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Téléphone (mobile) : </td><td>{{ app.user.telMobile }} </td>
+                    		<td>Téléphone (mobile) : </td><td>{{ app.user.telMobile | decode }} </td>
                     	</tr>
                     	<tr>
-                    		<td>Téléphone (fixe) : </td><td>{{ app.user.telFixe }}</td>
+                    		<td>Téléphone (fixe) : </td><td>{{ app.user.telFixe | decode }}</td>
                     	</tr>
                     	<tr>
                     		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~app.user.photo) }}"></td>
