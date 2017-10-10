@@ -60,25 +60,8 @@ require PATH_RESSOURCES . '/config/security.php';
 
 #11 : Gestion des Erreurs
 #   : https://gist.github.com/tournasdim/171b443065936bbb5ef3
-<<<<<<< HEAD
-//$app->error(function (\Exception $e) use ($app) {
-//    if ($e instanceof NotFoundHttpException) {
-//        return $app['twig']->render('erreur.html.twig', [
-//            'message' => 'Cette page n\'existe pas'
-//        ]);
-//    }
-//    if ($e instanceof AccessDeniedException) {
-//        return $app['twig']->render('erreur.html.twig', [
-//            'message' => $e->getMessage()
-//        ]);
-//    }
-//
-//    else return $app['twig']->render('erreur.html.twig', [
-//        'message' => 'Vous n\'avez pas l\'autorisation d\'accéder à cette page'
-//    ]);
-//});
-=======
-/*$app->error(function (\Exception $e) use ($app) {
+
+$app->error(function (\Exception $e) use ($app) {
     if ($e instanceof NotFoundHttpException) {
         return $app['twig']->render('erreur.html.twig', [
             'message' => 'Cette page n\'existe pas'
@@ -93,8 +76,7 @@ require PATH_RESSOURCES . '/config/security.php';
     else return $app['twig']->render('erreur.html.twig', [
         'message' => 'Vous n\'avez pas l\'autorisation d\'accéder à cette page'
     ]);
-});*/
->>>>>>> c100b60a64f00e006e6ccf3d5a168a7f6930c4e7
+});
 
 #12 : On retourne $app
 return $app;
