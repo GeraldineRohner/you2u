@@ -5,22 +5,48 @@
     <div class="col-md-4 sibarRight">
         <div id="sidebar" class="well sidebar-nav">
 
-            <h5><i class="glyphicon glyphicon-home"></i>
-                <small><b>UTILISATEURS</b></small>
-            </h5>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="{{ url('index_connexion') }}">Connexion</a></li>
-                <li><a href="{{ url('index_inscription') }}">Inscription</a></li>
-                <li><a href="{{ url('membre_contact') }}">Nous contacter</a></li>
+            
+           
+                
+                
+                {% if is_granted('ROLE_ADMIN') %}
+                <h5><i class="glyphicon glyphicon-home"></i>
+                	<small><b>Administration</b></small>
+            	</h5>
+                 <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{ url('admin_gestion_utilisateurs') }}"> Gérer les utilisateurs</a></li>
+                <li><a href="{{ url('admin_traitementSignalementUser') }}"> Gérer les signalements d'utilisateurs</a></li>
+                <li><a href="{{ url('admin_traitementSignalementService') }}"> Gérer les signalements des services</a></li>
+                <li><a href="{{ url('admin_serviceavalider') }}"> Gérer les annonces à valider.</a></li>
+                </ul>
+                {% endif %}
+                {% if is_granted('ROLE_USER') %}
+                <h5><i class="glyphicon glyphicon-home"></i>
+                	<small><b>Membre</b></small>
+            	</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>
+                    <li><a href="{{ url('membre_modif') }}"> Modifier le profil</a></li>
+                    <li><a href="{{ url('membre_motdepasse') }}"> Modifier le mot de passel</a></li>
+                    <li><a href="{{ url('membre_contact') }}">Assistance : Nous contacter</a></li>
+                    <li><a href="{{ url ('deconnexion') }}">Déconnexion </a></li>
+                </ul>
+                {% else %}
+                <h5><i class="glyphicon glyphicon-home"></i>
+                	<small><b>Nouveaux utilisateurs</b></small>
+            	</h5>
+            	<ul class="nav nav-pills nav-stacked">
+                    <li><a href="{{ url('index_inscription') }}">Inscription</a></li>
+                    <li><a href="{{ url('index_connexion') }}">Connexion</a></li>
+                </ul>
+                {% endif%}
             </ul>
 
-            {#{% if global.user.IS_AUTHENTICATED_FULLY %}#}
-                {#<ul>#}
-                    {#<li>{{ app.user.prenom }} {{ app.user.nom }}</li>#}
-                    {#<li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>#}
-                    {#<li><a href="{{  url ('index_inscription') }}">Créer un nouveau compte  </a></li>#}
-                {#</ul>#}
-            {#{% endif%}#}
+            
+                <ul>
+                  
+                </ul>
+            
 
         </div>
     </div>

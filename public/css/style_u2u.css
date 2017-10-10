@@ -336,3 +336,8 @@ footer img {
   display: none;
   padding: 15px 20px;
 }
+
+#map
+{
+	height: 300px;
+}

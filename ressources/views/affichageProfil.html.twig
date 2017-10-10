@@ -122,7 +122,8 @@
 				{% else %}
 				{# L'utilisateur a défini son profil comme étant privé #}
 
-				<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> L'utilisateur ne souhaite pas communiquer ses coordonnées </p>
+				<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> L'utilisateur ne souhaite pas communiquer ses coordonnées.</p>
+				<p> Pour le contacter, adresse lui un mail à cette adresse : <a href="mailto:{{infoUser.email|decode}}">{{ infoUser.email | decode }}</a>   </p>
 
 
 				{% endif %}
