@@ -1,8 +1,10 @@
 /*
     font-family: 'Open Sans', sans-serif;
+
     font-family: 'Ubuntu', sans-serif;
+
     font-family: 'Vollkorn', serif;
-    font-family: 'Merienda', cursive;
+    font-family: 'Merienda, cursive;
     */
 
     /* Global Styles */
@@ -18,24 +20,7 @@
       font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
-    /* Titres */
 
-    h1{
-      color:#d5a368;
-      font-family: 'Merienda', cursive;
-
-    }
-
-    h2{
-      color:#d5a368;
-      font-family: 'Merienda', cursive;
-    }
-
-    h4{
-      color: #fff;
-      text-align: center;
-      font-family: 'Open Sans', sans-serif;
-    }
     /* Propriete Menu */
 
     .navbar-toggle {
@@ -113,32 +98,6 @@
     max-width: 50%;
   }
 
-  /*Page affichage annonces*/ 
-  .photoAnn{
-    width: auto;
-    height: 150px;
-  }
-  .anntop{
-    margin-top: 5px;
-  }
-  .annonces1 img {
-
-
-    width: 500px;
-    height: auto;
-    margin-left: -40px;
-
-  }
-  .annonces1 p {
-
-    background-color: #f2efea;
-    font-size: 1em;
-    margin-top: 160px;
-    margin-right: 850px;
-
-
-  }
-
   /* Propriete connexion */
 
   .acroche{
@@ -147,7 +106,7 @@
   }
   .sizeLeft{
     padding-left: 10px;
-    padding-right: : 10px;
+    padding-right : 10px;
   }
 
   .connex{
@@ -165,6 +124,74 @@
     margin-top: 60px;
     height: auto;
     padding-bottom: 50px;
+
+  }
+
+
+  /* Propriete sidebar */
+
+  .well {
+    width: 80%;
+    height: 560px;
+    margin:0 auto;
+
+    background-color: black;
+    color: #F7D358;
+
+  }
+
+  #sidebar {
+    margin-top: 60px;
+    padding-top: 30px;
+    background-color: white;
+    color: #F7D358;
+
+  } 
+
+
+  h1{
+    color:#d5a368;
+  }
+
+  h4{
+    color: #fff;
+    text-align: center;
+  }
+
+  /* Propriété Carousel */
+  .experience{
+    margin: 0 auto;
+    height: auto;
+    margin-bottom: 20px;
+
+  }
+
+  .carousel {
+    width: 100%;
+    height: 250px;
+    padding-bottom: 90px; 
+    background-color: #f2efea;
+
+
+  }
+
+  .carousel-inner img{ 
+    width: 100%;
+    height: 200px;
+    background-color: #f2efea;
+
+
+  }
+
+  .carousel h1 {
+
+    color: #F7D358;
+
+  }
+
+  .carousel h2 {
+
+    color: black ;
 
   }
 
@@ -215,63 +242,7 @@
   width: 100%;
   height: 20px;
   margin: 0 auto;
-}
-
-/* Propriete sidebar */
-
-.well {
-  width: 80%;
-  height: 560px;
-  margin:0 auto;
-
-  background-color: black;
-  color: #F7D358;
-
-}
-
-#sidebar {
-  margin-top: 60px;
-  padding-top: 30px;
-  background-color: white;
-  color: #F7D358;
-
-} 
-
-/* Propriété Carousel */
-.experience{
-  margin: 0 auto;
-  height: auto;
-  margin-bottom: 20px;
-
-}
-
-.carousel {
-  width: 100%;
-  height: 250px;
-  padding-bottom: 90px; 
-  background-color: #f2efea;
-
-
-}
-
-.carousel-inner img{ 
-  width: 100%;
-  height: 200px;
-  background-color: #f2efea;
-
-
-}
-
-.carousel h1 {
-
-  color: #F7D358;
-
-}
-
-.carousel h2 {
-
-  color: black ;
-
+  margin-bottom: 10px;
 }
 
 /*Propriete section fonctionnement*/
@@ -323,8 +294,6 @@ footer img {
 
 }
 
-
-
 .footer{
   font-size: 12px;
   text-align: center;
@@ -337,4 +306,10 @@ footer img {
   bottom: 5px;
   display: none;
   padding: 15px 20px;
+}
+
+/* Barre de recherche localisation */
+.twitter-typeahead{
+  width:100%;
+  background-color: #FFFFFF;
 }

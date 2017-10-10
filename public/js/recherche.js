@@ -39,13 +39,20 @@ $(document).ready(function() {
                     for(let i = 0 ; i < nbAnnonces ; i++) {
 
                         $('.annonces').append(`
-                            <div class="col-md-5 annonce-item">
-                                <h4 class="titre_annonce"><a href="${urlPublic}/${annonces[i].nomCategorieService}/${annonces[i].titreServiceSlug}_${annonces[i].idService}.html">${annonces[i].titreService}</a></h4>
-                                <p class="categorie_annonce">${annonces[i].nomCategorieService}</p>
-                                <p class="annonceur">${annonces[i].prenom} ${annonces[i].nom}</p>
-                                <p class="tarif_annonce">${annonces[i].tarifService} EUR</p>
-                                <p class="date_publication_annonce">${annonces[i].datePublicationService}</p>
-                                <p class="localisation_annonce">${annonces[i].commune}</p>
+                            <div class="col-md-6 ann1">
+                                <div class="col-md-2 col-md-push-2">
+                                    <div class="imgprofil">
+                                        <img src="">
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-md-push-2">
+                                    <h2 class="titre_annonce"><a href="#">${annonces[i].titreService}</a></h2>
+                                    <p class="categorie_annonce">${annonces[i].nomCategorieService}</p>
+                                    <p class="annonceur">${annonces[i].prenom} ${annonces[i].nom}</p>
+                                    <p class="tarif_annonce">${annonces[i].tarifService} EUR</p>
+                                    <p class="date_publication_annonce">${annonces[i].datePublicationService}</p>
+                                    <p class="localisation_annonce">${annonces[i].commune}</p>
+                                </div>
                             </div>                    
                         `)
                     }
