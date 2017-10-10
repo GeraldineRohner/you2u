@@ -77,7 +77,7 @@
                         	<tbody>	
                         	{% for infoUser in infoUsers %}
                         	<tr>
-                        		<td>{{infoUser.pseudo}}</td><td>{{ infoUser.roleUser }}</td><td>{{ infoUser.dateInscription|date("d/m/Y") }}</td>
+                        		<td><a href="{{ url('index_profil', {idUser : infoUser.idUser}) }}">{{infoUser.pseudo}}</a></td><td>{{ infoUser.roleUser }}</td><td>{{ infoUser.dateInscription|date("d/m/Y") }}</td>
                         		
                         		{% if infoUser.roleUser == 'ROLE_ADMIN' %}
                         		<td></td><td></td><td></td>

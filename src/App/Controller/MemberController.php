@@ -170,6 +170,14 @@ class MemberController
                     'value' => $app['user']->getAdresse()
                 ]
             ])
+            ->add('descriptionUser', TextType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'value' => $app['user']->getDescriptionUser()
+                ]
+            ])
             ->add('ville', TextType::class, [
                 'required' => false,
                 'label' => false,
@@ -269,8 +277,9 @@ class MemberController
                     'codeINSEE' => $villeCP['codeINSEE'],
                     'telMobile' => htmlspecialchars($modifProfil['telMobile']),
                     'telFixe' => htmlspecialchars($modifProfil['telFixe']),
-                    'profilVisible' => htmlspecialchars(utf8_encode($modifProfil['profilVisible'])),
-                    'photo' => $urlFichier
+                    'profilVisible' => $modifProfil['profilVisible'],
+                    'photo' => $urlFichier,
+                    'descriptionUser' => htmlspecialchars($modifProfil['descriptionUser'])
                 )
             );
             $modifUser->save();

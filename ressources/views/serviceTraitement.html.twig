@@ -48,7 +48,7 @@
                         	<th>Service signalé</th><th>Proposé par : </th><th>Message</th><th>Date de soumission de l'alerte</th><th colspan="4" align="center">Actions</th>
                         	{% for signalementService in traitementServiceSignale %}
                         	<tr>
-                        		<td>{{ signalementService.titreService }}</td><td>{{ signalementService.pseudo }}</td><td>{{ signalementService.message }}</td><td>{{ signalementService.dateAlerte |date('d/m/Y') }}</td><td><a href="
+                        		<td>{{ signalementService.titreService }}</td><td><a href="{{ url('index_profil', {idUser : signalementService.idUserSignale}) }}">{{ signalementService.pseudo }}</a></td><td>{{ signalementService.message }}</td><td>{{ signalementService.dateAlerte |date('d/m/Y') }}</td><td><a href="
                         		{{ url('index_annonce', 
                         		{idService: signalementService.idServiceSignale,
                         		 slugService : signalementService.titreService|slug,
