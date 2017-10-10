@@ -108,9 +108,16 @@
                     	<tr>
                     		<td>Téléphone (fixe) : </td><td>{{ app.user.telFixe | decode }}</td>
                     	</tr>
-                    	<tr>
-                    		<td>Photo: </td><td><img class="img-responsive" width="300px" src="{{ asset('img/img_user/'~app.user.photo) }}"></td>
-                    	</tr>
+							<tr>
+								<td>Profil public  </td><td>{% if profilVisible == true %}{{ 'oui' }}{% else %}{{ 'non' }}{% endif %}</td>
+							</tr>
+							<tr>
+
+								<td> {% if app.user.photo == null %}
+										<img src="{{ asset('img/avatar.png') }}" alt="{{ app.user.pseudo | decode }}" />
+                                    {% else %}
+										<img src="{{ asset('img/img_user/'~app.user.photo) }}" alt="{{ app.user.pseudo | decode }}" />>{%  endif %}</td><td></td>
+							</tr>
                     	</table>
                 {% else %}
                         <div class="alert alert-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>

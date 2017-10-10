@@ -800,7 +800,7 @@ class IndexController
                     #On associe les colonnes de notre BDD avec les valeurs du formulaire
                     #Colonne MYSQL                                              #Valeurs du Fomulaire
                     $nouvelleNote->idUserNoted           =                          $idUser;
-                    $nouvelleNote->idNotedBy         =                              $app['user']->getIdUser();
+                    $nouvelleNote->idNotedBy             =                          $app['user']->getIdUser();
                     $nouvelleNote->note                  =                          htmlspecialchars(utf8_encode($noteService['note']));
                     $nouvelleNote->commentaires          =                          htmlspecialchars(utf8_encode($noteService['commentaires']));
                     $nouvelleNote->dateCommentaire       =                          time();
@@ -839,7 +839,8 @@ class IndexController
             'noteMoyenne'                => $noteMoyenne,
             'nombreStars'                => $nombreStars,
             'form'                       => $form->createView(),
-            'commentairesUser'           => $commentairesUser
+            'commentairesUser'           => $commentairesUser,
+
         ]);
     }
 

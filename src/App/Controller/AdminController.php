@@ -32,6 +32,7 @@ class AdminController
         $userSignaleATraiter = $app['idiorm.db']->for_table('signalements_users')->where('traitementAlerte',0)->count('idSignalementUser');
         $serviceSignaleATraiter = $app['idiorm.db']->for_table('vue_signalements_service')->where('traitementAlerte',0)->count('idServiceSignale');
         $serviceAValider = $app['idiorm.db']->for_table('services')->where('validation',0)->count('idService');
+
         
         
         

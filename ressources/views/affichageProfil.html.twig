@@ -110,9 +110,12 @@ Erreur lors de la publication de votre commentaire </p>
                     	<tr>
                     		<td>Téléphone (fixe) : </td><td>{{ infoUser.telFixe | decode }}</td>
                     	</tr>
+						<tr>
+							<td>Profil public  </td><td>{% if infoUser.profilVisible == 1%}{{ oui }}{% else %}{{ non }}{% endif %}</td>
+						</tr>
                     	<tr>
 
-                    		<td> {% if infoUser.photo == null %}
+						<td> {% if infoUser.photo == null %}
                                         <img src="{{ asset('img/avatar.png') }}" alt="{{ infoUser.pseudo | decode }}" />
                                         {% else %}
                                         <img src="{{ asset('img/img_user/'~infoUser.photo) }}" alt="{{ infoUser.pseudo | decode }}" />>{%  endif %}</td>
@@ -126,9 +129,13 @@ Erreur lors de la publication de votre commentaire </p>
         
 		{% else %}
 		{# L'utilisateur a défini son profil comme étant privé #}
-		
+				<table align="center" class="table table-condensed">
+			<tr>
+				<td>Email : </td><td>{{ infoUser.email | decode }} </td>
+			</tr>
+				</table>
                             <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-							L'utilisateur a défini son profil comme étant un profil privé </p>
+							L'utilisateur a défini son profil comme étant privé </p>
                            
                        
 		{% endif %}
@@ -189,7 +196,7 @@ Erreur lors de la publication de votre commentaire </p>
         {% else %}
       	<div class="alert alert-danger">
             <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existance de cette fiche. </p>
+                Le système n'arrive pas à accéder aux informations de l'utilisateur , veuillez vérifier l'existence de cette fiche. </p>
         {% endif %}    
 
         </div>
