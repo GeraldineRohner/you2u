@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{# Block de title défini dans base.html.twig #}
+{% block title %} Qui sommes nous {% endblock %}
+
+{% block contenu %}
+
+    <div class="container">
+        <h1 class="trtFonc">Le fonctionnement de You2u !</h1>
+        <img class="img-portfolio img-fluid" src="{{ asset('themes/you2u/img/collabshema.jpg') }}">
+
+        <p>You2U est une <b>plateforme collaborative transgénérationnelle</b> de partage de services et compétences pour le <b>département du Rhône</b>.
+            Nous croyons dans le <b>potentiel de nos aînés</b> et souhaitons leur permettre de partager leur expérience en se mettant au service des générations suivantes.
+            <b>L'inscription est gratuite </b> et tous les seniors connectés sont encouragés à en profiter  également et contribuer à cette entraide.
+        </p>
+
+        <section id="portfolio" class=" portfolio">
+            <div class="container">
+                <div class="row">
+
+                        <p> Afin d’enrichir la relation de confiance entre les utilisateurs, nous avons mis en place un système de notation et de commentaire afin que vous puissiez témoigner de votre expérience après service rendu.</p>
+                    <br>
+                        <h3>Comment fonctionne le site </h3><br>
+                        <h4 style="text-align: left !important;">Vous êtes seniors ?</h4>
+                        <ul>
+                            <li><b>Inscrivez-vous </b> depuis le formulaire d’inscription</li>
+                            <li><b>Rendez votre profil attractif</b> en complétant vos informations (photo, présentation, …)</li>
+                            <li><b>Ajouter autant d’annonces</b> que vous le souhaitez pour proposer vos services</li>
+                        </ul>
+                    <br>
+                        <h4 style="text-align: left !important;">Vous êtes à la recherche d’un service ?</h4>
+                        <ul>
+                            <li><b> Recherchez </b> si une annonce correspond à votre besoin</li>
+                            <li><b>Rentrez en contact</b> avec le senior qui a déposé l’annonce</li>
+                            <li><b>Mettez-vous d’accord</b> sur les différentes modalités du service</li>
+                            <li><b>Donnez un retour</b> de votre expérience en évaluant le profil du senior</li>
+                        </ul>
+
+                    <div class="col-md-6">
+                        <div class="service-item img-responsive">
+                            <img src="{{ asset('themes/you2u/img/petsitting1.jpg') }}" alt="">
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+
+{% endblock %}

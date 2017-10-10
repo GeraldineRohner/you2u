@@ -99,6 +99,11 @@ class IndexControllerProvider implements ControllerProviderInterface {
             ->get("/cgu", "App\Controller\IndexController::cguAction")
             ->bind("index_cgu");
 
+            # Page Qui sommes nous
+            $controllers
+                ->get("/qui-sommes-nous", "App\Controller\IndexController::quiSommesNousAction")
+                ->bind("index_quiSommesNous");
+
 
         # On retourne la liste des controllers (ControllerCollection)
         return $controllers;

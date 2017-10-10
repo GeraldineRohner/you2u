@@ -847,5 +847,14 @@ class IndexController
         return $app['twig']->render('cgu.html.twig');
     }
 
+    # Affichage de la page Qui sommes nous
+    public function quiSommesNousAction(Application $app)
+    {
+
+        # Affichage dans la vue
+        return $app['twig']->render('presentation.html.twig');
+
+    }
+
 
 } // Fin class IndexController
