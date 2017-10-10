@@ -1,28 +1,31 @@
 
 
+<!-- sidebarRight -->
+<div class="row">
+    <div class="col-md-4 sibarRight">
+        <div id="sidebar" class="well sidebar-nav">
 
+            <h5><i class="glyphicon glyphicon-home"></i>
+                <small><b>UTILISATEURS</b></small>
+            </h5>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="{{ url('index_connexion') }}">Connexion</a></li>
+                <li><a href="{{ url('index_inscription') }}">Inscription</a></li>
+                <li><a href="{{ url('membre_contact') }}">Nous contacter</a></li>
+            </ul>
 
-{% if !IS_AUTHENTICATED_FULLY %}
-    <ul>
-    <li>{{ app.user.prenom }} {{ app.user.nom }}</li>
-<li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>
-<li><a href="{{  url ('index_inscription') }}">Créer un nouveau compte  </a></li>
-<li><a href="#">Réseaux sociaux</a></li>
-    </ul>
+            {#{% if global.user.IS_AUTHENTICATED_FULLY %}#}
+                {#<ul>#}
+                    {#<li>{{ app.user.prenom }} {{ app.user.nom }}</li>#}
+                    {#<li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>#}
+                    {#<li><a href="{{  url ('index_inscription') }}">Créer un nouveau compte  </a></li>#}
+                {#</ul>#}
+            {#{% endif%}#}
 
-
-
-
-{% else %}
-<ul>
-    <li><a href="{{ url ('member_ajout_annonce') }}">Déposer une annonce </a></li>
-    {#<li><a href="">Parlez-en à vos amis</a></li>#}
-    <li><a href="{{  url ('index_inscription') }}">S'inscrire  </a></li>
-    <li><a href="{{ url ('index_connexion') }}">Se connecter  </a></li>
-    <li><a href="#">Réseaux sociaux</a></li>
-</ul>
-
-{% endif%}
+        </div>
+    </div>
+</div>
+<!-- Fin sidebarRight -->
 
 
 

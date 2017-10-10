@@ -6,41 +6,74 @@
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
 {% endblock %}
 
-
 {# Fil d'Ariane #}
 {% set active = 'accueil' %}
 
 {# Contenu de la Page #}
 {% block contenu %}
-    <div class="row">
-        <!--colleft-->
-        <div class="col-md-8 col-sm-12">
-            <div class="box-caption">
 
-        <div class="container">
-            <div class="starter-template">
+    <!-- Header image-->
+    <div class="container-fluid">
 
-            {% if global.request.get('inscription') == 'success' %}
-            {% endif %}
-              
-               
+      <!-- Barre de recherche: service-->
+      <div class="row">
+        <div class="col-md-1 logo">
+          <img src="{{ asset('themes/you2u/img/logo.svg') }}">
+        </div>
 
-                <h1>You2u</h1>
-                
+      <!-- Debut Image-->
+      <div container-fluid>
+        <div class="row">
+          <div class="col-md-8 photo">
+            <img class="img-responsive" src="{{ asset('themes/you2u/img/accueil1.jpg') }}" srcset="{{ asset('themes/you2u/img/accueil1.jpg') }}">
+          </div>
+          <!-- Fin Image-->
 
-                
-                <p class="lead">Use this document as a way to quickly start any new project.</p>
+           {% include('sidebar.html.twig') %}
 
-            </div>
-            <!--spotlight-->
-            <!--spotlight-thumbs-->
-            <section class="spotlight-thumbs">
-                <div class="row">
+          <!-- Debut de la section fonctionnement -->
+          <section class="container">
+
+             <div class="row">
+                <div class="col-xs-12 text-center">
+                  <h1 class="trtFonc">FONCTIONNEMENT</h1>
+                  <p class="txtExplication">
+                    You2u est une plateforme collaborative transgenerationelle de partage de services et compétences.</br>
+                    L'inscription est gratuite et tous les seniors connectés sont encouragés à eux aussi profiter et contribuer à cette entraide.
+                  <p/>
+                </div>
+              </div>
+
+              <div class="row mt-80">
+                <div class="col-sm-6">
+                  <img class="img-responsive img-you2" src="{{ asset('themes/you2u/img/connectezvous1.jpg') }}">
+                </div>
+                <div class="col-sm-6">
+                    <p style="
+                        font-size: 30px;
+                        margin-top: 190px;
+                    "> Inscrivez-vous <br>
+                      Deposez ou bénéficiez d'un service<br>
+                      Participez à l'entraide You2u <br>
+                    </p>
+                </div>
+              </div>
+
+          <!-- debut de la section experience-carousel -->
+</section>
+        <div class="container-full expfull">
+            <div class="container">
+          <div class="row experience">
+            <div class="col-xs-12">
+
+                  <h1 class="trtFonc text-center mb-20">LES DERNI&Egrave;RES ANNONCES</h1>
+
                     {% for service in services %}
+
                         <div class="col-md-4 col-sm-4 col-xs-12 border">
                             <div class="spotlight-item-thumb">
                                 <div class="spotlight-item-thumb-img">
-                               
+
                                     <a href="{{ url('index_annonce', {
                                         nomCategorieService : service.nomCategorieService | lower,
                                         slugService         : service.titreService | slug ,
@@ -68,19 +101,18 @@
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-            </section>
+
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+         <!-- fin de la section experience -carousel -->
 
+          </section>
+          <!-- fin de la section fonctionnement -->
 
-    {# include 'inc/sidebar.html' #}
-    {#    {{ render(controller('TechNews\\Controller\\NewsController::sidebar')) }}#}
-
-
-        </div><!-- /.container -->
-    
 {% endblock %}
+
 {% block javascripts %}
 {{ parent() }}
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>

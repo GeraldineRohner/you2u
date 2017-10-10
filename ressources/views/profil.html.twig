@@ -7,45 +7,45 @@
 {% block contenu %}
         
         
-            	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             	
-            	{% if global.request.get('ajoutAnnonce') == 'success' %}
+		{% if global.request.get('ajoutAnnonce') == 'success' %}
 
-                        <div class="alert alert-success">
-                            <p class="text-center"><i class="fa fa-thumbs-up"></i> Votre annonce est soumise à validation. </p>
-                            <p class="text-center"> Celle-ci sera publiée dans les 24 à 48 prochaines heures</p>
-                        </div>
+				<div class="alert alert-success">
+					<p class="text-center"><i class="fa fa-thumbs-up"></i> Votre annonce est soumise à validation. </p>
+					<p class="text-center"> Celle-ci sera publiée dans les 24 à 48 prochaines heures</p>
+				</div>
 
-             	{% endif %}
+		{% endif %}
              	
              	
-                   <div class="container">
-                    <div class="starter-template">
+	  	<div class="container">
+			<div class="starter-template">
                     	
                     	
                     	<h2> Ma note utilisateur moyenne</h2>
-                   
-                    	
+
+
                     	{% if nombreStars is not defined %}
                     	Vous n'avez pas de note.
                     	{% else %}
                     	{% for nombreStars in 1.. nombreStars %}
-                        <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i> 
+                        <i class="fa fa-star" aria-hidden="true" style="color:#ffd700"></i>
                         {% endfor %}
-                        
-                    	{% if halfstar is not empty %} 
+
+                    	{% if halfstar is not empty %}
                     		<i class="fa fa-star-half" aria-hidden="true" style="color:#ffd700"></i>
                     	{% endif %}
-                    	
+
                     	/ 5 sur une base de {{ totalNote }} note(s)</big>
                     	{% endif %}
-                    	
-                    	
-                    	{% if annoncesUser is not empty %} 
+
+
+                    	{% if annoncesUser is not empty %}
                     	<h2>Vos annonces en cours et validées</h2>
                     	<table class="table table-responsive">
                     	<tr>
-                    		<th> Nom de l'annonce </th> <th> Categorie </th> <th>Status</th> <th>Voir l'annonce</th> 
+                    		<th> Nom de l'annonce </th> <th> Categorie </th> <th>Status</th> <th>Voir l'annonce</th>
                     	</tr>
                     	{% for annonceUser in annoncesUser %}
                     	<tr> <td> {{ annonceUser.titreService | decode }} </td><td>{{ annonceUser.nomCategorieService | decode }}</td>
