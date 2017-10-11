@@ -9,7 +9,7 @@
     <title>{% block title %}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+<div>
 
         <div class="navbar navbar-default">
             <div class="row ">
@@ -50,9 +50,14 @@
                 </div>
             </div>
         </div>
+    {% if is_granted('ROLE_BANNED') %}
+        <div class='alert alert-danger text-center'>Ce compte est momentanément suspendu. Les fonctionnalités usuelles sont suspendues.</div>
+    {%  endif %}
+        {% block contenu %}
 
-        {% block contenu %}{% endblock %}
 
+
+        {% endblock %}
         <!-- Footer -->
         <footer class="container-fluid">
             <div class="row">
